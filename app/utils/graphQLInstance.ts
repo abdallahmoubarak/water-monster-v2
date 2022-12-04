@@ -1,9 +1,15 @@
 import { GraphQLClient } from "graphql-request";
 
-const endpoint = process.env.NEXT_PUBLIC_ENDPOINT;
+declare const process: {
+  env: {
+    NEXT_PUBLIC_ENDPOINT: string;
+  };
+};
+
+const endpoint: string = process.env.NEXT_PUBLIC_ENDPOINT;
 
 export const graphQLClient = new GraphQLClient(endpoint, {
-  headers: {
+  headers: <HeadersInit | undefined>{
     authorization: Boolean(
       typeof window !== "undefined" && localStorage.getItem("JWT"),
     )
