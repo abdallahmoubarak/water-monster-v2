@@ -11,30 +11,40 @@ export const validSign = ({
   userType,
 }: validationTypes) => {
   let valid = true;
+  let message = "All done";
+
   if (
-    signType === "signup" &&
-    (!userType ||
-      // name?.length < 5 ||
-      !(
-        email?.includes("@") &&
-        email?.indexOf("@") > 2 &&
-        email?.length - email.indexOf("@") > 5
-      ) ||
-      !regularExpression.test(password))
+    !(
+      email?.includes("@") &&
+      email?.indexOf("@") > 2 &&
+      email?.length - email.indexOf("@") > 5
+    )
   ) {
     valid = false;
-  } else if (
-    (signType === "signin" &&
-      !(
-        email?.includes("@") &&
-        email?.indexOf("@") > 2 &&
-        email?.length - email?.indexOf("@") > 5
-      )) ||
-    !regularExpression.test(password)
-  ) {
-    valid = false;
+    message = "Please enter a valid email address.";
+    return { valid, message };
   }
-  return valid;
+
+  if (!regularExpression.test(password)) {
+    valid = false;
+    message =
+      "Please enter a valid password. at least ( 8 char, 1 Uppercase, 1 Lowercase, 1 Special char)";
+    return { valid, message };
+  }
+
+  if (signType === "signup") {
+    if (!userType) {
+      valid = false;
+      message = "Please enter a user type.";
+      return { valid, message };
+    }
+    if (!name || name?.length < 5) {
+      valid = false;
+      message = "Please enter your full name.";
+      return { valid, message };
+    }
+  }
+  return { valid, message };
 };
 
 type validationTypes = {
