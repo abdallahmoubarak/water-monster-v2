@@ -34,7 +34,8 @@
     "**/*.ts",
     "**/*.tsx",
     "app/containers/page.jsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "utils/time.js"
   ],
   "exclude": ["node_modules"]
 }
