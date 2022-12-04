@@ -9,14 +9,14 @@ export default function Input({
   onBlur,
   onFocus,
   accept,
-  disabled,
+  isDisabled,
   limit = 40,
 }: inputProps) {
   const id = useId();
   return (
     <>
       <div className={styles.inputContainer}>
-        {disabled ? (
+        {isDisabled ? (
           <>
             <div className={styles.inputDisabled}>{value}</div>
             <label className={styles.labelDisabled} htmlFor={id}>
@@ -57,6 +57,6 @@ type inputProps = {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   accept?: string;
-  disabled?: string;
+  isDisabled?: boolean;
   limit?: number;
 };

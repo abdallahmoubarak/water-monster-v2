@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2022",
     "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": ".",
     "paths": {
@@ -10,7 +10,8 @@
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],
       "@/utils/*": ["utils/*"],
-      "@/types/*": ["types/*"]
+      "@/types/*": ["types/*"],
+      "@/graphql/*": ["graphql/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
@@ -34,7 +35,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "app/containers/page.jsx",
     ".next/types/**/*.ts",
     "utils/time.js"
   ],

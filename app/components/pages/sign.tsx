@@ -10,6 +10,7 @@ import Or from "@/components/svg/Or";
 import Image from "next/image";
 import googleLogo from "@/public/svg/google.svg";
 import metaLogo from "@/public/svg/metamask.svg";
+import { useSignIn, useSignUp } from "@/hooks/useAuth";
 
 export default function Sign() {
   const [signup, setSignUp] = useState<boolean>(true);
@@ -21,6 +22,9 @@ export default function Sign() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [invalid, setInvalid] = useState<boolean>(false);
   const [forgetForm, setForgetForm] = useState<boolean>(false);
+
+  const { mutate: signUp } = useSignUp({ setMsg, setIsLoading });
+  const { mutate: signIn } = useSignIn({ setMsg, setIsLoading });
 
   const handleSignClick = (signType: string) => {
     if (!isLoading) {
@@ -43,9 +47,9 @@ export default function Sign() {
       setInvalid(false);
       setMsg(message);
 
-      // signType === "signin"
-      //   ? signIn({ email.toLowerCase().trim(), password })
-      //   : signUp({ type, name, email.toLowerCase().trim(), password });
+      signType === "signin"
+        ? signIn({ email, password })
+        : signUp({ userType, name, email, password });
     }
   };
 

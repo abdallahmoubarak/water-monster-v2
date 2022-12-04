@@ -1,0 +1,18 @@
+import AnimatedLogo from "@/components/svg/AnimatedLogo";
+
+export default function Loading() {
+  return (
+    <>
+      <div className="loading">
+        <AnimatedLogo speed={1.5} />
+      </div>
+      <style jsx>{`
+        .loading {
+          width: 4rem;
+          margin: auto;
+          padding-top: 1rem;
+        }
+      `}</style>
+    </>
+  );
+}

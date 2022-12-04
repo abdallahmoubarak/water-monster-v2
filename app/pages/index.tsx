@@ -1,14 +1,14 @@
-// import Home from "@/app/home";
+import Home from "@/components/pages/home";
 import Head from "next/head";
-// import { useCurrentUser } from "@/hooks/useAuth";
+import { useCurrentUser } from "@/hooks/useAuth";
 import { styles } from "@/utils/styles";
-import AnimatedLogo from "@/components/svg/AnimatedLogo";
 import { useEffect, useState } from "react";
 import Sign from "@/components/pages/sign";
+import AnimatedLogo from "@/components/svg/AnimatedLogo";
 
 export default function Index() {
-  const [enabled, setEnabled] = useState(true);
-  // const { data: currentUser, isLoading } = useCurrentUser({ enabled });
+  const [enabled, setEnabled] = useState<boolean>(true);
+  const { data: currentUser, isLoading } = useCurrentUser({ enabled });
 
   useEffect(() => setEnabled(Boolean(localStorage.getItem("JWT"))), []);
 
@@ -21,15 +21,16 @@ export default function Index() {
         />
         <title>Water Monster</title>
       </Head>
-      {/* {enabled && (isLoading && !currentUser?.id &&  (
+      {enabled && isLoading && !currentUser && (
         <div className="fallback">
           <div className="logo-container">
             <AnimatedLogo />
           </div>
         </div>
-      ))} */}
+      )}
 
-      <Sign />
+      {currentUser?.id ? <Home /> : <Sign />}
+
       <style jsx>{`
         .fallback {
           ${styles.flexBothcenter};
