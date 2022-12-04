@@ -1,6 +1,8 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+//TODO: [WM-8] Improve types of the bellow variables
+
 declare const process: {
   env: {
     NEXT_PUBLIC_JWT_SECRET: string;
