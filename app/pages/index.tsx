@@ -2,9 +2,9 @@
 import Head from "next/head";
 // import { useCurrentUser } from "@/hooks/useAuth";
 import { styles } from "@/utils/styles";
-import AnimatedLogo from "@/components/SVG/AnimatedLogo";
+import AnimatedLogo from "@/components/svg/AnimatedLogo";
 import { useEffect, useState } from "react";
-import Sign from "@/app/(sign)/sign";
+import Sign from "@/components/pages/sign";
 
 export default function Index() {
   const [enabled, setEnabled] = useState(true);

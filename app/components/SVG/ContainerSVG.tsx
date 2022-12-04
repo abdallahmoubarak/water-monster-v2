@@ -1,4 +1,4 @@
-export default function ContainerSVG({ level = 1 }) {
+export default function ContainerSVG({ level = 1 }: { level: number }) {
   return (
     <>
       <svg

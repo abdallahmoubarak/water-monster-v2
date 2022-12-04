@@ -5,7 +5,11 @@ import Select from "@/components/Select";
 import { validSign } from "@/utils/signValidation";
 import { styles } from "@/utils/styles";
 import { useState } from "react";
-import RootLayout from "../layout";
+import RootLayout from "./layout";
+import Or from "@/components/svg/Or";
+import Image from "next/image";
+import googleLogo from "@/public/svg/google.svg";
+import metaLogo from "@/public/svg/metamask.svg";
 
 export default function Sign() {
   const [signup, setSignUp] = useState<boolean>(true);
@@ -119,6 +123,26 @@ export default function Sign() {
               onClick={() => handleSignClick(signup ? "signup" : "signin")}
             />
           )}
+        </div>
+        <div className="or-container">
+          <Or />
+        </div>
+        <div className="btn-container">
+          <button
+            className="google-btn"
+            // onClick={() => signInWithGoogle(setName, setEmail, setProfilePic)}
+          >
+            <div>
+              <Image src={googleLogo} alt="G" height={"30"} />
+            </div>
+            <div>Continue with google</div>
+          </button>
+          <button className="google-btn">
+            <div>
+              <Image src={metaLogo} alt="M" height={"30"} />
+            </div>
+            <div>Continue with Metamask</div>
+          </button>
         </div>
       </RootLayout>
 
