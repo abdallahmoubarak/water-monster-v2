@@ -6,3 +6,7 @@ export type signTypes = {
   password: string;
   userType?: string;
 };
+
+export type setAlertMsgType = {
+  setAlertMsg: Function;
+};
