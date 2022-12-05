@@ -125,7 +125,7 @@ const updatePrivateMode = async ({
 
 export const useUpdatePrivateMode = ({ setAlertMsg }: setAlertMsgType) => {
   return useMutation(updatePrivateMode, {
-    onError: (err: Error) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
     onSuccess: () => setAlertMsg("Private mode updated"),
   });
 };
@@ -146,7 +146,7 @@ const updateManualMode = async ({
 
 export const useUpdateManualMode = ({ setAlertMsg }: setAlertMsgType) => {
   return useMutation(updateManualMode, {
-    onError: (err: Error) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
     onSuccess: () => setAlertMsg("Mode updated"),
   });
 };
