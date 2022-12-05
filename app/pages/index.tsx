@@ -4,7 +4,7 @@ import { useCurrentUser } from "@/hooks/useAuth";
 import { styles } from "@/utils/styles";
 import { useEffect, useState } from "react";
 import Sign from "@/components/pages/sign";
-import AnimatedLogo from "@/components/svg/AnimatedLogo";
+import AnimatedLogo from "@/components/a/AnimatedLogo";
 
 export default function Index() {
   const [enabled, setEnabled] = useState<boolean>(true);

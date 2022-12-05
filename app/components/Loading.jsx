@@ -1,4 +1,4 @@
-import AnimatedLogo from "@/components/svg/AnimatedLogo";
+import AnimatedLogo from "@/components/a/AnimatedLogo";
 
 export default function Loading() {
   return (

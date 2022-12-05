@@ -1,6 +1,7 @@
 import { graphQLClient } from "@/utils/graphQLInstance";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { createMessageMutation, getMessagesQuery } from "./gql/message";
+import { createMessageType, useGetMessagesType } from "./hookTypes";
 
 /*********************** use create message hook ***********************/
 
@@ -17,15 +18,9 @@ export const useCreateMessage = () => {
   });
 };
 
-type createMessageType = {
-  from: string;
-  to: string;
-  content: string;
-};
-
 /*********************** use create message hook ***********************/
 
-const getMessages = async ({ me, other }: getMessagesType) => {
+const getMessages = async ({ me, other }: useGetMessagesType) => {
   const variables = { me, other };
   const res = await graphQLClient.request(getMessagesQuery, variables);
   return res?.messages;
@@ -38,15 +33,4 @@ export const useGetMessages = ({ me, other, enabled }: useGetMessagesType) => {
     onError: (err: Error) => console.log(err.message),
     enabled,
   });
-};
-
-type getMessagesType = {
-  me: string;
-  other: string;
-};
-
-type useGetMessagesType = {
-  me: string;
-  other: string;
-  enabled: boolean;
 };

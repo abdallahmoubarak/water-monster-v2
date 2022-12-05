@@ -1,4 +1,4 @@
-import ContainerSVG from "@/components/svg/ContainerSVG";
+import ContainerSVG from "@/components/a/ContainerSVG";
 import Image from "next/image";
 import settings from "@/public/svg/settings.svg";
 import { styles } from "@/utils/styles";

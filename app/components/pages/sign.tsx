@@ -6,7 +6,7 @@ import { validSign } from "@/utils/signValidation";
 import { styles } from "@/utils/styles";
 import { useState } from "react";
 import RootLayout from "./layout";
-import Or from "@/components/svg/Or";
+import Or from "@/components/a/Or";
 import Image from "next/image";
 import googleLogo from "@/public/svg/google.svg";
 import metaLogo from "@/public/svg/metamask.svg";
