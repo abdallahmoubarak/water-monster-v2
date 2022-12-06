@@ -27,3 +27,9 @@ export default function Box({ children, title, withOutShadow }) {
     </>
   );
 }
+
+type Box = {
+  children;
+  title;
+  withOutShadow;
+};

@@ -37,8 +37,8 @@ export default function Container({ container, setPage }) {
       <style jsx>{`
         .container-card {
           border: 1px solid lightgray;
-          max-width: 22rem;
-          flex: 1 1 22rem;
+          max-width: 24rem;
+          flex: 1 1 24rem;
           padding: 0.4rem 1rem;
           ${styles.borderRadius1rem};
           ${styles.boxshadow};

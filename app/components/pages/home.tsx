@@ -56,56 +56,22 @@ export default function Home() {
     });
   }, [socket]);
 
-  // useEffect(() => {
-  //   currentUser.type === "Admin" && setPage("Admin");
-  // }, [currentUser]);
-
   return (
     <>
       <Head>
         <title>{page}</title>
       </Head>
 
-      {layoutPages.includes(page) && (
-        <Layout hasImg={true} hasNav={true} active={page} setActive={setPage}>
-          {/* {page === "Statistics" && (
-            <Statistics setChatUser={setChatUser} setPage={setPage} />
-          )} */}
-          {page === "Containers" && (
-            <>
-              {currentUser?.type === "Provider" ? (
-                <></>
-              ) : (
-                // <MapPage
-                //   setPage={setPage}
-                //   userType={currentUser?.type}
-                //   setChatUser={setChatUser}
-                // />
-                <Containers setPage={setPage} />
-              )}
-            </>
-          )}
-
-          {/* {page === "Contacts" && (
-            <Contacts
-              setPage={setPage}
-              chatUser={chatUser}
-              setChatUser={setChatUser}
-              socket={socket}
-              onlineUsers={onlineUsers}
-            />
-          )} */}
-        </Layout>
-      )}
-      {/* {page === "Chat" && (
+      <Layout hasImg={true} hasNav={true} active={page} setActive={setPage}>
+        {page === "Containers" && <Containers setPage={setPage} />}
+      </Layout>
+      {page === "Chat" && (
         <Chat setPage={setPage} user={chatUser} socket={socket} />
       )}
       {page === "Setting" && (
         <ContainerSetting setPage={setPage} containerId={pageId} />
       )}
       {page === "Profile" && <Profile setPage={setPage} />}
-      {page === "Wallet" && <Wallet setPage={setPage} />}
-      {page === "Admin" && <Admin onlineUsers={onlineUsers} socket={socket} />}
       {page === "Call" && (
         <Call
           call={call}
@@ -116,7 +82,7 @@ export default function Home() {
           userType={currentUser.type}
           socket={socket}
         />
-      )} */}
+      )}
     </>
   );
 }

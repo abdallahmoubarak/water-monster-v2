@@ -1,7 +1,8 @@
 import { styles } from "@/utils/styles";
+import { MouseEventHandler } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 
-export default function Layout({ children, onClick, title }) {
+export default function Layout({ children, onClick, title }: layoutTypes) {
   return (
     <>
       <div className="page-container">
@@ -47,3 +48,8 @@ export default function Layout({ children, onClick, title }) {
     </>
   );
 }
+type layoutTypes = {
+  children: React.ReactNode;
+  onClick: MouseEventHandler<HTMLDivElement>;
+  title: string;
+};

@@ -7,20 +7,18 @@ import InputsContainer from "@/components/InputsContainer";
 import UploadImage from "@/components/UploadImage";
 import { useCurrentUser } from "@/hooks/useAuth";
 import { useUpdateName, useUpdatePhone } from "@/hooks/useUser";
-import { useCreateWallet } from "@/hooks/useWallet";
 import { formatter } from "@/utils/currencyFormatter";
 import { graphQLClient } from "@/utils/graphQLInstance";
 import { client } from "pages/_app";
 import { useState } from "react";
 import Layout from "./sLayout";
 
-export default function Profile({ setPage }) {
+export default function Profile({ setPage }: { setPage: Function }) {
   const { data: currentUser } = useCurrentUser({ enabled: true });
   const [name, setName] = useState(currentUser?.name || "");
   const [phone, setPhone] = useState(currentUser?.phone || "");
   const [image, setImage] = useState("");
   const [base64, setImg64] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
   const currentAmount = formatter.format(
     parseFloat(currentUser?.wallet?.amount),
@@ -28,15 +26,6 @@ export default function Profile({ setPage }) {
 
   const { mutate: updateName } = useUpdateName({ setAlertMsg });
   const { mutate: updatePhone } = useUpdatePhone({ setAlertMsg });
-  const { mutate: createWallet } = useCreateWallet({
-    setAlertMsg,
-    setIsLoading,
-  });
-
-  const handleCreateWallet = () => {
-    setIsLoading(true);
-    createWallet({ id: currentUser.id });
-  };
 
   return (
     <>
@@ -68,28 +57,11 @@ export default function Profile({ setPage }) {
                   updatePhone({ id: currentUser?.id, phone })
                 }
               />
-              {currentUser?.wallet?.amount ? (
-                <>
-                  <Field title={"Wallet balance"} value={currentAmount} />
-                  <Button
-                    text={
-                      currentUser?.type === "Client" ? "Recharge" : "Withdraw"
-                    }
-                    onClick={() => setPage("Wallet")}
-                  />
-                </>
-              ) : (
-                <Button
-                  text="Create a wallet"
-                  onClick={handleCreateWallet}
-                  isLoading={isLoading}
-                />
-              )}
               <Field title={"Language"} value={"En"} />
               <Field title={"Email"} value={currentUser?.email} />
               <Button
                 text="Logout"
-                dark={true}
+                isSecondary={true}
                 onClick={() => {
                   client.setQueryData(["User"], null);
                   localStorage.removeItem("JWT");

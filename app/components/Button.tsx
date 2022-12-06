@@ -74,5 +74,5 @@ type buttonProps = {
   disabled?: boolean;
   isSecondary?: boolean;
   font?: string;
-  isLoading: boolean;
+  isLoading?: boolean;
 };
