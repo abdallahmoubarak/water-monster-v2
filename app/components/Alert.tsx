@@ -1,7 +1,7 @@
 import { styles } from "@/utils/styles";
 import { useEffect } from "react";
 
-export default function Alert({ alertMsg, setAlertMsg }) {
+export default function Alert({ alertMsg, setAlertMsg }: alertType) {
   useEffect(() => {
     const clearMessage = setTimeout(() => {
       setAlertMsg(false);
@@ -49,3 +49,8 @@ export default function Alert({ alertMsg, setAlertMsg }) {
     </>
   );
 }
+
+type alertType = {
+  alertMsg: string;
+  setAlertMsg: Function;
+};
