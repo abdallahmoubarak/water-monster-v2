@@ -1,19 +1,14 @@
 import Layout from "./layout";
 import { useEffect, useState } from "react";
 import Containers from "./primary/containers";
-import Admin from "./admin";
 import Head from "next/head";
-import MapPage from "./primary/mapPage";
 import { io, Socket } from "socket.io-client";
 import { useCurrentUser } from "@/hooks/useAuth";
 import dynamic from "next/dynamic";
 
 const ContainerSetting = dynamic(() => import("./secoundary/containerSetting"));
-const Statistics = dynamic(() => import("./primary/statistics"));
-const Contacts = dynamic(() => import("./primary/contacts"));
 const Profile = dynamic(() => import("./secoundary/profile"));
 const Chat = dynamic(() => import("./secoundary/chat"));
-const Wallet = dynamic(() => import("./secoundary/wallet"));
 const Call = dynamic(() => import("@/components/Call"));
 
 export default function Home() {
@@ -62,9 +57,11 @@ export default function Home() {
         <title>{page}</title>
       </Head>
 
-      <Layout hasImg={true} hasNav={true} active={page} setActive={setPage}>
-        {page === "Containers" && <Containers setPage={setPage} />}
-      </Layout>
+      {page === "Containers" && (
+        <Layout hasImg={true} hasNav={false} active={page} setActive={setPage}>
+          <Containers setPage={setPage} />
+        </Layout>
+      )}
       {page === "Chat" && (
         <Chat setPage={setPage} user={chatUser} socket={socket} />
       )}
@@ -87,7 +84,6 @@ export default function Home() {
   );
 }
 
-const layoutPages = ["Statistics", "Containers", "Contacts"];
 declare const process: {
   env: {
     NEXT_PUBLIC_BASEURL: string;

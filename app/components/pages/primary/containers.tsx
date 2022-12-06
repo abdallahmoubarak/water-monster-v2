@@ -8,7 +8,7 @@ import ContainerLoader from "@/components/ContainerLoader";
 import { client } from "pages/_app";
 import Alert from "@/components/Alert";
 
-export default function Containers({ setPage }) {
+export default function Containers({ setPage }: { setPage: Function }) {
   const currentUser = client.getQueryData(["User"]);
   const [requestOn, setRequestOn] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
@@ -36,7 +36,7 @@ export default function Containers({ setPage }) {
         <div className="new-installation-btn">
           <Button
             text={requestOn ? "Cancel" : "New Installation"}
-            dark={true}
+            isSecondary={true}
             onClick={() => setRequestOn(!requestOn)}
           />
         </div>

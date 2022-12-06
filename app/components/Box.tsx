@@ -1,6 +1,6 @@
 import { styles } from "@/utils/styles";
 
-export default function Box({ children, title, withOutShadow }) {
+export default function Box({ children, title, withOutShadow }: boxTypes) {
   return (
     <>
       <div className="box">
@@ -28,8 +28,8 @@ export default function Box({ children, title, withOutShadow }) {
   );
 }
 
-type Box = {
-  children;
-  title;
-  withOutShadow;
+type boxTypes = {
+  children: React.ReactNode;
+  title?: string;
+  withOutShadow?: boolean;
 };
