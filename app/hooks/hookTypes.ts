@@ -1,3 +1,4 @@
+import { setAlertMsgType } from "./../types/common";
 /************************ useAuth types ************************/
 export type useSignType = {
   setMsg: Function;
@@ -47,4 +48,30 @@ export type useGetMessagesType = {
   me: string;
   other: string;
   enabled?: boolean;
+};
+
+/************************ useUser types ************************/
+export type userType = {
+  id: string;
+  name?: string;
+  phone?: string;
+};
+
+/************************ useWallet types ************************/
+
+export type walletType = {
+  id: string;
+  amount: number;
+};
+
+export type useWalletType = setAlertMsgType & {
+  setIsLoading: Function;
+  setAmount: Function;
+};
+
+export type payType = {
+  req_id: string;
+  payer_wallet_id: string;
+  payed_wallet_id: string;
+  amount: string;
 };

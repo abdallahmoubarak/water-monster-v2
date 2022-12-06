@@ -8,18 +8,22 @@ import {
   payMutation,
   withdrawMutation,
 } from "./gql/wallet";
+import { payType, useWalletType, walletType } from "./hookTypes";
 
 /****************** create wallet  ******************/
 
-const createWallet = async ({ id }) => {
+const createWallet = async ({ id }: walletType) => {
   const variables = { id };
   const res = await graphQLClient.request(createWalletMutation, variables);
   return res;
 };
 
-export const useCreateWallet = ({ setIsLoading, setAlertMsg }) => {
+export const useCreateWallet = ({
+  setIsLoading,
+  setAlertMsg,
+}: useWalletType) => {
   return useMutation(createWallet, {
-    onError: (err) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
     onSuccess: () => {
       setIsLoading(false);
       client.refetchQueries(["User"]);
@@ -30,15 +34,19 @@ export const useCreateWallet = ({ setIsLoading, setAlertMsg }) => {
 
 /****************** charge wallet  ******************/
 
-const chargeWallet = async ({ id, amount }) => {
+const chargeWallet = async ({ id, amount }: walletType) => {
   const variables = { id, amount };
   const res = await graphQLClient.request(chargeWalletMutation, variables);
   return res;
 };
 
-export const useChargeWallet = ({ setAlertMsg, setAmount, setIsLoading }) => {
+export const useChargeWallet = ({
+  setAlertMsg,
+  setAmount,
+  setIsLoading,
+}: useWalletType) => {
   return useMutation(chargeWallet, {
-    onError: (err) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
     onSuccess: () => {
       setIsLoading(false);
       setAmount("");
@@ -50,7 +58,7 @@ export const useChargeWallet = ({ setAlertMsg, setAmount, setIsLoading }) => {
 
 /****************** charge wallet  ******************/
 
-const withdrawWallet = async ({ id, amount }) => {
+const withdrawWallet = async ({ id, amount }: walletType) => {
   const variables = { id, amount };
   const res = await graphQLClient.request(withdrawMutation, variables);
   return res;
@@ -60,9 +68,9 @@ export const useWithdrawMutation = ({
   setAlertMsg,
   setAmount,
   setIsLoading,
-}) => {
+}: useWalletType) => {
   return useMutation(withdrawWallet, {
-    onError: (err) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
     onSuccess: () => {
       setIsLoading(false);
       setAmount("");
@@ -74,15 +82,23 @@ export const useWithdrawMutation = ({
 
 /****************** Pay Mutation  ******************/
 
-const pay = async ({ req_id, payer_wallet_id, payed_wallet_id, amount }) => {
+const pay = async ({
+  req_id,
+  payer_wallet_id,
+  payed_wallet_id,
+  amount,
+}: payType) => {
   const variables = { req_id, payer_wallet_id, payed_wallet_id, amount };
   const res = await graphQLClient.request(payMutation, variables);
   return res;
 };
 
-export const usePayMutation = ({ setIsLoading, setAlertMsg }) => {
+export const usePayMutation = ({
+  setIsLoading,
+  setAlertMsg,
+}: useWalletType) => {
   return useMutation(pay, {
-    onError: (err) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
     onSuccess: () => {
       setIsLoading(false);
       setAlertMsg("Payment done!");
@@ -93,15 +109,18 @@ export const usePayMutation = ({ setIsLoading, setAlertMsg }) => {
 
 /****************** Cash Mutation  ******************/
 
-const cash = async ({ req_id }) => {
+const cash = async ({ req_id }: { req_id: string }) => {
   const variables = { req_id };
   const res = await graphQLClient.request(cashMutation, variables);
   return res;
 };
 
-export const useCashMutation = ({ setIsLoading, setAlertMsg }) => {
+export const useCashMutation = ({
+  setIsLoading,
+  setAlertMsg,
+}: useWalletType) => {
   return useMutation(cash, {
-    onError: (err) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
     onSuccess: () => {
       setIsLoading(false);
       setAlertMsg("Payment done!");

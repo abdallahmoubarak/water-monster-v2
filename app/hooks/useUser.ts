@@ -1,3 +1,5 @@
+import { userType } from "./hookTypes";
+import { setAlertMsgType } from "./../types/common";
 import { graphQLClient } from "@/utils/graphQLInstance";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import {
@@ -11,39 +13,39 @@ import { client } from "pages/_app";
 
 /*********************** use update name hook ***********************/
 
-const updateName = async ({ id, name }) => {
+const updateName = async ({ id, name }: userType) => {
   const variables = { id, name };
   const res = await graphQLClient.request(updateNameMutation, variables);
   return res?.updateUsers?.users[0];
 };
 
-export const useUpdateName = ({ setAlertMsg }) => {
+export const useUpdateName = ({ setAlertMsg }: setAlertMsgType) => {
   return useMutation(updateName, {
     onSuccess: (res) => {
       localStorage.setItem("User", res?.user);
       client.setQueryData(["User"], res?.user);
       setAlertMsg("Name updated");
     },
-    onError: (err) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
   });
 };
 
 /*********************** use update phone hook ***********************/
 
-const updatePhone = async ({ id, phone }) => {
+const updatePhone = async ({ id, phone }: userType) => {
   const variables = { id, phone };
   const res = await graphQLClient.request(updatePhoneMutation, variables);
   return res?.updateUsers?.users[0];
 };
 
-export const useUpdatePhone = ({ setAlertMsg }) => {
+export const useUpdatePhone = ({ setAlertMsg }: setAlertMsgType) => {
   return useMutation(updatePhone, {
     onSuccess: (res) => {
       localStorage.setItem("User", res?.user);
       client.setQueryData(["User"], res?.user);
       setAlertMsg("Phone updated");
     },
-    onError: (err) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
   });
 };
 
@@ -58,23 +60,23 @@ export const useGetAdmin = () => {
   return useQuery({
     queryFn: () => getAdmin(),
     queryKey: ["Admin"],
-    onError: (err) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
   });
 };
 
 /*********************** use get contacts hook ***********************/
 
-const getContacts = async ({ id }) => {
+const getContacts = async ({ id }: userType) => {
   const variables = { me: id };
   const res = await graphQLClient.request(getContactsQuery, variables);
   return res?.users;
 };
 
-export const useGetContacts = ({ id }) => {
+export const useGetContacts = ({ id }: userType) => {
   return useQuery({
     queryFn: () => getContacts({ id }),
     queryKey: ["Contacts"],
-    onError: (err) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
   });
 };
 
@@ -89,6 +91,6 @@ export const useGetUsers = () => {
   return useQuery({
     queryFn: () => getUsers(),
     queryKey: ["Users"],
-    onError: (err) => console.log(err),
+    onError: (err: Error) => console.log(err.message),
   });
 };

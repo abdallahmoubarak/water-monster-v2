@@ -30,6 +30,8 @@ export const useSignUp = ({ setMsg, setIsLoading }: useSignType) => {
   });
 };
 
+/*********************** useSignIn hook ***********************/
+
 const signIn = async ({ email, password }: signTypes) => {
   const variables = { email, password };
   const res = await graphQLClient.request(signInMutation, variables);
@@ -66,6 +68,8 @@ export const useCurrentUser = ({ enabled }: { enabled: boolean }) => {
     queryKey: ["User"],
     queryFn: () => getUser(),
     refetchOnWindowFocus: false,
+    placeholderData:
+      typeof window !== "undefined" && localStorage.getItem("User"),
     enabled,
   });
 };
