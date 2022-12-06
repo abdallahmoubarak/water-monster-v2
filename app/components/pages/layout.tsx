@@ -40,5 +40,5 @@ type layoutProps = {
   hasImg?: boolean;
   hasNav?: boolean;
   active?: string;
-  setActive?: () => void;
+  setActive: Function;
 };

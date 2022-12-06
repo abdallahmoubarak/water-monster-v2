@@ -6,7 +6,6 @@ import { Neo4jGraphQL } from "@neo4j/graphql";
 import { Neo4jGraphQLAuthJWTPlugin } from "@neo4j/graphql-plugin-auth";
 import neo4j from "neo4j-driver";
 import { OGM } from "@neo4j/graphql-ogm";
-// import "ts-tiny-invariant";
 
 declare const process: {
   env: {

@@ -11,8 +11,7 @@ export default function TopBar({ hasImg, setActive }: topBarProps) {
         {hasImg && (
           <div
             className="profile-image"
-            // onClick={() => setActive("Profile")}
-          ></div>
+            onClick={() => setActive("Profile")}></div>
         )}
       </div>
 
@@ -42,5 +41,5 @@ export default function TopBar({ hasImg, setActive }: topBarProps) {
 
 type topBarProps = {
   hasImg?: boolean;
-  setActive?: (name: string) => void;
+  setActive: Function;
 };
