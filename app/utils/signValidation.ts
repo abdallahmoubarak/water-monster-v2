@@ -1,3 +1,4 @@
+import { signTypes } from "./../types/common";
 const regularExpression =
   /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
@@ -47,10 +48,4 @@ export const validSign = ({
   return { valid, message };
 };
 
-type validationTypes = {
-  signType: string;
-  email: string;
-  password: string;
-  name?: string;
-  userType?: string;
-};
+type validationTypes = signTypes & { signType: string };

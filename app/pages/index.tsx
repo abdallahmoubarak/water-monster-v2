@@ -4,7 +4,7 @@ import { useCurrentUser } from "@/hooks/useAuth";
 import { styles } from "@/utils/styles";
 import { useEffect, useState } from "react";
 import Sign from "@/components/pages/sign";
-import AnimatedLogo from "@/components/a/AnimatedLogo";
+import AnimatedLogo from "@/components/svg/AnimatedLogo";
 
 export default function Index() {
   const [enabled, setEnabled] = useState<boolean>(true);
@@ -21,6 +21,7 @@ export default function Index() {
         />
         <title>Water Monster</title>
       </Head>
+
       {enabled && isLoading && !currentUser && (
         <div className="fallback">
           <div className="logo-container">
