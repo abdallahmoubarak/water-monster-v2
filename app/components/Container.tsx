@@ -4,15 +4,25 @@ import settings from "@/public/svg/settings.svg";
 import { styles } from "@/utils/styles";
 import { BiWater } from "react-icons/bi";
 
-export default function Container({ container, setPage }) {
+export default function Container({
+  container,
+  setPage,
+  setPageId,
+}: {
+  container: any;
+  setPage: Function;
+  setPageId: Function;
+}) {
+  const handleOnSettingsClick = () => {
+    setPage("Settings");
+    setPageId(container.id);
+  };
   return (
     <>
       <div className="container-card">
         <div className="flex">
           <div>{container?.name} Container</div>
-          <div
-            className="stng"
-            onClick={() => setPage("Setting", container.id)}>
+          <div className="stng" onClick={handleOnSettingsClick}>
             <Image width={30} src={settings} alt="s" />
           </div>
         </div>

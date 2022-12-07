@@ -70,7 +70,7 @@ export default function Button({
 
 type buttonProps = {
   text: string;
-  onClick?: () => void;
+  onClick?: Function;
   disabled?: boolean;
   isSecondary?: boolean;
   font?: string;

@@ -8,13 +8,8 @@ const ContainerSetting = dynamic(() => import("./secoundary/containerSetting"));
 const Profile = dynamic(() => import("./secoundary/profile"));
 
 export default function Home() {
-  const [page, setPageName] = useState<string>("Containers");
+  const [page, setPage] = useState<string>("Containers");
   const [pageId, setPageId] = useState<string>("");
-
-  const setPage = ({ name, id }: { name: string; id: string }) => {
-    setPageName(name);
-    setPageId(id);
-  };
 
   return (
     <>
@@ -24,11 +19,11 @@ export default function Home() {
 
       {page === "Containers" && (
         <Layout hasImg={true} hasNav={false} active={page} setActive={setPage}>
-          <Containers setPage={setPage} />
+          <Containers setPage={setPage} setPageId={setPageId} />
         </Layout>
       )}
 
-      {page === "Setting" && (
+      {page === "Settings" && (
         <ContainerSetting setPage={setPage} containerId={pageId} />
       )}
       {page === "Profile" && <Profile setPage={setPage} />}

@@ -7,11 +7,7 @@ import { useState } from "react";
 import { styles } from "@/utils/styles";
 import { useSignIn, useSignUp } from "@/hooks/useAuth";
 
-export default function SignForm({
-  handleForget,
-}: {
-  handleForget: () => void;
-}) {
+export default function SignForm({ handleForget }: { handleForget: Function }) {
   const [signup, setSignUp] = useState<boolean>(true);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");

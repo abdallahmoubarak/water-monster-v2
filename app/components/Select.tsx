@@ -37,6 +37,6 @@ type selectProps = {
   name: string;
   options: string[];
   selected: string;
-  setSelected: (value: string) => void;
+  setSelected: Function;
   hasDefault: boolean;
 };

@@ -1,7 +1,13 @@
 import SettingForm from "@/components/SettingForm";
 import Layout from "./sLayout";
 
-export default function ContainerSetting({ setPage, containerId }) {
+export default function ContainerSetting({
+  setPage,
+  containerId,
+}: {
+  setPage: Function;
+  containerId: string;
+}) {
   return (
     <>
       <Layout

@@ -16,16 +16,10 @@ export default function SettingForm({
   const [name, setName] = useState<string>("");
   const [size, setSize] = useState<string>("");
   const [address, setAddress] = useState<string>("");
-  const [installationState, setInstallationState] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alertMsg, setAlertMsg] = useState<string>("");
 
   const { mutate: updateContainer } = useUpdateContainer({
-    setPage,
-    setIsLoading,
-  });
-
-  const { mutate: deleteContainer } = useDeleteContainer({
     setPage,
     setIsLoading,
   });
@@ -38,11 +32,6 @@ export default function SettingForm({
     setName(cnt?.name);
     setSize(cnt?.size);
     setAddress(cnt?.address);
-    setInstallationState(
-      cnt?.requests.filter(
-        (req: { title: string }) => req.title === "Installation",
-      )[0]?.state,
-    );
   }, [containerId]);
 
   const handleUpdate = () => {
@@ -54,12 +43,6 @@ export default function SettingForm({
     <>
       <div className="setting-container">
         <Box title={"Inforamation"}>
-          {installationState !== "done" && (
-            <div className="state">
-              <MdPendingActions />
-              <div>Pending for {installationState}...</div>
-            </div>
-          )}
           <Input name="Container name" value={name} setValue={setName} />
           <Input name={"Size"} value={size} setValue={setSize} />
           <Input name={"Address"} value={address} isDisabled={true} />
@@ -70,13 +53,6 @@ export default function SettingForm({
               isLoading={isLoading}
               disabled={name === container?.name}
             />
-            {installationState === "approval" && (
-              <Button
-                text="Delete"
-                isSecondary={true}
-                onClick={() => deleteContainer(container.id)}
-              />
-            )}
           </div>
         </Box>
       </div>

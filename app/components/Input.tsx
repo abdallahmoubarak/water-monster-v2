@@ -52,7 +52,7 @@ export default function Input({
 type inputProps = {
   name: string;
   value: string | number;
-  setValue?: (value: string) => void;
+  setValue?: Function;
   type?: string;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;

@@ -1,4 +1,5 @@
 import { useCreateContainer } from "@/hooks/useContainer";
+import { setAlertMsgType } from "@/types/common";
 import { styles } from "@/utils/styles";
 import { useState } from "react";
 import Box from "./Box";
@@ -6,43 +7,39 @@ import Button from "./Button";
 import Input from "./Input";
 import InputsContainer from "./InputsContainer";
 
-export default function RequestInstallation({
+export default function Installation({
   currentUser,
   close,
   setAlertMsg,
+}: {
+  currentUser: any;
+  close: Function;
+  setAlertMsg: Function;
 }) {
-  const [name, setName] = useState("");
-  const [size, setSize] = useState("");
-  const [address, setAddress] = useState("");
-  const [date, setDate] = useState("");
+  const [name, setName] = useState<string>("");
+  const [size, setSize] = useState<string>("");
+  const [height, setHeight] = useState<string>("");
 
   const { mutate: createContainer } = useCreateContainer();
 
-  const handleRequest = () => {
-    createContainer({ id: currentUser.id, name, size, address, date });
+  const handleInstallation = () => {
+    createContainer({ id: currentUser.id, name, size, height });
     setName("");
     setSize("");
-    setAddress("");
-    setDate("");
+    setHeight("");
     setAlertMsg("Created successfully");
     close();
   };
 
   return (
     <>
-      <Box title={"Request new container"}>
+      <Box title={"Install new sensor"}>
         <InputsContainer>
           <Input name={"Container name"} value={name} setValue={setName} />
           <Input name={"Size"} value={size} setValue={setSize} />
-          <Input name={"Address"} value={address} setValue={setAddress} />
-          <Input
-            type={"date"}
-            name={"Prefared date"}
-            value={date}
-            setValue={setDate}
-          />
+          <Input name={"Height"} value={height} setValue={setHeight} />
         </InputsContainer>
-        <Button text="Request now" onClick={handleRequest} />
+        <Button text="Start" onClick={handleInstallation} />
       </Box>
 
       <style jsx>{`
