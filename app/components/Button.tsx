@@ -1,6 +1,7 @@
 import { styles } from "@/utils/styles";
 import Loading from "@/public/svg/Loading.svg";
 import Image from "next/image";
+import { MouseEventHandler } from "react";
 
 export default function Button({
   text = "button",
@@ -70,7 +71,7 @@ export default function Button({
 
 type buttonProps = {
   text: string;
-  onClick?: Function;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
   disabled?: boolean;
   isSecondary?: boolean;
   font?: string;
