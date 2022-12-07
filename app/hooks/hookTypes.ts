@@ -6,31 +6,30 @@ export type useSignTypes = {
 
 /************************ useContainer types ************************/
 
-export type createContainerType = {
+export type createContainerTypes = {
   id: string;
   name: string;
   size: string;
-  address: string;
-  date: string;
+  height: string;
 };
 
-export type updateContainerType = {
+export type updateContainerTypes = {
   id: string;
   name: string;
   size: string;
 };
 
-export type useUpdateContainerType = {
+export type useUpdateContainerTypes = {
   setPage: Function;
   setIsLoading: Function;
 };
 
-export type updatePrivateModeType = {
+export type updatePrivateModeTypes = {
   id: string;
   private_mode: boolean;
 };
 
-export type updateManualModeType = {
+export type updateManualModeTypes = {
   id: string;
   manual_mode: boolean;
 };

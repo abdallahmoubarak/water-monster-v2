@@ -3,11 +3,11 @@ import { graphQLClient } from "@/utils/graphQLInstance";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { client } from "pages/_app";
 import {
-  createContainerType,
-  updateContainerType,
-  updateManualModeType,
-  updatePrivateModeType,
-  useUpdateContainerType,
+  createContainerTypes,
+  updateContainerTypes,
+  updateManualModeTypes,
+  updatePrivateModeTypes,
+  useUpdateContainerTypes,
 } from "./hookTypes";
 import {
   createContainerMutation,
@@ -39,17 +39,13 @@ const createContainer = async ({
   id,
   name,
   size,
-  address,
-  date,
-}: createContainerType) => {
+  height,
+}: createContainerTypes) => {
   const variables = {
     id,
     name,
     size,
-    address,
-    date,
-    title: "Installation",
-    state: "approval",
+    height,
   };
   const res = await graphQLClient.request(createContainerMutation, variables);
   return res;
@@ -64,7 +60,7 @@ export const useCreateContainer = () => {
 
 /************************* update a container *************************/
 
-const updateContainer = async ({ id, name, size }: updateContainerType) => {
+const updateContainer = async ({ id, name, size }: updateContainerTypes) => {
   const variables = { container_id: id, name, size };
   const res = await graphQLClient.request(updateContainerMutation, variables);
   return res?.updateContainers?.containers;
@@ -73,7 +69,7 @@ const updateContainer = async ({ id, name, size }: updateContainerType) => {
 export const useUpdateContainer = ({
   setPage,
   setIsLoading,
-}: useUpdateContainerType) => {
+}: useUpdateContainerTypes) => {
   return useMutation(updateContainer, {
     onSuccess: () => setPage("Containers"),
     onError: () => setIsLoading(false),
@@ -91,7 +87,7 @@ const deleteContainer = async (id: string) => {
 export const useDeleteContainer = ({
   setPage,
   setIsLoading,
-}: useUpdateContainerType) => {
+}: useUpdateContainerTypes) => {
   return useMutation(deleteContainer, {
     onSuccess: () => setPage("Containers"),
     onError: () => setIsLoading(false),
@@ -103,7 +99,7 @@ export const useDeleteContainer = ({
 const updatePrivateMode = async ({
   id,
   private_mode,
-}: updatePrivateModeType) => {
+}: updatePrivateModeTypes) => {
   const variables = { id, private_mode };
   const res = await graphQLClient.request(updatePrivateModeMutation, variables);
   return res;
@@ -118,7 +114,7 @@ export const useUpdatePrivateMode = ({ setAlertMsg }: setAlertMsgType) => {
 
 /****************** updating manual mode in a container ******************/
 
-const updateManualMode = async ({ id, manual_mode }: updateManualModeType) => {
+const updateManualMode = async ({ id, manual_mode }: updateManualModeTypes) => {
   const variables = { id, manual_mode };
   const res = await graphQLClient.request(updateManualModeMutation, variables);
   return res;

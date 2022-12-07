@@ -5,6 +5,7 @@ export const containerDefs = gql`
     id: ID! @id
     name: String
     size: String
+    height: String
     location: Point
     address: String
     water_level: Int

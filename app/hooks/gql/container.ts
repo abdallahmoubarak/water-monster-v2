@@ -16,21 +16,13 @@ export const userContainerQuery = gql`
 `;
 
 export const createContainerMutation = gql`
-  mutation (
-    $id: ID!
-    $name: String!
-    $size: String!
-    $title: String!
-    $state: String!
-    $date: Date!
-    $address: String!
-  ) {
+  mutation ($id: ID!, $name: String!, $size: String!, $height: String!) {
     createContainers(
       input: [
         {
           name: $name
           size: $size
-          address: $address
+          height: $height
           user: { connect: { where: { node: { id: $id } } } }
         }
       ]
@@ -39,11 +31,11 @@ export const createContainerMutation = gql`
         id
         name
         size
+        height
         sensor_state
         private_mode
         manual_mode
         water_level
-        address
       }
     }
   }
@@ -59,15 +51,11 @@ export const updateContainerMutation = gql`
         id
         name
         size
+        height
         sensor_state
         private_mode
         manual_mode
         water_level
-        address {
-          title
-          state
-          date
-        }
       }
     }
   }
