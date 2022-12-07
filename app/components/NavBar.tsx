@@ -16,7 +16,7 @@ export default function NavBar({
             <li
               key={i}
               className={`nav-li ${activePage === item.name && "active"}`}
-              onClick={() => setActivePage(item.name || "")}>
+              onClick={() => !!setActivePage && setActivePage(item.name)}>
               <div className="nav-icon">
                 <Image src={item.img} alt={item.name} height={33} />
               </div>
