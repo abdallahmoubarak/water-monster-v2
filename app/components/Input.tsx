@@ -33,7 +33,9 @@ export default function Input({
               value={value}
               type={type}
               onChange={(e) =>
-                e.target.value.length < limit && setValue(e.target.value)
+                e.target.value.length < limit &&
+                !!setValue &&
+                setValue(e.target.value)
               }
               onBlur={onBlur && onBlur}
               accept={accept && accept}
