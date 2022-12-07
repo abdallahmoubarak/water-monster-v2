@@ -1,6 +1,12 @@
 import { styles } from "@/utils/styles";
 
-export default function Field({ title, value }) {
+export default function Field({
+  title,
+  value,
+}: {
+  title: string;
+  value: string;
+}) {
   return (
     <>
       <div className="field">
