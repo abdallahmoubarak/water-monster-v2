@@ -1,6 +1,5 @@
-import { setAlertMsgType } from "./../types/common";
 /************************ useAuth types ************************/
-export type useSignType = {
+export type useSignTypes = {
   setMsg: Function;
   setIsLoading: Function;
 };
@@ -51,7 +50,7 @@ export type useGetMessagesType = {
 };
 
 /************************ useUser types ************************/
-export type userType = {
+export type userTypes = {
   id: string;
   name?: string;
   phone?: string;

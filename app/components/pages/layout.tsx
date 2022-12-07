@@ -36,9 +36,9 @@ export default function RootLayout({
 }
 
 type layoutProps = {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   hasImg?: boolean;
   hasNav?: boolean;
   active?: string;
-  setActive: Function;
+  setActive?: Function;
 };

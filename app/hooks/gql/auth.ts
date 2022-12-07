@@ -5,16 +5,21 @@ export const signUpMutation = gql`
     $name: String!
     $email: String!
     $password: String!
-    $type: String!
+    $userType: String!
   ) {
-    signUp(name: $name, email: $email, password: $password, type: $type) {
+    signUp(
+      name: $name
+      email: $email
+      password: $password
+      userType: $userType
+    ) {
       token
       user {
         id
         name
         email
         phone
-        type
+        userType
         profile_url
       }
     }
@@ -30,7 +35,7 @@ export const signInMutation = gql`
         name
         email
         phone
-        type
+        userType
         profile_url
       }
     }
@@ -44,7 +49,7 @@ export const meQuery = gql`
       name
       email
       phone
-      type
+      userType
       profile_url
     }
   }

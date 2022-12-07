@@ -1,4 +1,4 @@
-import { userType } from "./hookTypes";
+import { userTypes } from "./hookTypes";
 import { setAlertMsgType } from "./../types/common";
 import { graphQLClient } from "@/utils/graphQLInstance";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -13,7 +13,7 @@ import { client } from "pages/_app";
 
 /*********************** use update name hook ***********************/
 
-const updateName = async ({ id, name }: userType) => {
+const updateName = async ({ id, name }: userTypes) => {
   const variables = { id, name };
   const res = await graphQLClient.request(updateNameMutation, variables);
   return res?.updateUsers?.users[0];
@@ -32,7 +32,7 @@ export const useUpdateName = ({ setAlertMsg }: setAlertMsgType) => {
 
 /*********************** use update phone hook ***********************/
 
-const updatePhone = async ({ id, phone }: userType) => {
+const updatePhone = async ({ id, phone }: userTypes) => {
   const variables = { id, phone };
   const res = await graphQLClient.request(updatePhoneMutation, variables);
   return res?.updateUsers?.users[0];
@@ -66,13 +66,13 @@ export const useGetAdmin = () => {
 
 /*********************** use get contacts hook ***********************/
 
-const getContacts = async ({ id }: userType) => {
+const getContacts = async ({ id }: userTypes) => {
   const variables = { me: id };
   const res = await graphQLClient.request(getContactsQuery, variables);
   return res?.users;
 };
 
-export const useGetContacts = ({ id }: userType) => {
+export const useGetContacts = ({ id }: userTypes) => {
   return useQuery({
     queryFn: () => getContacts({ id }),
     queryKey: ["Contacts"],

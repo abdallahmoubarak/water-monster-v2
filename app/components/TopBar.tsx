@@ -41,5 +41,5 @@ export default function TopBar({ hasImg, setActive }: topBarProps) {
 
 type topBarProps = {
   hasImg?: boolean;
-  setActive: Function;
+  setActive?: Function;
 };

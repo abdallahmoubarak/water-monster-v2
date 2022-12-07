@@ -8,7 +8,7 @@ export const updateNameMutation = gql`
         name
         email
         phone
-        type
+        userType
         profile_url
       }
     }
@@ -23,7 +23,7 @@ export const updatePhoneMutation = gql`
         name
         email
         phone
-        type
+        userType
         profile_url
       }
     }
@@ -38,7 +38,7 @@ export const updateProfileUrlMutation = gql`
         name
         email
         phone
-        type
+        userType
         profile_url
       }
     }
@@ -47,7 +47,7 @@ export const updateProfileUrlMutation = gql`
 
 export const getAdminQuery = gql`
   query {
-    users(where: { type: "Admin" }) {
+    users(where: { userType: "Admin" }) {
       id
       name
       profile_url
@@ -69,7 +69,7 @@ export const getContactsQuery = gql`
       id
       name
       profile_url
-      type
+      userType
     }
   }
 `;
@@ -78,7 +78,7 @@ export const getUsersQuery = gql`
   query {
     users(where: { type_NOT: "Admin" }) {
       name
-      type
+      userType
     }
   }
 `;

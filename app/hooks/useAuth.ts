@@ -1,4 +1,4 @@
-import { useSignType } from "./hookTypes";
+import { useSignTypes } from "./hookTypes";
 import { graphQLClient } from "@/utils/graphQLInstance";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { meQuery, signInMutation, signUpMutation } from "./gql/auth";
@@ -13,7 +13,7 @@ const signUp = async ({ userType, name, email, password }: signTypes) => {
   return res?.signUp;
 };
 
-export const useSignUp = ({ setMsg, setIsLoading }: useSignType) => {
+export const useSignUp = ({ setMsg, setIsLoading }: useSignTypes) => {
   return useMutation(signUp, {
     onSuccess: (res) => {
       localStorage.setItem("JWT", res?.token);
@@ -38,7 +38,7 @@ const signIn = async ({ email, password }: signTypes) => {
   return res?.signIn;
 };
 
-export const useSignIn = ({ setMsg, setIsLoading }: useSignType) => {
+export const useSignIn = ({ setMsg, setIsLoading }: useSignTypes) => {
   return useMutation(signIn, {
     onSuccess: (res) => {
       localStorage.setItem("JWT", res?.token);

@@ -17,7 +17,7 @@ export default function SignForm({
   const [email, setEmail] = useState<string>("");
   const [password, setPass] = useState<string>("");
   const [msg, setMsg] = useState<string>("");
-  const [selected, setSelected] = useState<string>("Client");
+  const [selectedType, setSelectedType] = useState<string>("Client");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [invalid, setInvalid] = useState<boolean>(false);
   const [forgetForm, setForgetForm] = useState<boolean>(false);
@@ -29,7 +29,7 @@ export default function SignForm({
     if (!isLoading) {
       setIsLoading(true);
       setMsg("");
-      let userType = selected;
+      let userType = selectedType;
       const { valid, message } = validSign({
         signType,
         email,
@@ -48,7 +48,7 @@ export default function SignForm({
 
       signType === "signin"
         ? signIn({ email, password })
-        : signUp({ userType, name, email, password });
+        : signUp({ userType: "Client", name, email, password });
     }
   };
   return (
@@ -89,8 +89,8 @@ export default function SignForm({
           <Select
             name="Account type"
             options={["Client", "Provider"]}
-            setSelected={setSelected}
-            selected={selected}
+            setSelected={setSelectedType}
+            selected={selectedType}
             hasDefault={true}
           />
         )}
