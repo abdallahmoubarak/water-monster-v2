@@ -11,7 +11,7 @@ export default function TopBar({ hasImg, setActive }: topBarProps) {
         {hasImg && (
           <div
             className="profile-image"
-            onClick={() => setActive("Profile")}></div>
+            onClick={() => !!setActive && setActive("Profile")}></div>
         )}
       </div>
 

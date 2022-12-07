@@ -7,7 +7,6 @@ import InputsContainer from "@/components/InputsContainer";
 import UploadImage from "@/components/UploadImage";
 import { useCurrentUser } from "@/hooks/useAuth";
 import { useUpdateName, useUpdatePhone } from "@/hooks/useUser";
-import { formatter } from "@/utils/currencyFormatter";
 import { graphQLClient } from "@/utils/graphQLInstance";
 import { client } from "pages/_app";
 import { useState } from "react";
@@ -20,9 +19,6 @@ export default function Profile({ setPage }: { setPage: Function }) {
   const [image, setImage] = useState("");
   const [base64, setImg64] = useState("");
   const [alertMsg, setAlertMsg] = useState("");
-  const currentAmount = formatter.format(
-    parseFloat(currentUser?.wallet?.amount),
-  );
 
   const { mutate: updateName } = useUpdateName({ setAlertMsg });
   const { mutate: updatePhone } = useUpdatePhone({ setAlertMsg });

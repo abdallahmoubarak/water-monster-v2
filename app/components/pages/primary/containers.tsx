@@ -1,26 +1,29 @@
 import Button from "@/components/Button";
 import { styles } from "@/utils/styles";
-import { useState } from "react";
+import { Key, useState } from "react";
 import RequestInstallation from "@/components/RequestInstallation";
 import Container from "@/components/Container";
 import { useUserContainers } from "@/hooks/useContainer";
 import ContainerLoader from "@/components/ContainerLoader";
 import { client } from "pages/_app";
 import Alert from "@/components/Alert";
+import { userTypes } from "@/hooks/hookTypes";
 
 export default function Containers({ setPage }: { setPage: Function }) {
-  const currentUser = client.getQueryData(["User"]);
+  const currentUser =
+    client.getQueryData<userTypes>(["User"]) ||
+    JSON.parse(localStorage.getItem("User"));
   const [requestOn, setRequestOn] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
 
-  const { data: containers, isLoading } = useUserContainers(currentUser.id);
+  const { data: containers, isLoading } = useUserContainers(currentUser?.id);
 
   return (
     <>
       <div className="page">
         {isLoading && <ContainerLoader />}
         <div className="containers">
-          {containers?.map((container, i) => (
+          {containers?.map((container: any, i: Key) => (
             <Container key={i} container={container} setPage={setPage} />
           ))}
         </div>

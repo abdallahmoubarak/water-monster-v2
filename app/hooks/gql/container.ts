@@ -10,11 +10,7 @@ export const userContainerQuery = gql`
       private_mode
       manual_mode
       water_level
-      address {
-        title
-        state
-        date
-      }
+      address
     }
   }
 `;
@@ -47,11 +43,7 @@ export const createContainerMutation = gql`
         private_mode
         manual_mode
         water_level
-        address {
-          title
-          state
-          date
-        }
+        address
       }
     }
   }
