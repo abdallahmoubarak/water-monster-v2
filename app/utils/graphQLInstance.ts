@@ -2,11 +2,13 @@ import { GraphQLClient } from "graphql-request";
 
 declare const process: {
   env: {
-    NEXT_PUBLIC_ENDPOINT: string;
+    NEXT_PUBLIC_GQL_PATH: string;
+    NEXT_PUBLIC_BASEURL: string;
   };
 };
 
-const endpoint: string = process.env.NEXT_PUBLIC_ENDPOINT;
+const endpoint: string =
+  process.env.NEXT_PUBLIC_BASEURL + process.env.NEXT_PUBLIC_GQL_PATH;
 
 export const graphQLClient = new GraphQLClient(endpoint, {
   headers: <HeadersInit | undefined>{

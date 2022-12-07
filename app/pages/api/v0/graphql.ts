@@ -21,7 +21,7 @@ export default async function handler(
 
   await ogm.init();
   await startServer;
-  await server.createHandler({ path: "/api/v0/graphql" })(req, res);
+  await server.createHandler({ path: process.env.NEXT_PUBLIC_PATH })(req, res);
 }
 
 export const config = {
