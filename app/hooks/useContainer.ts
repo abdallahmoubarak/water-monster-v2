@@ -12,7 +12,6 @@ import {
 import {
   createContainerMutation,
   deleteContainerMutation,
-  getMapContainersQuery,
   updateContainerMutation,
   updateManualModeMutation,
   updatePrivateModeMutation,
@@ -129,19 +128,5 @@ export const useUpdateManualMode = ({ setAlertMsg }: setAlertMsgType) => {
   return useMutation(updateManualMode, {
     onError: (err: Error) => console.log(err.message),
     onSuccess: () => setAlertMsg("Mode updated"),
-  });
-};
-
-/****************** get availble map containers ******************/
-
-const getMapContainers = async () => {
-  const res = await graphQLClient.request(getMapContainersQuery);
-  return res?.containers;
-};
-
-export const useGetMapContainers = () => {
-  return useQuery({
-    queryKey: ["MapContainers"],
-    queryFn: () => getMapContainers(),
   });
 };

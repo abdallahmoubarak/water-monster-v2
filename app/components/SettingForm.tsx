@@ -33,13 +33,15 @@ export default function SettingForm({
   useEffect(() => {
     const cnt = client
       ?.getQueryData(["Containers"])
-      ?.filter((item) => item.id === containerId)[0];
+      ?.filter((item: { id: string }) => item.id === containerId)[0];
     setContainer(cnt);
     setName(cnt?.name);
     setSize(cnt?.size);
     setAddress(cnt?.address);
     setInstallationState(
-      cnt?.requests.filter((req) => req.title === "Installation")[0]?.state,
+      cnt?.requests.filter(
+        (req: { title: string }) => req.title === "Installation",
+      )[0]?.state,
     );
   }, [containerId]);
 

@@ -56,22 +56,3 @@ export type userType = {
   name?: string;
   phone?: string;
 };
-
-/************************ useWallet types ************************/
-
-export type walletType = {
-  id: string;
-  amount: number;
-};
-
-export type useWalletType = setAlertMsgType & {
-  setIsLoading: Function;
-  setAmount: Function;
-};
-
-export type payType = {
-  req_id: string;
-  payer_wallet_id: string;
-  payed_wallet_id: string;
-  amount: string;
-};

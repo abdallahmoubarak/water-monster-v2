@@ -10,15 +10,7 @@ export const userContainerQuery = gql`
       private_mode
       manual_mode
       water_level
-      address
-      requests(
-        where: {
-          OR: [
-            { title: "Installation" }
-            { title: "Filling", state_NOT: "done" }
-          ]
-        }
-      ) {
+      address {
         title
         state
         date
@@ -43,16 +35,6 @@ export const createContainerMutation = gql`
           name: $name
           size: $size
           address: $address
-          requests: {
-            create: {
-              node: {
-                state: $state
-                title: $title
-                date: $date
-                creator: { connect: { where: { node: { id: $id } } } }
-              }
-            }
-          }
           user: { connect: { where: { node: { id: $id } } } }
         }
       ]
@@ -65,15 +47,7 @@ export const createContainerMutation = gql`
         private_mode
         manual_mode
         water_level
-        address
-        requests(
-          where: {
-            OR: [
-              { title: "Installation" }
-              { title: "Filling", state_NOT: "done" }
-            ]
-          }
-        ) {
+        address {
           title
           state
           date
@@ -97,15 +71,7 @@ export const updateContainerMutation = gql`
         private_mode
         manual_mode
         water_level
-        address
-        requests(
-          where: {
-            OR: [
-              { title: "Installation" }
-              { title: "Filling", state_NOT: "done" }
-            ]
-          }
-        ) {
+        address {
           title
           state
           date
@@ -148,42 +114,6 @@ export const updateManualModeMutation = gql`
     ) {
       containers {
         id
-      }
-    }
-  }
-`;
-
-export const getMapContainersQuery = gql`
-  query {
-    containers(
-      where: {
-        OR: [
-          { private_mode: false, manual_mode: true }
-          { private_mode: false, manual_mode: false }
-          { requests_SINGLE: { state_NOT: "done" } }
-        ]
-      }
-    ) {
-      id
-      name
-      location {
-        longitude
-        latitude
-      }
-      size
-      sensor_state
-      water_level
-      user {
-        id
-        name
-        profile_url
-      }
-      requests(where: { title: "Filling", state_NOT: "done" }) {
-        id
-        state
-        provider {
-          id
-        }
       }
     }
   }
