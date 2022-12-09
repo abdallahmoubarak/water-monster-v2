@@ -22,8 +22,7 @@ export default function Containers({
   const [requestOn, setRequestOn] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
 
-  const { data: containers, isLoading } =
-    currentUser && useUserContainers(currentUser.id);
+  const { data: containers, isLoading } = useUserContainers(currentUser.id);
 
   return (
     <>
