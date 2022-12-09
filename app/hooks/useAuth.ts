@@ -17,6 +17,7 @@ export const useSignUp = ({ setMsg, setIsLoading }: useSignTypes) => {
   return useMutation(signUp, {
     onSuccess: (res) => {
       localStorage.setItem("JWT", res?.token);
+      localStorage.setItem("User", JSON.stringify(res?.user));
       client.setQueryData(["User"], res?.user);
       graphQLClient.setHeaders({
         authorization: `Bearer ${res?.token}`,
@@ -42,7 +43,7 @@ export const useSignIn = ({ setMsg, setIsLoading }: useSignTypes) => {
   return useMutation(signIn, {
     onSuccess: (res) => {
       localStorage.setItem("JWT", res?.token);
-      localStorage.setItem("User", res?.user);
+      localStorage.setItem("User", JSON.stringify(res?.user));
       client.setQueryData(["User"], res?.user);
       graphQLClient.setHeaders({
         authorization: `Bearer ${res?.token}`,
