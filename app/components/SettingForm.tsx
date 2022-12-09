@@ -26,7 +26,7 @@ export default function SettingForm({
 
   useEffect(() => {
     const cnt = client
-      ?.getQueryData(["Containers"])
+      ?.getQueryData<any>(["Containers"])
       ?.filter((item: { id: string }) => item.id === containerId)[0];
     setContainer(cnt);
     setName(cnt?.name);
