@@ -30,9 +30,10 @@ export default function SignForm({
       setIsLoading(true);
       setMsg("");
       let userType = selectedType;
+      let newEmail = email.toLowerCase().trim();
       const { valid, message } = validSign({
         signType,
-        email,
+        email: newEmail,
         password,
         name,
         userType,
@@ -47,8 +48,8 @@ export default function SignForm({
       setMsg(message);
 
       signType === "signin"
-        ? signIn({ email, password })
-        : signUp({ userType: "Client", name, email, password });
+        ? signIn({ email: newEmail, password })
+        : signUp({ userType: "Client", name, email: newEmail, password });
     }
   };
   return (
