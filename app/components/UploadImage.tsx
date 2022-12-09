@@ -6,7 +6,7 @@ export default function UploadImage({
   image,
   setImage,
   setImg64,
-}) {
+}: uploadImgTypes) {
   return (
     <>
       <div className="upload-img-container">
@@ -25,20 +25,20 @@ export default function UploadImage({
             id="upload-img-input"
             type="file"
             accept="image/png, image/gif, image/jpeg"
-            onChange={(e) => {
-              var file = e.target.files[0];
-              const reader = new FileReader();
-              reader.onload = () => {
-                reader.readyState === 2 && setImage(reader.result);
-                reader.readyState === 2 &&
-                  setImg64(reader.result.split("base64,")[1]);
-              };
-              if (file) {
-                reader.readAsDataURL(file);
-              } else {
-                setImage();
-              }
-            }}
+            // onChange={(e) => {
+            //   var file = e.target.files[0];
+            //   const reader = new FileReader();
+            //   reader.onload = () => {
+            //     reader.readyState === 2 && setImage(reader.result);
+            //     reader.readyState === 2 &&
+            //       setImg64(reader.result.split("base64,")[1]);
+            //   };
+            //   if (file) {
+            //     reader.readAsDataURL(file);
+            //   } else {
+            //     setImage();
+            //   }
+            // }}
           />
         </div>
       </div>
@@ -76,3 +76,9 @@ export default function UploadImage({
     </>
   );
 }
+type uploadImgTypes = {
+  currentUser: any;
+  image: string;
+  setImage: Function;
+  setImg64: Function;
+};

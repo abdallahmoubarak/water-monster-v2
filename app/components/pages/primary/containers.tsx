@@ -16,13 +16,13 @@ export default function Containers({
   setPage: Function;
   setPageId: Function;
 }) {
-  const currentUser =
-    client.getQueryData<userTypes>(["User"]) ||
-    JSON.parse(localStorage.getItem("User"));
+  const currentUser: any =
+    JSON.parse(localStorage.getItem("User") || "") ||
+    client.getQueryData<userTypes>(["User"]);
   const [requestOn, setRequestOn] = useState(false);
   const [alertMsg, setAlertMsg] = useState("");
 
-  const { data: containers, isLoading } = useUserContainers(currentUser?.id);
+  const { data: containers, isLoading } = useUserContainers(currentUser.id);
 
   return (
     <>

@@ -1,6 +1,13 @@
 import { styles } from "@/utils/styles";
+import { MouseEventHandler } from "react";
 
-export default function Switch({ icon, title, description, on, setOn }) {
+export default function Switch({
+  icon,
+  title,
+  description,
+  isOn,
+  setIsOn,
+}: switchTypes) {
   return (
     <>
       <div>
@@ -9,7 +16,7 @@ export default function Switch({ icon, title, description, on, setOn }) {
             <div>{icon}</div>
             <div>{title}</div>
           </div>
-          <div className="switch" onClick={setOn}>
+          <div className="switch" onClick={setIsOn}>
             <div className="circul"></div>
           </div>
         </div>
@@ -37,14 +44,14 @@ export default function Switch({ icon, title, description, on, setOn }) {
           border: 1px solid lightgray;
           cursor: pointer;
           ${styles.flexAligncenter};
-          ${on &&
+          ${isOn &&
           "-webkit-box-orient: horizontal;-webkit-box-direction: reverse;-ms-flex-direction: row-reverse; flex-direction: row-reverse;"}
         }
         .circul {
           width: 1.6rem;
           height: 1.6rem;
           ${styles.borderRadius50percent};
-          background: ${on ? styles.primaryColor : "gray"};
+          background: ${isOn ? styles.primaryColor : "gray"};
         }
         .description {
           color: gray;
@@ -55,3 +62,10 @@ export default function Switch({ icon, title, description, on, setOn }) {
     </>
   );
 }
+type switchTypes = {
+  icon: any;
+  title: string;
+  description: string;
+  isOn: boolean;
+  setIsOn: MouseEventHandler<HTMLDivElement>;
+};

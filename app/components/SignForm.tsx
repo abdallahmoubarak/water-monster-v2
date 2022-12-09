@@ -3,11 +3,15 @@ import Input from "@/components/Input";
 import InputsContainer from "@/components/InputsContainer";
 import Select from "@/components/Select";
 import { validSign } from "@/utils/signValidation";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { styles } from "@/utils/styles";
 import { useSignIn, useSignUp } from "@/hooks/useAuth";
 
-export default function SignForm({ handleForget }: { handleForget: Function }) {
+export default function SignForm({
+  handleForget,
+}: {
+  handleForget: MouseEventHandler<HTMLButtonElement>;
+}) {
   const [signup, setSignUp] = useState<boolean>(true);
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");

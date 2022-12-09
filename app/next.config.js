@@ -10,7 +10,6 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 const nextConfig = withPWA({
   reactStrictMode: false,
   swcMinify: true,
-  experimental: { appDir: true },
   images: {
     domains: ["hello.com"],
   },
