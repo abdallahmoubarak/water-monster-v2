@@ -1,6 +1,6 @@
 import Button from "@/components/Button";
 import { styles } from "@/utils/styles";
-import { Key, useState } from "react";
+import { Key, useEffect, useState } from "react";
 import Installation from "@/components/Installation";
 import Container from "@/components/Container";
 import { useUserContainers } from "@/hooks/useContainer";
@@ -23,6 +23,12 @@ export default function Containers({
   const [alertMsg, setAlertMsg] = useState("");
 
   const { data: containers, isLoading } = useUserContainers(currentUser.id);
+  useEffect(() => {
+    client.setQueryData(
+      ["Containers"],
+      JSON.parse(localStorage.getItem("Containers") || "[{}]"),
+    );
+  }, []);
 
   return (
     <>

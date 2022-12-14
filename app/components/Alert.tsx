@@ -6,7 +6,7 @@ export default function Alert({ alertMsg, setAlertMsg }: alertType) {
     const clearMessage = setTimeout(() => {
       setAlertMsg(false);
     }, 3000);
-    return () => clearTimeout(clearMessage);
+    () => clearTimeout(clearMessage);
   }, [alertMsg, setAlertMsg]);
 
   return (

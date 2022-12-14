@@ -5,12 +5,19 @@ import { styles } from "@/utils/styles";
 import { useEffect, useState } from "react";
 import Sign from "@/components/pages/sign";
 import AnimatedLogo from "@/components/svg/AnimatedLogo";
+import { client } from "./_app";
 
 export default function Index() {
   const [enabled, setEnabled] = useState<boolean>(true);
   const { data: currentUser, isLoading } = useCurrentUser({ enabled });
 
   useEffect(() => setEnabled(Boolean(localStorage.getItem("JWT"))), []);
+  useEffect(() => {
+    client.setQueryData(
+      ["User"],
+      JSON.parse(localStorage.getItem("User") || "{}"),
+    );
+  }, []);
 
   return (
     <>
@@ -22,7 +29,7 @@ export default function Index() {
         <title>Water Monster</title>
       </Head>
 
-      {enabled && isLoading && !currentUser && (
+      {isLoading && (
         <div className="fallback">
           <div className="logo-container">
             <AnimatedLogo />
