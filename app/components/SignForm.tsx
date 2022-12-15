@@ -81,7 +81,7 @@ export default function SignForm({
         {!forgetForm && (
           <Input
             name="Password"
-            type={"password"}
+            inputType={"password"}
             value={password}
             setValue={setPass}
           />

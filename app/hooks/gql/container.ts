@@ -6,6 +6,7 @@ export const userContainerQuery = gql`
       id
       name
       size
+      height
       sensor_state
       private_mode
       manual_mode
@@ -42,10 +43,15 @@ export const createContainerMutation = gql`
 `;
 
 export const updateContainerMutation = gql`
-  mutation ($container_id: ID!, $name: String!, $size: String!) {
+  mutation (
+    $container_id: ID!
+    $name: String!
+    $size: String!
+    $height: String!
+  ) {
     updateContainers(
       where: { id: $container_id }
-      update: { name: $name, size: $size }
+      update: { name: $name, size: $size, height: $height }
     ) {
       containers {
         id
@@ -56,44 +62,6 @@ export const updateContainerMutation = gql`
         private_mode
         manual_mode
         water_level
-      }
-    }
-  }
-`;
-
-export const deleteContainerMutation = gql`
-  mutation ($container_id: ID!) {
-    deleteContainers(
-      where: { id: $container_id }
-      delete: { requests: { where: {} } }
-    ) {
-      nodesDeleted
-      relationshipsDeleted
-    }
-  }
-`;
-
-export const updatePrivateModeMutation = gql`
-  mutation ($id: ID!, $private_mode: Boolean!) {
-    updateContainers(
-      where: { id: $id }
-      update: { private_mode: $private_mode }
-    ) {
-      containers {
-        id
-      }
-    }
-  }
-`;
-
-export const updateManualModeMutation = gql`
-  mutation ($id: ID!, $manual_mode: Boolean!) {
-    updateContainers(
-      where: { id: $id }
-      update: { manual_mode: $manual_mode }
-    ) {
-      containers {
-        id
       }
     }
   }

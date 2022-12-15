@@ -17,6 +17,7 @@ export type updateContainerTypes = {
   id: string;
   name: string;
   size: string;
+  height: string;
 };
 
 export type useUpdateContainerTypes = {

@@ -5,7 +5,7 @@ export default function Input({
   name,
   value,
   setValue,
-  type = "text",
+  inputType = "text",
   onBlur,
   onFocus,
   accept,
@@ -31,7 +31,7 @@ export default function Input({
               id={id}
               placeholder={name}
               value={value}
-              type={type}
+              type={inputType}
               onChange={(e) =>
                 e.target.value.length < limit &&
                 !!setValue &&
@@ -55,7 +55,7 @@ type inputProps = {
   name: string;
   value: string | number;
   setValue?: Function;
-  type?: string;
+  inputType?: string;
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
   accept?: string;

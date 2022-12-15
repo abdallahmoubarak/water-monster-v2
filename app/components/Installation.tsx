@@ -36,8 +36,18 @@ export default function Installation({
       <Box title={"Install new sensor"}>
         <InputsContainer>
           <Input name={"Container name"} value={name} setValue={setName} />
-          <Input name={"Size"} value={size} setValue={setSize} />
-          <Input name={"Height"} value={height} setValue={setHeight} />
+          <Input
+            name={"Size"}
+            inputType={"number"}
+            value={size}
+            setValue={setSize}
+          />
+          <Input
+            name={"Height"}
+            inputType={"number"}
+            value={height}
+            setValue={setHeight}
+          />
         </InputsContainer>
         <Button text="Start" onClick={handleInstallation} />
       </Box>
