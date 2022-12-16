@@ -11,6 +11,8 @@ import { graphQLClient } from "@/utils/graphQLInstance";
 import { client } from "pages/_app";
 import { useState } from "react";
 import Layout from "./sLayout";
+import { IoLanguage, IoMailOutline } from "react-icons/io5";
+import { BiSupport } from "react-icons/bi";
 
 export default function Profile({ setPage }: { setPage: Function }) {
   const { data: currentUser } = useCurrentUser({ enabled: true });
@@ -53,8 +55,18 @@ export default function Profile({ setPage }: { setPage: Function }) {
                   updatePhone({ id: currentUser?.id, phone })
                 }
               />
-              <Field title={"Language"} value={"En"} />
-              <Field title={"Email"} value={currentUser?.email} />
+              <Field
+                icon={<BiSupport />}
+                title={"Support"}
+                value={"Contact us"}
+                onClick={() => setPage("Chat")}
+              />
+              <Field icon={<IoLanguage />} title={"Language"} value={"En"} />
+              <Field
+                icon={<IoMailOutline />}
+                title={"Email"}
+                value={currentUser?.email}
+              />
               <Button
                 text="Logout"
                 isSecondary={true}

@@ -1,17 +1,17 @@
 import { styles } from "@/utils/styles";
+import { MouseEventHandler } from "react";
 
-export default function Field({
-  title,
-  value,
-}: {
-  title: string;
-  value: string;
-}) {
+export default function Field({ icon, title, value, onClick }: fieldProps) {
   return (
     <>
       <div className="field">
-        <div className="field-title">{title}</div>
-        <div className="field-value">{value}</div>
+        <div className="field-title">
+          {icon}
+          {title}
+        </div>
+        <div className="field-value" onClick={onClick}>
+          {value}
+        </div>
       </div>
       <style jsx>{`
         .field {
@@ -23,6 +23,8 @@ export default function Field({
         }
         .field-title {
           font-weight: bold;
+          ${styles.flexAligncenter};
+          gap: 0.6rem;
         }
         .field-value {
           cursor: pointer;
@@ -31,3 +33,10 @@ export default function Field({
     </>
   );
 }
+
+type fieldProps = {
+  icon: any;
+  title: string;
+  value: string;
+  onClick?: MouseEventHandler<HTMLDivElement>;
+};

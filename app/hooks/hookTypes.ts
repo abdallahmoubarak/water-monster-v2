@@ -54,4 +54,5 @@ export type userTypes = {
   id: string;
   name?: string;
   phone?: string;
+  profile_url?: string;
 };

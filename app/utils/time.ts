@@ -1,4 +1,4 @@
-export const timeChangerTS = (od: Date): string => {
+export const timeChanger = (od: Date): string => {
   let hours: number = od.getHours();
   let minutes: string | number = od.getMinutes();
   const ampm = hours >= 12 ? "PM" : "AM";
