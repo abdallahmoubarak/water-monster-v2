@@ -12,6 +12,7 @@ export const userContainerQuery = gql`
       manual_mode
       water_level
       address
+      updatedAt
     }
   }
 `;
@@ -37,6 +38,7 @@ export const createContainerMutation = gql`
         private_mode
         manual_mode
         water_level
+        updatedAt
       }
     }
   }
@@ -62,6 +64,7 @@ export const updateContainerMutation = gql`
         private_mode
         manual_mode
         water_level
+        updatedAt
       }
     }
   }

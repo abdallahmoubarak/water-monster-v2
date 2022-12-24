@@ -1,8 +1,10 @@
 import ContainerSVG from "@/components/svg/ContainerSVG";
 import Image from "next/image";
-import settings from "@/public/svg/sun.svg";
+import settings from "@/public/svg/settings.svg";
 import { styles } from "@/utils/styles";
 import { BiWater } from "react-icons/bi";
+import { HiOutlineClock } from "react-icons/hi";
+import { dateTimeChanger, humanReadableTime } from "@/utils/time";
 
 export default function Container({
   container,
@@ -32,6 +34,12 @@ export default function Container({
           </span>
           <span>{(container?.size * container?.water_level) / 100} liter</span>
           <span>({container?.water_level} %)</span>
+        </div>
+        <div className="sub-title">
+          <span>
+            <HiOutlineClock />
+          </span>
+          <span>{humanReadableTime(container?.updatedAt)}</span>
         </div>
         <div className="container-container">
           <ContainerSVG level={container?.water_level} />
@@ -68,7 +76,6 @@ export default function Container({
           ${styles.flexAligncenter};
           gap: 0.3rem;
           color: gray;
-          padding-bottom: 0.6rem;
         }
         .state-led {
           width: 1.2rem;

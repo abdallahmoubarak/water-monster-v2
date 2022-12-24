@@ -14,7 +14,7 @@ export default function Box({ children, title, withOutShadow }: boxTypes) {
           ${styles.borderRadius1rem};
           ${styles.flexColumn};
           gap: 1rem;
-          padding: 1rem;
+          padding: ${!withOutShadow && "1rem"};
           width: 100%;
           max-width: 26rem;
           margin: auto;

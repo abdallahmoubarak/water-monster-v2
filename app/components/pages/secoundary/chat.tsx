@@ -121,7 +121,7 @@ export default function Chat({ setPage }: chatProps) {
 
       <style jsx>{`
         .chat-container {
-          height: 100%;
+          height: 100vh;
           box-shadow: 0px 0px 10px lightgray;
           ${styles.borderRadius1rem};
           position: relative;

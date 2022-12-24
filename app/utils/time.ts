@@ -47,3 +47,28 @@ export const dateChanger = (od: Date): string => {
 
   return strTime;
 };
+
+// A function generatated using chatGPT
+
+export const humanReadableTime = (timestamp: string): string => {
+  const currentTimestamp = Date.now();
+  const duration = currentTimestamp - new Date(timestamp).getTime();
+  const date = new Date(timestamp).toLocaleDateString();
+  const time = new Date(timestamp).toLocaleTimeString();
+
+  if (duration >= 86400000) {
+    // 1 day
+    return `${date} ${time}`;
+  } else if (duration >= 3600000) {
+    // 1 hour
+    return `${Math.floor(duration / 3600000)} hours ago`;
+  } else if (duration >= 60000) {
+    // 1 minute
+    return `${Math.floor(duration / 60000)} minutes ago`;
+  } else if (duration >= 1000) {
+    // 1 second
+    return `${Math.floor(duration / 1000)} seconds ago`;
+  } else {
+    return "just now";
+  }
+};
