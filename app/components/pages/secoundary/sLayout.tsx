@@ -13,7 +13,7 @@ export default function Layout({ children, onClick, title }: layoutTypes) {
           </div>
           <div className="font-bold text-2xl">{title}</div>
         </div>
-        <div className="relative overflow-auto p-4">{children}</div>
+        <div className="relative overflow-auto p-3">{children}</div>
       </div>
     </>
   );

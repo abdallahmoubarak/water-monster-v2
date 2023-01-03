@@ -43,7 +43,7 @@ export default function Container({
           </span>
           <span>{humanReadableTime(container?.updatedAt)}</span>
         </div>
-        <div className="transition-all duration-[3s] ease-in-out container-card">
+        <div className="transition-all duration-[3s] ease-in-out">
           <ContainerSVG level={container?.water_level} />
         </div>
         <div className="text-xl flex items-center justify-between pt-2">
