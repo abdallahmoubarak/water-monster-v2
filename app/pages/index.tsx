@@ -1,7 +1,6 @@
 import Home from "@/components/pages/home";
 import Head from "next/head";
 import { useCurrentUser } from "@/hooks/useAuth";
-import { styles } from "@/utils/styles";
 import { useEffect, useState } from "react";
 import Sign from "@/components/pages/sign";
 import AnimatedLogo from "@/components/svg/AnimatedLogo";
@@ -30,27 +29,14 @@ export default function Index() {
       </Head>
 
       {isLoading && (
-        <div className="fallback">
-          <div className="logo-container">
+        <div className="bg-primary h-screen w-screen flex justify-center items-center">
+          <div className="max-w-[8rem] mx-auto">
             <AnimatedLogo />
           </div>
         </div>
       )}
 
       {currentUser?.id ? <Home /> : <Sign />}
-
-      <style jsx>{`
-        .fallback {
-          ${styles.flexBothcenter};
-          background: ${styles.primaryColor};
-          height: 100vh;
-          width: 100vw;
-        }
-        .logo-container {
-          max-width: 8rem;
-          margin: 0 auto;
-        }
-      `}</style>
     </>
   );
 }

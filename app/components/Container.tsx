@@ -43,7 +43,7 @@ export default function Container({
           </span>
           <span>{humanReadableTime(container?.updatedAt)}</span>
         </div>
-        <div className="container-container">
+        <div className="transition-all duration-[3s] ease-in-out container-card">
           <ContainerSVG level={container?.water_level} />
         </div>
         <div className="text-xl flex items-center justify-between pt-2">
@@ -55,9 +55,6 @@ export default function Container({
         </div>
       </div>
       <style jsx>{`
-        .container-card {
-          ${styles.transitionAll3s};
-        }
         .container-card:hover {
           ${styles.boxshadowHover};
           ${styles.transitionAll3s};

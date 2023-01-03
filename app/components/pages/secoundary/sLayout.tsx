@@ -1,4 +1,3 @@
-import { styles } from "@/utils/styles";
 import { MouseEventHandler } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 
