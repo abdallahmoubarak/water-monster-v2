@@ -1,6 +1,5 @@
 import NavBar from "@/components/NavBar";
 import TopBar from "@/components/TopBar";
-import { styles } from "@/utils/styles";
 
 export default function RootLayout({
   children,
@@ -10,27 +9,19 @@ export default function RootLayout({
   setActive,
 }: layoutProps) {
   return (
-    <div className="app">
+    <div className="flex flex-col h-screen overflow-hidden">
       <TopBar hasImg={hasImg} setActive={setActive} />
 
-      <div className="app-body">{children}</div>
+      <div
+        className={`h-screen overflow-auto ${
+          hasNav && "height: calc(100vh - 8rem)"
+        }`}>
+        {children}
+      </div>
 
       <div>
         {hasNav && <NavBar activePage={active} setActivePage={setActive} />}
       </div>
-
-      <style jsx>{`
-        .app {
-          ${styles.flexColumn};
-          height: 100vh;
-          overflow: hidden;
-        }
-        .app-body {
-          overflow: auto;
-          height: 100vh;
-          ${hasNav && "height: calc(100vh - 8rem)"};
-        }
-      `}</style>
     </div>
   );
 }

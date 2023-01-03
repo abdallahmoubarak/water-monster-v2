@@ -3,7 +3,7 @@ import ContentLoader from "react-content-loader";
 export default function ContainerLoader() {
   return (
     <>
-      <div className="loader">
+      <div className="mx-auto max-w-[22rem]">
         <ContentLoader
           speed={2}
           width={360}
@@ -14,12 +14,6 @@ export default function ContainerLoader() {
           <rect x="5" y="8" rx="16" ry="16" width="342" height="507" />
         </ContentLoader>
       </div>
-      <style jsx>{`
-        .loader {
-          max-width: 22rem;
-          margin: auto;
-        }
-      `}</style>
     </>
   );
 }

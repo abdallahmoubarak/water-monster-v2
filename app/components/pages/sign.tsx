@@ -21,17 +21,17 @@ export default function SignPage() {
   return (
     <>
       <RootLayout>
-        <div className="sign-container">
+        <div className="flex flex-col items-center justify-center max-w-[26rem] mx-auto p-4 sign-container">
           {isSent ? <MailSent /> : <SignForm handleForget={handleForget} />}
         </div>
         {!isSent && (
           <>
-            <div className="or-container">
+            <div className="max-w-[26rem] mx-auto p-8">
               <Or />
             </div>
-            <div className="btn-container">
+            <div className="flex flex-col justify-center items-center gap-4 pb-8">
               <button
-                className="google-btn"
+                className="social-btn"
                 // onClick={() => signInWithGoogle(setName, setEmail, setProfilePic)}
               >
                 <div>
@@ -39,7 +39,7 @@ export default function SignPage() {
                 </div>
                 <div>Continue with google</div>
               </button>
-              <button className="google-btn">
+              <button className="social-btn">
                 <div>
                   <Image src={metaLogo} alt="M" height={"30"} />
                 </div>
@@ -51,26 +51,7 @@ export default function SignPage() {
       </RootLayout>
 
       <style jsx>{`
-        .sign-container {
-          ${styles.flexBothcenter};
-          ${styles.flexColumn};
-          max-width: 26rem;
-          margin: auto;
-          padding: 1rem;
-        }
-
-        .or-container {
-          max-width: 26rem;
-          margin: auto;
-          padding: 2rem;
-        }
-        .btn-container {
-          ${styles.flexBothcenter};
-          ${styles.flexColumn};
-          gap: 1rem;
-          padding-bottom: 2rem;
-        }
-        .google-btn {
+        .social-btn {
           transition: background-color 0.3s, box-shadow 0.3s;
           padding: 0.4rem 1rem;
           padding-top: 0.6rem;
@@ -84,12 +65,12 @@ export default function SignPage() {
           ${styles.flexBothcenter};
           gap: 1rem;
         }
-        .google-btn:hover {
+        .social-btn:hover {
           box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04),
             0 2px 4px rgba(0, 0, 0, 0.25);
         }
 
-        .google-btn:focus {
+        .social-btn:focus {
           outline: none;
           box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04),
             0 2px 4px rgba(0, 0, 0, 0.25), 0 0 0 3px #c8dafc;

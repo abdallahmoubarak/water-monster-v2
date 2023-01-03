@@ -21,21 +21,23 @@ export default function Container({
   };
   return (
     <>
-      <div className="container-card">
-        <div className="flex">
+      <div className="border border-gray-200 max-w-[24rem] flex-[24rem] px-4 py-2 rounded-2xl shadow-[0_0_10px_0_rgba(0,0,0,0.2)] container-card">
+        <div className="text-2xl flex items-center justify-between pt-2">
           <div>{container?.name} Container</div>
-          <div className="stng" onClick={handleOnSettingsClick}>
+          <div
+            className="w-8 h-8 cursor-pointer"
+            onClick={handleOnSettingsClick}>
             <Image width={30} src={settings} alt="s" />
           </div>
         </div>
-        <div className="sub-title">
+        <div className="flex items-center gap-1 text-gray-500">
           <span>
             <BiWater />
           </span>
           <span>{(container?.size * container?.water_level) / 100} liter</span>
           <span>({container?.water_level} %)</span>
         </div>
-        <div className="sub-title">
+        <div className="flex items-center gap-1 text-gray-500">
           <span>
             <HiOutlineClock />
           </span>
@@ -44,52 +46,21 @@ export default function Container({
         <div className="container-container">
           <ContainerSVG level={container?.water_level} />
         </div>
-        <div className="flex">
+        <div className="text-xl flex items-center justify-between pt-2">
           <div>Sensor State</div>
           <div
-            className={`state-led ${
-              container?.sensor_state && "led-active"
+            className={`rounded-full w-4 h-4  ${
+              container?.sensor_state ? "bg-primary" : "bg-secondary"
             }`}></div>
         </div>
       </div>
       <style jsx>{`
         .container-card {
-          border: 1px solid lightgray;
-          max-width: 24rem;
-          flex: 1 1 24rem;
-          padding: 0.4rem 1rem;
-          ${styles.borderRadius1rem};
-          ${styles.boxshadow};
           ${styles.transitionAll3s};
         }
         .container-card:hover {
           ${styles.boxshadowHover};
           ${styles.transitionAll3s};
-        }
-        .flex {
-          ${styles.fontSize1p4rem};
-          ${styles.flexAligncenter};
-          ${styles.justifyBetween};
-          padding-top: 0.6rem;
-        }
-        .sub-title {
-          ${styles.flexAligncenter};
-          gap: 0.3rem;
-          color: gray;
-        }
-        .state-led {
-          width: 1.2rem;
-          height: 1.2rem;
-          ${styles.borderRadius50percent};
-          background: ${styles.secondaryColor};
-        }
-        .led-active {
-          background: ${styles.primaryColor};
-        }
-        .stng {
-          width: 2rem;
-          height: 2rem;
-          cursor: pointer;
         }
       `}</style>
     </>

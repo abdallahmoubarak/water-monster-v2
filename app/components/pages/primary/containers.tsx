@@ -1,5 +1,4 @@
 import Button from "@/components/Button";
-import { styles } from "@/utils/styles";
 import { Key, useEffect, useState } from "react";
 import Installation from "@/components/Installation";
 import Container from "@/components/Container";
@@ -32,9 +31,9 @@ export default function Containers({
 
   return (
     <>
-      <div className="page">
+      <div className="p-3">
         {isLoading && <ContainerLoader />}
-        <div className="containers">
+        <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
           {containers?.map((container: any, i: Key) => (
             <Container
               key={i}
@@ -53,7 +52,7 @@ export default function Containers({
           />
         )}
 
-        <div className="new-installation-btn">
+        <div className="py-8">
           <Button
             text={requestOn ? "Cancel" : "New Installation"}
             isSecondary={true}
@@ -63,21 +62,6 @@ export default function Containers({
       </div>
 
       <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
-
-      <style jsx>{`
-        .page {
-          padding: 0.8rem;
-        }
-        .containers {
-          ${styles.flexBothcenter};
-          flex-wrap: wrap;
-          gap: 1rem;
-          padding-bottom: 1rem;
-        }
-        .new-installation-btn {
-          padding: 2rem 0;
-        }
-      `}</style>
     </>
   );
 }

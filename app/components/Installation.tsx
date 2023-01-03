@@ -1,6 +1,4 @@
 import { useCreateContainer } from "@/hooks/useContainer";
-import { setAlertMsgType } from "@/types/common";
-import { styles } from "@/utils/styles";
 import { useState } from "react";
 import Box from "./Box";
 import Button from "./Button";
@@ -51,14 +49,6 @@ export default function Installation({
         </InputsContainer>
         <Button text="Start" onClick={handleInstallation} />
       </Box>
-
-      <style jsx>{`
-        .input-container {
-          ${styles.flexColumn};
-          gap: 0.6rem;
-          padding: 0.6rem 0;
-        }
-      `}</style>
     </>
   );
 }

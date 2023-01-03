@@ -3,25 +3,14 @@ import { styles } from "@/utils/styles";
 export default function Box({ children, title, withOutShadow }: boxTypes) {
   return (
     <>
-      <div className="box">
-        <div className="box-title">{title}</div>
-
+      <div className="box rounded-2xl flex flex-col gap-4 w-full max-w-[26rem] mx-auto">
+        <div className="text-2xl">{title}</div>
         {children}
       </div>
       <style jsx>{`
         .box {
           ${!withOutShadow && styles.boxshadow};
-          ${styles.borderRadius1rem};
-          ${styles.flexColumn};
-          gap: 1rem;
           padding: ${!withOutShadow && "1rem"};
-          width: 100%;
-          max-width: 26rem;
-          margin: auto;
-        }
-
-        .box-title {
-          ${styles.fontSize1p4rem};
         }
       `}</style>
     </>

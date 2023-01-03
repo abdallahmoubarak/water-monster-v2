@@ -5,46 +5,17 @@ import { FaArrowLeft } from "react-icons/fa";
 export default function Layout({ children, onClick, title }: layoutTypes) {
   return (
     <>
-      <div className="page-container">
-        <div className="page-header">
-          <div className="back-icon" onClick={onClick}>
+      <div className="flex flex-col h-screen overflow-hidden ">
+        <div className="flex items-center gap-2 text-white px-2 h-16 bg-primary">
+          <div
+            className="text-xl p-2 cursor-pointer flex items-center justify-center"
+            onClick={onClick}>
             <FaArrowLeft />
           </div>
-          <div className="page-title">{title}</div>
+          <div className="font-bold text-2xl">{title}</div>
         </div>
-        <div className="page">{children}</div>
+        <div className="relative overflow-auto p-4">{children}</div>
       </div>
-      <style jsx>{`
-        .page-container {
-          display: flex;
-          flex-direction: column;
-          height: 100vh;
-          overflow: hidden;
-        }
-
-        .page {
-          position: relative;
-          overflow: auto;
-          padding: 0.8rem;
-        }
-        .page-header {
-          ${styles.flexAligncenter};
-          gap: 0.6rem;
-          background: ${styles.primaryColor};
-          color: white;
-          padding: 0.6rem;
-        }
-        .page-title {
-          ${styles.fontSize1p4rem};
-          font-weight: bold;
-        }
-        .back-icon {
-          font-size: 1.3rem;
-          padding: 0.6rem;
-          cursor: pointer;
-          ${styles.flexBothcenter};
-        }
-      `}</style>
     </>
   );
 }
