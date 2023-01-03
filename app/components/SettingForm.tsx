@@ -1,7 +1,6 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
 import { useEffect, useState } from "react";
-import { styles } from "@/utils/styles";
 import { client } from "pages/_app";
 import { useUpdateContainer } from "@/hooks/useContainer";
 import Box from "./Box";
@@ -49,7 +48,7 @@ export default function SettingForm({
 
   return (
     <>
-      <div className="setting-container">
+      <div className="flex flex-col gap-4">
         <Box title={"Inforamation"}>
           <Input name="Container name" value={name} setValue={setName} />
           <Input
@@ -66,7 +65,7 @@ export default function SettingForm({
           />
 
           <Input name={"Address"} value={address} isDisabled={true} />
-          <div className="btn-container">
+          <div className="flex items-center">
             <Button
               text="Save"
               onClick={handleUpdate}
@@ -81,21 +80,6 @@ export default function SettingForm({
         </Box>
       </div>
       <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
-
-      <style jsx>{`
-        .setting-container {
-          ${styles.flexColumn};
-          gap: 1rem;
-        }
-        .state {
-          ${styles.flexAligncenter};
-          gap: 0.3rem;
-          color: ${styles.secondaryColor};
-        }
-        .btn-container {
-          ${styles.flexAligncenter};
-        }
-      `}</style>
     </>
   );
 }

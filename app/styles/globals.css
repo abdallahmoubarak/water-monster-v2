@@ -49,3 +49,6 @@ body {
 .dark-profile-background {
   background: white center/cover url("/svg/person-colored.svg") no-repeat;
 }
+.white-profile-background {
+  background: #43b9c3 center/cover url("/svg/person-white.svg") no-repeat;
+}
