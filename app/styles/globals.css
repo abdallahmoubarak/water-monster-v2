@@ -46,3 +46,6 @@ a {
 body {
   height: 100%;
 }
+.dark-profile-background {
+  background: white center/cover url("/svg/person-colored.svg") no-repeat;
+}
