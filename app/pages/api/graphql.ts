@@ -1,12 +1,11 @@
 import { ogm, server } from "@/graphql/index";
-import { MicroRequest } from "apollo-server-micro/dist/types";
-import { ServerResponse, IncomingMessage } from "http";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 const startServer = server.start();
 
 export default async function handler(
-  req: MicroRequest,
-  res: ServerResponse<IncomingMessage>,
+  req: NextApiRequest,
+  res: NextApiResponse,
 ) {
   res.setHeader("Access-Control-Allow-Credentials", "true");
   res.setHeader("Access-Control-Allow-Origin", "*");

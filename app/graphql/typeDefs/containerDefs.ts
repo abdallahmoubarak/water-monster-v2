@@ -3,6 +3,8 @@ import { gql } from "apollo-server-micro";
 export const containerDefs = gql`
   type Container {
     id: ID! @id
+    serialNumber: String
+    distance: Int
     name: String
     size: String
     height: String
