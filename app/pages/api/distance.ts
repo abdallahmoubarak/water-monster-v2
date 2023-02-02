@@ -1,6 +1,16 @@
 import { GraphQLClient } from "graphql-request";
 import type { NextApiRequest, NextApiResponse } from "next";
 
+declare const process: {
+  env: {
+    NEXT_PUBLIC_GQL_PATH: string;
+    NEXT_PUBLIC_BASEURL: string;
+  };
+};
+
+const endpoint: string =
+  process.env.NEXT_PUBLIC_BASEURL + process.env.NEXT_PUBLIC_GQL_PATH;
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
@@ -11,12 +21,7 @@ export default async function handler(
   };
 
   if (distance && serialNumber) {
-    const graphQLClient = new GraphQLClient(
-      process.env.NEXT_PUBLIC_ENDPOINT || "",
-      {
-        mode: "cors",
-      },
-    );
+    const graphQLClient = new GraphQLClient(endpoint, { mode: "cors" });
 
     await graphQLClient.request(
       `mutation {
