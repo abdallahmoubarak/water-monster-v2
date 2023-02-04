@@ -9,7 +9,7 @@ import { QrReader } from "react-qr-reader";
 export default function Home() {
   const router = useRouter();
   const [step, setStep] = useState(1);
-  const [data, setData] = useState("No result");
+  const [data, setData] = useState("No QR code detected");
   useEffect(() => {
     console.log(data);
   }, []);
@@ -39,6 +39,25 @@ export default function Home() {
                 width={300}
                 height={300}
               />
+            </>
+          )}
+          {step === 3 && (
+            <Image
+              className="mx-auto py-8"
+              src="/gif/wifi.gif"
+              alt=""
+              width={300}
+              height={300}
+            />
+          )}
+          <div className="text-center py-8">
+            {step === 1 && "Plug the Water Monster hub to electricity"}
+            {step === 2 && "Scan the QR code placed on the card inside the box"}
+            {step === 3 && "Setup your wifi configuration"}
+            {step === 4 && "Inserting container's info, comming soon..."}
+          </div>
+          {step === 2 && (
+            <>
               <QrReader
                 onResult={(result, error) => {
                   if (!!result) {
@@ -56,24 +75,15 @@ export default function Home() {
                   facingMode: "environment",
                 }}
               />
-              <p>{data}</p>
+              <p className="pb-6">{data}</p>
             </>
           )}
-          {step === 3 && (
-            <Image
-              className="mx-auto py-8"
-              src="/gif/wifi.gif"
-              alt=""
-              width={300}
-              height={300}
-            />
-          )}
-          <div className="text-center py-8">
-            {step === 1 && "Plug the Water Monster hub to electricity"}
-            {step === 2 && "Scan the QR code placed on the box"}
-            {step === 3 && "Setup the wifi configuration"}
-          </div>
-          <Button text={"Done"} onClick={() => setStep((step) => step + 1)} />
+          <Button
+            text={"Done"}
+            onClick={() =>
+              step < 4 ? setStep((step) => step + 1) : router.replace("/")
+            }
+          />
         </Layout>
       </main>
     </>
