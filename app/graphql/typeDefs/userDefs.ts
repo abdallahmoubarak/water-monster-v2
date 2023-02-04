@@ -15,6 +15,7 @@ export const userDefs = gql`
     sent_messages: [Message!]! @relationship(type: "FROM", direction: OUT)
     received_messages: [Message!]! @relationship(type: "TO", direction: IN)
     containers: [Container!]! @relationship(type: "OWNS", direction: OUT)
+    canView: [Container!]! @relationship(type: "CAN_VIEW", direction: OUT)
     createdAt: DateTime! @timestamp(operations: [CREATE])
     updatedAt: DateTime! @timestamp(operations: [CREATE, UPDATE])
   }

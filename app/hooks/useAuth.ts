@@ -25,7 +25,7 @@ export const useSignUp = ({ setMsg, setIsLoading }: useSignTypes) => {
       });
     },
     onError: (err: Error) => {
-      setMsg(err.message);
+      setMsg(err.message.split(":")[0]);
       setIsLoading(false);
     },
   });
@@ -51,7 +51,7 @@ export const useSignIn = ({ setMsg, setIsLoading }: useSignTypes) => {
       });
     },
     onError: (err: Error) => {
-      setMsg(err.message);
+      setMsg(err.message.split(":")[0]);
       setIsLoading(false);
     },
   });

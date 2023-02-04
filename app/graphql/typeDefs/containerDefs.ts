@@ -17,6 +17,7 @@ export const containerDefs = gql`
     private_mode: Boolean
     manual_mode: Boolean
     user: User! @relationship(type: "OWNS", direction: IN)
+    viewer: [User!]! @relationship(type: "CAN_VIEW", direction: IN)
     createdAt: DateTime! @timestamp(operations: [CREATE])
     updatedAt: DateTime! @timestamp(operations: [CREATE, UPDATE])
   }
