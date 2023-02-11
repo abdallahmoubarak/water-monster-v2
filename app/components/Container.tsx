@@ -4,7 +4,7 @@ import settings from "@/public/svg/settings.svg";
 import { styles } from "@/utils/styles";
 import { BiWater } from "react-icons/bi";
 import { HiOutlineClock } from "react-icons/hi";
-import { dateTimeChanger, humanReadableTime } from "@/utils/time";
+import { humanReadableTime } from "@/utils/time";
 
 export default function Container({
   container,
@@ -21,12 +21,13 @@ export default function Container({
   };
   return (
     <>
-      <div className="border border-gray-200 max-w-[24rem] flex-[24rem] px-4 py-2 rounded-2xl shadow-[0_0_10px_0_rgba(0,0,0,0.2)] container-card">
+      <div className="border border-gray-200 max-w-[24rem] flex-[24rem] px-4 py-2 rounded-2xl shadow-[0_0_10px_0_rgba(0,0,0,0.2)]">
         <div className="text-2xl flex items-center justify-between pt-2">
           <div>{container?.name} Container</div>
           <div
             className="w-8 h-8 cursor-pointer"
-            onClick={handleOnSettingsClick}>
+            onClick={handleOnSettingsClick}
+          >
             <Image width={30} src={settings} alt="s" />
           </div>
         </div>
@@ -51,15 +52,10 @@ export default function Container({
           <div
             className={`rounded-full w-4 h-4  ${
               container?.sensor_state ? "bg-primary" : "bg-secondary"
-            }`}></div>
+            }`}
+          ></div>
         </div>
       </div>
-      <style jsx>{`
-        .container-card:hover {
-          ${styles.boxshadowHover};
-          ${styles.transitionAll3s};
-        }
-      `}</style>
     </>
   );
 }
