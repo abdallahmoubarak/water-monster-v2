@@ -8,7 +8,7 @@ import { QrReader } from "react-qr-reader";
 import ToolTipButton from "@/components/ToolTipButton";
 import { useCreateContainer } from "@/hooks/useContainer";
 
-export default function Home() {
+export default function Installation() {
   const router = useRouter();
   const [step, setStep] = useState<number>(1);
   const [data, setData] = useState<string>("No QR code detected");
