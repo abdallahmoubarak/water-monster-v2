@@ -1,7 +1,6 @@
 import ContainerSVG from "@/components/svg/ContainerSVG";
 import Image from "next/image";
 import settings from "@/public/svg/settings.svg";
-import { styles } from "@/utils/styles";
 import { BiWater } from "react-icons/bi";
 import { HiOutlineClock } from "react-icons/hi";
 import { humanReadableTime } from "@/utils/time";
