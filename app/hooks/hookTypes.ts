@@ -9,6 +9,7 @@ export type useSignTypes = {
 export type createContainerTypes = {
   userId: string;
   serialNumber: string;
+  location: any;
 };
 
 export type updateContainerTypes = {

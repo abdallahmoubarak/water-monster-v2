@@ -18,10 +18,11 @@ export const userContainerQuery = gql`
 `;
 
 export const createContainerMutation = gql`
-  mutation ($userId: ID!, $serialNumber: String!) {
+  mutation ($userId: ID!, $serialNumber: String!, $location: Point!) {
     createContainers(
       input: [
         {
+          location: $location
           serialNumber: $serialNumber
           user: { connect: { where: { node: { id: $userId } } } }
         }

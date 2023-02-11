@@ -14,7 +14,6 @@ export default function SettingForm({
   const [name, setName] = useState<string>("");
   const [size, setSize] = useState<string>("");
   const [height, setHeight] = useState<string>("");
-  const [address, setAddress] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alertMsg, setAlertMsg] = useState<string>("");
 
@@ -31,7 +30,6 @@ export default function SettingForm({
     setName(cnt?.name);
     setSize(cnt?.size);
     setHeight(cnt?.height);
-    setAddress(cnt?.address);
   }, [containerId]);
 
   const handleUpdate = () => {
@@ -40,7 +38,7 @@ export default function SettingForm({
       size === container?.size &&
       height === container?.height
     ) {
-      return;
+      setAlertMsg("All fields are required");
     }
     updateContainer({ id: container.id, name, size, height });
     setIsLoading(true);
@@ -63,8 +61,6 @@ export default function SettingForm({
             value={height}
             setValue={setHeight}
           />
-
-          <Input name={"Address"} value={address} isDisabled={true} />
           <div className="flex items-center">
             <Button
               text="Save"

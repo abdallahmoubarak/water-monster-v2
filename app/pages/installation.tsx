@@ -8,6 +8,7 @@ import { QrReader } from "react-qr-reader";
 import ToolTipButton from "@/components/ToolTipButton";
 import { useCreateContainer } from "@/hooks/useContainer";
 import { useCurrentUser } from "@/hooks/useAuth";
+import { getGeoLocation } from "@/utils/getGeoLocation";
 
 export default function Installation() {
   const router = useRouter();
@@ -18,13 +19,22 @@ export default function Installation() {
   const { data: currentUser } = useCurrentUser({ enabled: true });
   const { mutate: createContainer } = useCreateContainer();
 
+  useEffect(() => getGeoLocation(), []);
+
   useEffect(() => {
     if (data !== "No QR code detected") {
       const serialNumber = data.split("serialNumber=")[1];
       if (serialNumber) {
+        createContainer({
+          userId: currentUser.id,
+          serialNumber,
+          location: {
+            latitude: localStorage.getItem("lat"),
+            longitude: localStorage.getItem("long"),
+          },
+        });
         setStep(3);
         setIsScan(false);
-        createContainer({ userId: currentUser.id, serialNumber });
       } else {
         setData("The QR code is not as a standard.");
       }
