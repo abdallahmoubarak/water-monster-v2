@@ -20,4 +20,8 @@ export const containerDefs = gql`
     createdAt: DateTime! @timestamp(operations: [CREATE])
     updatedAt: DateTime! @timestamp(operations: [CREATE, UPDATE])
   }
+
+  type Mutation {
+    createOrUpdateContainer(serialNumber: String!, userId: String!): Container!
+  }
 `;

@@ -13,9 +13,9 @@ export default function ToolTipButton() {
   };
   return (
     <div className="flex gap-1 items-center flex-wrap">
-      <div className="py-4">
+      <div className="">
         <button
-          className="flex gap-1 justify-center self-center border border-black p-1 rounded cursor-pointer bg-white w-56"
+          className="flex gap-1 justify-center self-center font-bold border border-gray-400 p-1 rounded cursor-pointer bg-white w-56"
           data-tooltip-target="tooltip-default"
           onClick={() => {
             navigator.clipboard.writeText(password);

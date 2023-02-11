@@ -14,7 +14,6 @@ export default function Containers({
   setPage: Function;
   setPageId: Function;
 }) {
-  const router = useRouter();
   let currentUser: any = localStorage.getItem("User");
   currentUser =
     JSON.parse(currentUser) || client.getQueryData<userTypes>(["User"]);
@@ -46,7 +45,7 @@ export default function Containers({
           <Button
             text={"New Installation"}
             isSecondary={true}
-            onClick={() => router.push("installation")}
+            onClick={() => setPage("Installation")}
           />
         </div>
       </div>

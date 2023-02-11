@@ -19,7 +19,6 @@ export default function ContainerSetting({
         <div className="pt-4">
           <Button text={"Reconfigure WiFi"} />
         </div>
-        {/* <Button text={"Reconfigure Container Settings"} /> */}
       </Layout>
     </>
   );

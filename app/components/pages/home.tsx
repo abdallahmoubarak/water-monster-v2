@@ -7,6 +7,7 @@ import Chat from "./secoundary/chat";
 
 const ContainerSetting = dynamic(() => import("./secoundary/containerSetting"));
 const Profile = dynamic(() => import("./secoundary/profile"));
+const Installation = dynamic(() => import("./secoundary/installation"));
 
 export default function Home() {
   const [page, setPage] = useState<string>("Containers");
@@ -30,6 +31,8 @@ export default function Home() {
       {page === "Profile" && <Profile setPage={setPage} />}
 
       {page === "Chat" && <Chat setPage={setPage} />}
+
+      {page === "Installation" && <Installation setPage={setPage} />}
     </>
   );
 }
