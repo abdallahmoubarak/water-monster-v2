@@ -31,16 +31,12 @@ export const useUserContainers = (id: string) => {
 /************************* create a container *************************/
 
 const createContainer = async ({
-  id,
-  name,
-  size,
-  height,
+  userId,
+  serialNumber,
 }: createContainerTypes) => {
   const variables = {
-    id,
-    name,
-    size,
-    height,
+    userId,
+    serialNumber,
   };
   const res = await graphQLClient.request(createContainerMutation, variables);
   return res;

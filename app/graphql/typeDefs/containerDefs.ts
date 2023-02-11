@@ -12,7 +12,6 @@ export const containerDefs = gql`
     address: String
     water_level: Int
     pending: String
-    sensor_serial: String
     sensor_state: Boolean
     private_mode: Boolean
     manual_mode: Boolean
