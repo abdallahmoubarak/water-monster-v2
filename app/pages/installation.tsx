@@ -7,14 +7,15 @@ import { useEffect, useState } from "react";
 import { QrReader } from "react-qr-reader";
 import ToolTipButton from "@/components/ToolTipButton";
 import { useCreateContainer } from "@/hooks/useContainer";
+import { useCurrentUser } from "@/hooks/useAuth";
 
 export default function Installation() {
   const router = useRouter();
   const [step, setStep] = useState<number>(1);
   const [data, setData] = useState<string>("No QR code detected");
   const [isScan, setIsScan] = useState<boolean>(false);
-  let currentUser: any = localStorage.getItem("User");
 
+  const { data: currentUser } = useCurrentUser({ enabled: true });
   const { mutate: createContainer } = useCreateContainer();
 
   useEffect(() => {
