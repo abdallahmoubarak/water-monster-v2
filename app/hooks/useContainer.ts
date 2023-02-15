@@ -10,6 +10,7 @@ import {
   createContainerMutation,
   updateContainerMutation,
   userContainerQuery,
+  userViewingContainerQuery,
 } from "./gql/container";
 
 /*********************** getting user containers ***********************/
@@ -25,6 +26,24 @@ export const useUserContainers = (id: string) => {
     queryKey: ["Containers"],
     queryFn: () => getUserContainers(id),
     onSuccess: (res) => localStorage.setItem("Containers", JSON.stringify(res)),
+  });
+};
+
+/*********************** getting user viewing containers ***********************/
+
+const getUserViewingContainers = async (id: string) => {
+  const variables = { id };
+  const res = await graphQLClient.request(userViewingContainerQuery, variables);
+  console.log(res?.users[0]);
+  return res?.users[0].viewContainers;
+};
+
+export const useUserViewingContainers = (id: string) => {
+  return useQuery({
+    queryKey: ["ViewingContainers"],
+    queryFn: () => getUserViewingContainers(id),
+    onSuccess: (res) =>
+      localStorage.setItem("ViewingContainers", JSON.stringify(res)),
   });
 };
 

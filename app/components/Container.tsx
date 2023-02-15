@@ -6,10 +6,12 @@ import { HiOutlineClock } from "react-icons/hi";
 import { humanReadableTime } from "@/utils/time";
 
 export default function Container({
+  view,
   container,
   setPage,
   setPageId,
 }: {
+  view: boolean;
   container: any;
   setPage: Function;
   setPageId: Function;
@@ -18,17 +20,30 @@ export default function Container({
     setPage("Settings");
     setPageId(container.id);
   };
+
+  const handleOnDelete = () => {
+    console.log(container.id);
+  };
   return (
     <>
       <div className="border border-gray-200 max-w-[24rem] flex-[24rem] px-4 py-2 rounded-2xl shadow-[0_0_10px_0_rgba(0,0,0,0.2)]">
         <div className="text-2xl flex items-center justify-between pt-2">
           <div>{container?.name} Container</div>
-          <div
-            className="w-8 h-8 cursor-pointer"
-            onClick={handleOnSettingsClick}
-          >
-            <Image width={30} src={settings} alt="s" />
-          </div>
+          {view ? (
+            <div
+              className="text-red-600 text-sm cursor-pointer font-bold"
+              onClick={handleOnDelete}
+            >
+              Delete
+            </div>
+          ) : (
+            <div
+              className="w-8 h-8 cursor-pointer"
+              onClick={handleOnSettingsClick}
+            >
+              <Image width={30} src={settings} alt="s" />
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-1 text-gray-500">
           <span>

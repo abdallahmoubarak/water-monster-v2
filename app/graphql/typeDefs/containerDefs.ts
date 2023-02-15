@@ -22,6 +22,10 @@ export const containerDefs = gql`
   }
 
   type Mutation {
-    createOrUpdateContainer(serialNumber: String!, userId: String!): Container!
+    createOrUpdateContainer(
+      serialNumber: String!
+      userId: String!
+      location: PointInput
+    ): Container!
   }
 `;

@@ -1,12 +1,15 @@
-import { Container } from "../index";
-import { User } from "../index";
+import { Container, User } from "../index";
 
-type containerTypes = { serialNumber: string; userId: string };
+type containerTypes = {
+  serialNumber: string;
+  userId: string;
+  location: any;
+};
 
 export const containerMutations = {
   createOrUpdateContainer: async (
     _source: any,
-    { serialNumber, userId }: containerTypes
+    { serialNumber, userId, location }: containerTypes
   ) => {
     let existingContainer = await Container.find({ where: { serialNumber } });
     let user = await User.find({ where: { id: userId } });
@@ -18,12 +21,13 @@ export const containerMutations = {
       const { containers } = await Container.create({
         input: [
           {
+            location,
             serialNumber,
             user: { connect: { where: { node: { id: userId } } } },
           },
         ],
       });
-      return { container: containers[0] };
+      return containers[0];
     } else {
       // update existing container with user as viewer
       const [container] = existingContainer;
@@ -31,7 +35,7 @@ export const containerMutations = {
         where: { serialNumber },
         update: { viewer: { connect: { where: { node: { id: userId } } } } },
       });
-      return { container };
+      return container;
     }
   },
 };
