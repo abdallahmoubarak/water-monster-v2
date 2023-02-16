@@ -13,7 +13,7 @@ const endpoint: string =
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse,
+  res: NextApiResponse
 ) {
   const { distance, serialNumber } = req.query as {
     distance: string;
@@ -28,10 +28,14 @@ export default async function handler(
         updateContainers(
           where: { serialNumber: "${serialNumber}" }
           update: { distance: ${parseInt(distance)} }
-        ) {containers {
+        ) {	
+          containers {
             id
-        }}
-    }`,
+            name
+            distance
+          }
+        }
+      }`
     );
   }
 
