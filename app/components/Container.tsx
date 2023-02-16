@@ -26,6 +26,10 @@ export default function Container({
   const handleOnDelete = () => {
     console.log(container.id);
   };
+
+  const waterLevel =
+    ((container?.height - container?.distance) * 100) / container?.height;
+
   return (
     <>
       <div className="border border-gray-200 max-w-[24rem] flex-[24rem] px-4 py-2 rounded-2xl shadow-[0_0_10px_0_rgba(0,0,0,0.2)]">
@@ -51,8 +55,19 @@ export default function Container({
           <span>
             <BiWater />
           </span>
-          <span>{(container?.size * container?.water_level) / 100} liter</span>
-          <span>({container?.water_level} %)</span>
+          {container.water_level ? (
+            <>
+              <span>
+                {(container?.size * container?.water_level) / 100} liter
+              </span>
+              <span>({container?.water_level} %)</span>
+            </>
+          ) : (
+            <>
+              <span>{(container?.size * waterLevel) / 100} liter</span>
+              <span>({waterLevel}%)</span>
+            </>
+          )}
         </div>
         <div className="flex items-center gap-1 text-gray-500">
           <span>
@@ -61,7 +76,11 @@ export default function Container({
           <span>{humanReadableTime(container?.updatedAt)}</span>
         </div>
         <div className="transition-all duration-[3s] ease-in-out">
-          <ContainerSVG level={container?.water_level} />
+          {container.water_level ? (
+            <ContainerSVG level={container?.water_level} />
+          ) : (
+            <ContainerSVG level={waterLevel} />
+          )}
         </div>
         <div className="text-xl flex items-center justify-between pt-2">
           <div>Sensor State</div>

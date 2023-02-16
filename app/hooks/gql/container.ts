@@ -24,8 +24,11 @@ export const userViewingContainerQuery = gql`
       viewContainers {
         id
         name
-        water_level
+        size
+        height
         distance
+        water_level
+        sensor_state
         updatedAt
       }
     }
