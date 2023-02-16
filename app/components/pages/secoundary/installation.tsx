@@ -20,7 +20,7 @@ export default function ContainerSetting({ setPage }: { setPage: Function }) {
 
   useEffect(() => {
     if (data !== "No QR code detected") {
-      const serialNumber = data.split("serialNumber=")[1];
+      const serialNumber = data.split("serialNumber=")[1].trim();
       if (serialNumber) {
         createContainer({
           userId: currentUser.id,
