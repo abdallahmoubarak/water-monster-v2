@@ -4,10 +4,10 @@ import Layout from "./sLayout";
 
 export default function ContainerSetting({
   setPage,
-  containerId,
+  currentContainer,
 }: {
   setPage: Function;
-  containerId: string;
+  currentContainer: any;
 }) {
   return (
     <>
@@ -15,9 +15,12 @@ export default function ContainerSetting({
         title={"Container Settings"}
         onClick={() => setPage("Containers")}
       >
-        <SettingForm containerId={containerId} setPage={setPage} />
+        <SettingForm currentContainer={currentContainer} setPage={setPage} />
         <div className="pt-4">
-          <Button text={"Reconfigure WiFi"} />
+          <Button
+            text={"Reconfigure WiFi"}
+            onClick={() => setPage("Reconfigure")}
+          />
         </div>
       </Layout>
     </>

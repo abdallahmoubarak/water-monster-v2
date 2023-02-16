@@ -5,20 +5,22 @@ import { BiWater } from "react-icons/bi";
 import { HiOutlineClock } from "react-icons/hi";
 import { humanReadableTime } from "@/utils/time";
 
+interface ContainerCard {
+  view: boolean;
+  container: any;
+  setPage: any;
+  setCurrentContainer: any;
+}
+
 export default function Container({
   view,
   container,
   setPage,
-  setPageId,
-}: {
-  view: boolean;
-  container: any;
-  setPage: Function;
-  setPageId: Function;
-}) {
+  setCurrentContainer,
+}: ContainerCard) {
   const handleOnSettingsClick = () => {
-    setPage("Settings");
-    setPageId(container.id);
+    setPage && setPage("Settings");
+    setCurrentContainer && setCurrentContainer(container);
   };
 
   const handleOnDelete = () => {

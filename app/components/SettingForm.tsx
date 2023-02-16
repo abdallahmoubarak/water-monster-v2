@@ -1,19 +1,22 @@
 import Button from "@/components/Button";
 import Input from "@/components/Input";
-import { useEffect, useState } from "react";
-import { client } from "pages/_app";
+import { useState } from "react";
 import { useUpdateContainer } from "@/hooks/useContainer";
 import Box from "./Box";
 import Alert from "./Alert";
 
+interface settingFormTypes {
+  currentContainer: any;
+  setPage: Function;
+}
+
 export default function SettingForm({
-  containerId,
+  currentContainer,
   setPage,
 }: settingFormTypes) {
-  const [container, setContainer] = useState<any>([]);
-  const [name, setName] = useState<string>("");
-  const [size, setSize] = useState<string>("");
-  const [height, setHeight] = useState<string>("");
+  const [name, setName] = useState<string>(currentContainer?.name);
+  const [size, setSize] = useState<string>(currentContainer?.size);
+  const [height, setHeight] = useState<string>(currentContainer?.height);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alertMsg, setAlertMsg] = useState<string>("");
 
@@ -22,26 +25,12 @@ export default function SettingForm({
     setIsLoading,
   });
 
-  useEffect(() => {
-    const cnt = client
-      ?.getQueryData<any>(["Containers"])
-      ?.filter((item: { id: string }) => item.id === containerId)[0];
-    setContainer(cnt);
-    setName(cnt?.name);
-    setSize(cnt?.size);
-    setHeight(cnt?.height);
-  }, [containerId]);
-
   const handleUpdate = () => {
-    if (
-      name === container?.name &&
-      size === container?.size &&
-      height === container?.height
-    ) {
+    if (!!name && !!size && !!height) {
+      updateContainer({ id: currentContainer?.id, name, size, height });
+    } else {
       setAlertMsg("All fields are required");
     }
-    updateContainer({ id: container.id, name, size, height });
-    setIsLoading(true);
   };
 
   return (
@@ -67,9 +56,9 @@ export default function SettingForm({
               onClick={handleUpdate}
               isLoading={isLoading}
               disabled={
-                name === container?.name &&
-                size === container?.size &&
-                height === container?.height
+                name === currentContainer?.name &&
+                size === currentContainer?.size &&
+                height === currentContainer?.height
               }
             />
           </div>
@@ -79,7 +68,3 @@ export default function SettingForm({
     </>
   );
 }
-type settingFormTypes = {
-  containerId: string;
-  setPage: Function;
-};

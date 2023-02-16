@@ -12,10 +12,10 @@ import Alert from "@/components/Alert";
 
 export default function Containers({
   setPage,
-  setPageId,
+  setCurrentContainer,
 }: {
   setPage: Function;
-  setPageId: Function;
+  setCurrentContainer: Function;
 }) {
   const [alertMsg, setAlertMsg] = useState<string>("");
 
@@ -48,7 +48,7 @@ export default function Containers({
               view={false}
               container={container}
               setPage={setPage}
-              setPageId={setPageId}
+              setCurrentContainer={setCurrentContainer}
             />
           ))}
         </div>
@@ -58,8 +58,8 @@ export default function Containers({
               view={true}
               key={i}
               container={container}
-              setPage={setPage}
-              setPageId={setPageId}
+              setPage={undefined}
+              setCurrentContainer={undefined}
             />
           ))}
         </div>

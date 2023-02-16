@@ -34,7 +34,6 @@ export const useUserContainers = (id: string) => {
 const getUserViewingContainers = async (id: string) => {
   const variables = { id };
   const res = await graphQLClient.request(userViewingContainerQuery, variables);
-  console.log(res?.users[0]);
   return res?.users[0].viewContainers;
 };
 
