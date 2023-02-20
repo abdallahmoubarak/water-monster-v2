@@ -21,7 +21,8 @@ export default function Containers({
 
   let currentUser: any = localStorage.getItem("User");
   currentUser =
-    JSON.parse(currentUser) || client.getQueryData<userTypes>(["User"]);
+    (currentUser && JSON.parse(currentUser)) ||
+    client.getQueryData<userTypes>(["User"]);
 
   const { data: containers, isLoading } = useUserContainers(currentUser.id);
   const { data: viewingContainer } = useUserViewingContainers(currentUser.id);
