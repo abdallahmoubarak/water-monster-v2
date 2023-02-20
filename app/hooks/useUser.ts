@@ -22,8 +22,8 @@ const updateName = async ({ id, name }: userTypes) => {
 export const useUpdateName = ({ setAlertMsg }: setAlertMsgType) => {
   return useMutation(updateName, {
     onSuccess: (res) => {
-      localStorage.setItem("User", res?.user);
-      client.setQueryData(["User"], res?.user);
+      localStorage.setItem("User", JSON.stringify(res));
+      client.setQueryData(["User"], res);
       setAlertMsg("Name updated");
     },
     onError: (err: Error) => console.log(err.message),
@@ -41,8 +41,9 @@ const updatePhone = async ({ id, phone }: userTypes) => {
 export const useUpdatePhone = ({ setAlertMsg }: setAlertMsgType) => {
   return useMutation(updatePhone, {
     onSuccess: (res) => {
-      localStorage.setItem("User", res?.user);
-      client.setQueryData(["User"], res?.user);
+      localStorage.setItem("User", JSON.stringify(res));
+      client.setQueryData(["User"], res);
+      console.log(res);
       setAlertMsg("Phone updated");
     },
     onError: (err: Error) => console.log(err.message),
