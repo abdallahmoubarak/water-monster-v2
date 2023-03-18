@@ -13,6 +13,7 @@ import { useState } from "react";
 import Layout from "./sLayout";
 import { IoLanguage, IoMailOutline } from "react-icons/io5";
 import { BiSupport } from "react-icons/bi";
+import { useRouter } from "next/router";
 
 export default function Profile({ setPage }: { setPage: Function }) {
   const { data: currentUser } = useCurrentUser({ enabled: true });
@@ -21,6 +22,7 @@ export default function Profile({ setPage }: { setPage: Function }) {
   const [image, setImage] = useState("");
   const [base64, setImg64] = useState("");
   const [alertMsg, setAlertMsg] = useState("");
+  const router = useRouter();
 
   const { mutate: updateName } = useUpdateName({ setAlertMsg });
   const { mutate: updatePhone } = useUpdatePhone({ setAlertMsg });
@@ -59,7 +61,7 @@ export default function Profile({ setPage }: { setPage: Function }) {
                 icon={<BiSupport />}
                 title={"Support"}
                 value={"Contact us"}
-                onClick={() => setPage("Chat")}
+                onClick={() => router.push("https://wa.me/+96170097533")}
               />
               <Field icon={<IoLanguage />} title={"Language"} value={"En"} />
               <Field
