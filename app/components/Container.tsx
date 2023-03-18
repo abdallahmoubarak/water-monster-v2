@@ -28,8 +28,7 @@ export default function Container({
   };
 
   const calc = Math.round(
-    ((container?.height - (container?.distance - 192)) * 100) /
-      container?.height
+    ((container?.height - container?.distance) * 100) / container?.height
   );
 
   const waterLevel = calc > 0 && calc < 100 ? calc : calc < 0 ? 1 : 100;
