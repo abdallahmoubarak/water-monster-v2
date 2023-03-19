@@ -4,12 +4,14 @@ import settings from "@/public/svg/settings.svg";
 import { BiWater } from "react-icons/bi";
 import { HiOutlineClock } from "react-icons/hi";
 import { humanReadableTime } from "@/utils/time";
+import Loading from "./svg/Loading";
 
 interface ContainerCard {
   view: boolean;
   container: any;
   setPage: any;
   setCurrentContainer: any;
+  isFetching: boolean;
 }
 
 export default function Container({
@@ -17,6 +19,7 @@ export default function Container({
   container,
   setPage,
   setCurrentContainer,
+  isFetching,
 }: ContainerCard) {
   const handleOnSettingsClick = () => {
     setPage && setPage("Settings");
@@ -24,6 +27,7 @@ export default function Container({
   };
 
   const handleOnDelete = () => {
+    alert("not yet active");
     console.log(container.id);
   };
 
@@ -65,11 +69,21 @@ export default function Container({
                 {(container?.size * container?.water_level) / 100} liter
               </span>
               <span>({container?.water_level} %)</span>
+              {isFetching && (
+                <span>
+                  <Loading />
+                </span>
+              )}
             </>
           ) : (
             <>
               <span>{(container?.size * waterLevel) / 100} liter</span>
               <span>({waterLevel}%)</span>
+              {isFetching && (
+                <span>
+                  <Loading />
+                </span>
+              )}
             </>
           )}
         </div>

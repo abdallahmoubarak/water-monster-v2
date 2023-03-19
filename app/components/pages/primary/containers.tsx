@@ -24,7 +24,11 @@ export default function Containers({
     (currentUser && JSON.parse(currentUser)) ||
     client.getQueryData<userTypes>(["User"]);
 
-  const { data: containers, isLoading } = useUserContainers(currentUser.id);
+  const {
+    data: containers,
+    isLoading,
+    isFetching,
+  } = useUserContainers(currentUser.id);
   const { data: viewingContainer } = useUserViewingContainers(currentUser.id);
 
   useEffect(() => {
@@ -50,6 +54,7 @@ export default function Containers({
               container={container}
               setPage={setPage}
               setCurrentContainer={setCurrentContainer}
+              isFetching={isFetching}
             />
           ))}
         </div>
@@ -61,6 +66,7 @@ export default function Containers({
               container={container}
               setPage={undefined}
               setCurrentContainer={undefined}
+              isFetching={isFetching}
             />
           ))}
         </div>
