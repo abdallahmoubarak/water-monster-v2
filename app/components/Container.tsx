@@ -92,6 +92,11 @@ export default function Container({
             <HiOutlineClock />
           </span>
           <span>{humanReadableTime(container?.updatedAt)}</span>
+          {isFetching && (
+            <span>
+              <Loading />
+            </span>
+          )}
         </div>
         <div className="transition-all duration-[3s] ease-in-out">
           {container.water_level ? (
