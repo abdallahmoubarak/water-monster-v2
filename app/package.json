@@ -28,7 +28,7 @@
     "eslint-config-next": "13.0.5",
     "graphql": "^16.6.0",
     "graphql-request": "^5.0.0",
-    "neo4j-driver": "^5.7.0",
+    "neo4j-driver": "^4.4.10",
     "next": "13.0.5",
     "next-auth": "^4.21.1",
     "react": "18.2.0",
