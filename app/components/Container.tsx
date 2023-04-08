@@ -32,7 +32,7 @@ export default function Container({
   };
 
   const calc = Math.round(
-    ((container?.height - container?.distance / 10 - 20) * 100) /
+    ((container?.height - container?.distance / 10 + 20) * 100) /
       container?.height
   );
 
