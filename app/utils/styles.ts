@@ -1,5 +1,5 @@
 export const styles = {
-  primaryColor: "#43b9c3",
+  primaryColor: "#40A3C0",
   secondaryColor: "#C34D43",
   grey: "#8f8f8f",
   offWhiteBG: "background: #fefcf7;",
@@ -31,7 +31,7 @@ export const styles = {
   borderRadius50percent:
     "border-radius: 50%; -webkit-border-radius: 50%; -moz-border-radius: 50%; -ms-border-radius: 50%; -o-border-radius: 50%;",
   whiteProfileBackground:
-    "background: #43b9c3 center/cover url('/svg/person-white.svg') no-repeat;",
+    "background: #40A3C0 center/cover url('/svg/person-white.svg') no-repeat;",
   darkProfileBackground:
     "background: white center/cover url('/svg/person-colored.svg') no-repeat;",
 };

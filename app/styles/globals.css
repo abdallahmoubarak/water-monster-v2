@@ -39,7 +39,7 @@ a {
   text-decoration: none;
 }
 :root {
-  --primary-color: #43b9c3;
+  --primary-color: #40a3c0;
   --gray-color: #757575;
   --secondary-color: #c34d43;
 }
@@ -51,5 +51,5 @@ body {
   background: white center/cover url("/svg/person-colored.svg") no-repeat;
 }
 .white-profile-background {
-  background: #43b9c3 center/cover url("/svg/person-white.svg") no-repeat;
+  background: #40a3c0 center/cover url("/svg/person-white.svg") no-repeat;
 }
