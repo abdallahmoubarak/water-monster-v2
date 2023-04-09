@@ -5,6 +5,7 @@ import { BiWater } from "react-icons/bi";
 import { HiOutlineClock } from "react-icons/hi";
 import { humanReadableTime } from "@/utils/time";
 import Loading from "./svg/Loading";
+import { sensorState } from "@/utils/sensorState";
 
 interface ContainerCard {
   view: boolean;
@@ -35,16 +36,6 @@ export default function Container({
     ((container?.height - container?.distance / 10 + 18) * 100) /
       container?.height
   );
-
-  const sensor_state = () => {
-    const currentTimestamp = Date.now();
-    const duration = currentTimestamp - new Date(container.updatedAt).getTime();
-    const minutes = Math.floor(duration / 1000 / 60);
-    if (minutes > 60) {
-      return false;
-    }
-    return true;
-  };
 
   const waterLevel = calc > 0 && calc < 100 ? calc : calc < 0 ? 1 : 100;
 
@@ -119,7 +110,9 @@ export default function Container({
           <div>Sensor State</div>
           <div
             className={`rounded-full w-4 h-4  ${
-              sensor_state() ? "bg-primary" : "bg-secondary"
+              sensorState({ date: container.updatedAt })
+                ? "bg-primary"
+                : "bg-secondary"
             }`}
           ></div>
         </div>
