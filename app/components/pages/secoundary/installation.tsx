@@ -23,7 +23,7 @@ export default function ContainerSetting({ setPage }: { setPage: Function }) {
       const serialNumber = data.split("serialNumber=")[1].trim();
       if (serialNumber) {
         createContainer({
-          userId: currentUser.id,
+          userId: currentUser?.id,
           serialNumber,
           location: {
             latitude: parseFloat(localStorage.getItem("lat") || ""),
