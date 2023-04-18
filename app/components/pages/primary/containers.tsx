@@ -9,6 +9,7 @@ import ContainerLoader from "@/components/ContainerLoader";
 import { client } from "pages/_app";
 import { userTypes } from "@/hooks/hookTypes";
 import Alert from "@/components/Alert";
+import ServicesBar from "@/components/ServicesBar";
 
 export default function Containers({
   setPage,
@@ -44,6 +45,7 @@ export default function Containers({
 
   return (
     <>
+      <ServicesBar setPage={setPage} />
       <div className="p-3">
         {isLoading && <ContainerLoader />}
         <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
