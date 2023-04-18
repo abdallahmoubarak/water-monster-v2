@@ -4,8 +4,7 @@ import Box from "./Box";
 export default function ServicesBar({ setPage }: any) {
   return (
     <div className="max-w-[30rem] mx-auto p-4 ">
-      <Box>
-        <div className="px-1 text-2xl">Services</div>
+      <Box title="Services">
         <div className="flex gap-2  ">
           <div onClick={() => setPage("Plumber")}>
             <Image src={"/png/plumber.png"} alt={""} height={200} width={200} />
