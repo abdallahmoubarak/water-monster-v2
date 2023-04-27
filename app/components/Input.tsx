@@ -29,7 +29,7 @@ export default function Input({
       ) : (
         <>
           <input
-            className="block text-xl pl-4 pb-2 pt-6 border leading-none border-black_gray w-full bg-transparent rounded-md focus:outline-none focus:ring-0 focus:border-primary peer placeholder:text-transparent"
+            className="block text-xl pl-4 pb-2 pt-6 border leading-none border-black_gray w-full bg-transparent rounded-md focus:outline-none focus:ring-0 focus:border-primary peer placeholder:text-transparent select-auto"
             autoComplete="off"
             id={id}
             placeholder={name}
