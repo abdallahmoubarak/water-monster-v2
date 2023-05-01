@@ -8,7 +8,7 @@ import AskToScan from "@/components/configSteps/AskToScan";
 import QrReaderStep from "@/components/configSteps/QrReaderStep";
 import WifiConfigStep from "@/components/configSteps/WifiConfigStep";
 
-export default function ContainerSetting({ setPage }: { setPage: Function }) {
+export default function Installation({ setPage }: { setPage: Function }) {
   const [step, setStep] = useState<number>(1);
   const [data, setData] = useState<string>("No QR code detected");
   const [isScan, setIsScan] = useState<boolean>(false);

@@ -9,7 +9,7 @@ import { signTypes } from "@/types/common";
 
 const signUp = async ({ userType, name, email, password }: signTypes) => {
   const variables = { name, email, password, userType };
-  const res = await graphQLClient.request(signUpMutation, variables);
+  const res: any = await graphQLClient.request(signUpMutation, variables);
   return res?.signUp;
 };
 
@@ -35,7 +35,7 @@ export const useSignUp = ({ setMsg, setIsLoading }: useSignTypes) => {
 
 const signIn = async ({ email, password }: signTypes) => {
   const variables = { email, password };
-  const res = await graphQLClient.request(signInMutation, variables);
+  const res: any = await graphQLClient.request(signInMutation, variables);
   return res?.signIn;
 };
 
@@ -60,7 +60,7 @@ export const useSignIn = ({ setMsg, setIsLoading }: useSignTypes) => {
 /****************** get current user using jwt *******************/
 
 const getUser = async () => {
-  const res = await graphQLClient.request(meQuery);
+  const res: any = await graphQLClient.request(meQuery);
   return res?.me;
 };
 
