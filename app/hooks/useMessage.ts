@@ -7,7 +7,10 @@ import { createMessageType, useGetMessagesType } from "./hookTypes";
 
 const createMessage = async ({ from, to, content }: createMessageType) => {
   const variables = { from, to, content };
-  const res = await graphQLClient.request(createMessageMutation, variables);
+  const res: any = await graphQLClient.request(
+    createMessageMutation,
+    variables
+  );
   return res?.createMessage?.messages[0];
 };
 
@@ -22,7 +25,7 @@ export const useCreateMessage = () => {
 
 const getMessages = async ({ me, other }: useGetMessagesType) => {
   const variables = { me, other };
-  const res = await graphQLClient.request(getMessagesQuery, variables);
+  const res: any = await graphQLClient.request(getMessagesQuery, variables);
   return res?.messages;
 };
 

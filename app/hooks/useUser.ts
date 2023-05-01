@@ -15,7 +15,7 @@ import { client } from "pages/_app";
 
 const updateName = async ({ id, name }: userTypes) => {
   const variables = { id, name };
-  const res = await graphQLClient.request(updateNameMutation, variables);
+  const res: any = await graphQLClient.request(updateNameMutation, variables);
   return res?.updateUsers?.users[0];
 };
 
@@ -34,7 +34,7 @@ export const useUpdateName = ({ setAlertMsg }: setAlertMsgType) => {
 
 const updatePhone = async ({ id, phone }: userTypes) => {
   const variables = { id, phone };
-  const res = await graphQLClient.request(updatePhoneMutation, variables);
+  const res: any = await graphQLClient.request(updatePhoneMutation, variables);
   return res?.updateUsers?.users[0];
 };
 
@@ -53,7 +53,7 @@ export const useUpdatePhone = ({ setAlertMsg }: setAlertMsgType) => {
 /*********************** use get Admin hook ***********************/
 
 const getAdmin = async () => {
-  const res = await graphQLClient.request(getAdminQuery);
+  const res: any = await graphQLClient.request(getAdminQuery);
   return res?.users;
 };
 
@@ -69,7 +69,7 @@ export const useGetAdmin = () => {
 
 const getContacts = async ({ id }: userTypes) => {
   const variables = { me: id };
-  const res = await graphQLClient.request(getContactsQuery, variables);
+  const res: any = await graphQLClient.request(getContactsQuery, variables);
   return res?.users;
 };
 
@@ -84,7 +84,7 @@ export const useGetContacts = ({ id }: userTypes) => {
 /*********************** use get contacts hook ***********************/
 
 const getUsers = async () => {
-  const res = await graphQLClient.request(getUsersQuery);
+  const res: any = await graphQLClient.request(getUsersQuery);
   return res?.users;
 };
 

@@ -17,7 +17,7 @@ import {
 
 const getUserContainers = async (id: string) => {
   const variables = { id };
-  const res = await graphQLClient.request(userContainerQuery, variables);
+  const res: any = await graphQLClient.request(userContainerQuery, variables);
   return res?.containers;
 };
 
@@ -33,7 +33,10 @@ export const useUserContainers = (id: string) => {
 
 const getUserViewingContainers = async (id: string) => {
   const variables = { id };
-  const res = await graphQLClient.request(userViewingContainerQuery, variables);
+  const res: any = await graphQLClient.request(
+    userViewingContainerQuery,
+    variables
+  );
   return res?.users[0].viewContainers;
 };
 
@@ -79,7 +82,10 @@ const updateContainer = async ({
   threshold,
 }: updateContainerTypes) => {
   const variables = { container_id: id, name, size, height, threshold };
-  const res = await graphQLClient.request(updateContainerMutation, variables);
+  const res: any = await graphQLClient.request(
+    updateContainerMutation,
+    variables
+  );
   return res?.updateContainers?.containers;
 };
 

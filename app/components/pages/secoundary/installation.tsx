@@ -36,7 +36,7 @@ export default function Installation({ setPage }: { setPage: Function }) {
         setData("The QR code is not as a standard.");
       }
     }
-  }, [data]);
+  }, [data, createContainer, currentUser?.id]);
   return (
     <>
       <Layout title={"Installation"} onClick={() => setPage("Containers")}>
