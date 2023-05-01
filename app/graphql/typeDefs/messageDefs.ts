@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-micro";
+import { gql } from "graphql-request";
 
 export const messageDefs = gql`
   type Message {

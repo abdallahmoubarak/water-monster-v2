@@ -1,11 +1,9 @@
-import { ApolloServer } from "apollo-server-micro";
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
-import { typeDefs } from "./typeDefs";
-import { resolvers } from "./resolvers";
+import { resolvers } from "./resolvers/index";
+import neo4j from "neo4j-driver";
 import { Neo4jGraphQL } from "@neo4j/graphql";
 import { Neo4jGraphQLAuthJWTPlugin } from "@neo4j/graphql-plugin-auth";
-import neo4j from "neo4j-driver";
-import { OGM } from "@neo4j/graphql-ogm";
+import { typeDefs } from "./typeDefs";
+import { ApolloServer } from "@apollo/server";
 
 declare const process: {
   env: {
@@ -24,10 +22,6 @@ export const driver = neo4j.driver(
   )
 );
 
-export const ogm = new OGM({ typeDefs, driver });
-export const User = ogm.model("User");
-export const Container = ogm.model("Container");
-
 const neoSchema = new Neo4jGraphQL({
   typeDefs,
   resolvers,
@@ -41,12 +35,4 @@ const neoSchema = new Neo4jGraphQL({
 
 export const server = new ApolloServer({
   schema: await neoSchema.getSchema(),
-  introspection: true,
-  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
-  context: async (ctx: any) => {
-    return {
-      driver,
-      ...ctx,
-    };
-  },
 });

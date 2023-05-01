@@ -1,34 +1,42 @@
 import { signTypes } from "@/types/common";
 import { createJWT, comparePassword, hashPassword } from "@/utils/jwt";
-
-import { User } from "../index";
+import { driver } from "../index";
+import { v4 as uuidv4 } from "uuid";
 
 export const authMutations = {
   signUp: async (
     _source: any,
-    { name, email, password, userType }: signTypes,
+    { name, email, password, userType }: signTypes
   ) => {
-    const [existing] = await User.find({ where: { email } });
-    if (existing) throw new Error(`User with email ${email} already exists!`);
-    const hash = await hashPassword(password);
+    const session = driver.session();
+    const users = await session.run(
+      `MATCH (n:User {email:"${email}"}) RETURN n`
+    );
 
-    const { users } = await User.create({
-      input: [
-        {
-          name,
-          email,
-          password: hash,
-          userType,
-        },
-      ],
-    });
-    const token = await createJWT({ sub: users[0].id });
+    if (users.records.length > 0) {
+      throw new Error("User with that email already exists!");
+    }
+    const hashedPassword = await hashPassword(password);
 
-    return { user: users[0], token };
+    const id = uuidv4();
+
+    await session.run(
+      `CREATE (n:User {id:"${id}", email:"${email}", password:"${hashedPassword}", name:"${name}", userType:"${userType}"})`
+    );
+
+    const token = await createJWT({ sub: id });
+    const user = { id, email, name, userType };
+    return { user, token };
   },
 
   signIn: async (_source: any, { email, password }: signTypes) => {
-    const [user] = await User.find({ where: { email } });
+    const session = driver.session();
+    const users = await session.run(
+      `MATCH (n:User {email:"${email}"}) RETURN n`
+    );
+    const [user]: any = users.records.map(
+      (record) => record.get("n").properties
+    );
     if (!user) throw new Error("Email or password is not correct!");
     const correctPassword = await comparePassword(password, user.password);
     if (!correctPassword) throw new Error("Email or password is not correct!");

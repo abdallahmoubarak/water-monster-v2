@@ -1,4 +1,4 @@
-import { Container, User } from "../index";
+import { driver } from "../index";
 
 type containerTypes = {
   serialNumber: string;
@@ -11,31 +11,48 @@ export const containerMutations = {
     _source: any,
     { serialNumber, userId, location }: containerTypes
   ) => {
-    let existingContainer = await Container.find({ where: { serialNumber } });
-    let user = await User.find({ where: { id: userId } });
+    const session = driver.session();
+    const existingContainers = await session.run(
+      `MATCH (n:Container {serialNumber:"${serialNumber}"}) RETURN n`
+    );
+    const [existingContainer]: any = existingContainers.records.map(
+      (record) => record.get("n").properties
+    );
+
+    const users = await session.run(`MATCH (n:User {id:"${userId}"}) RETURN n`);
+    const [user]: any = users.records.map(
+      (record) => record.get("n").properties
+    );
 
     if (!user) throw new Error(`User with id ${userId} does not exist!`);
 
-    if (existingContainer.length === 0) {
+    if (!existingContainer) {
       // create new container with user as owner
-      const { containers } = await Container.create({
-        input: [
-          {
-            location,
-            serialNumber,
-            user: { connect: { where: { node: { id: userId } } } },
-          },
-        ],
-      });
-      return containers[0];
+      const newContainer = await session.run(
+        `
+        CREATE (c:Container { location: $location, serialNumber: $serialNumber })
+        CREATE (c)<-[:OWNS]-(u:User { id: $userId })
+        RETURN c
+      `,
+        { location, serialNumber, userId }
+      );
+
+      const [container]: any = newContainer.records.map(
+        (record) => record.get("c").properties
+      );
+
+      return container;
     } else {
       // update existing container with user as viewer
-      const [container] = existingContainer;
-      await Container.update({
-        where: { serialNumber },
-        update: { viewer: { connect: { where: { node: { id: userId } } } } },
-      });
-      return container;
+      await session.run(
+        `
+        MATCH (c:Container {serialNumber: $serialNumber})
+        CREATE (c)<-[:CAN_VIEW]-(u:User { id: $userId })
+      `,
+        { serialNumber, userId }
+      );
+
+      return existingContainer;
     }
   },
 };
