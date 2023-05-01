@@ -17,7 +17,9 @@ export default function ContainerSetting({
         onClick={() => setPage("Containers")}
       >
         <SettingForm currentContainer={currentContainer} setPage={setPage} />
-        <QrCode value={"serialNumber"} width={"200px"} />
+        <div className="mx-auto w-fit p-4 pt-6">
+          <QrCode value={"serialNumber"} width={"250px"} />
+        </div>
         <div className="pt-4">
           <Button
             text={"Reconfigure WiFi"}
