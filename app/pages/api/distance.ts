@@ -2,14 +2,10 @@ import { GraphQLClient } from "graphql-request";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 declare const process: {
-  env: {
-    NEXT_PUBLIC_GQL_PATH: string;
-    NEXT_PUBLIC_BASEURL: string;
-  };
+  env: { NEXT_PUBLIC_GQL_PATH: string };
 };
 
-const endpoint: string =
-  process.env.NEXT_PUBLIC_BASEURL + process.env.NEXT_PUBLIC_GQL_PATH;
+const endpoint: string = process.env.NEXT_PUBLIC_GQL_PATH;
 
 export default async function handler(
   req: NextApiRequest,
