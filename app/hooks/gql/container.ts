@@ -7,6 +7,7 @@ export const userContainerQuery = gql`
       name
       size
       height
+      threshold
       distance
       sensor_state
       private_mode
@@ -26,6 +27,7 @@ export const userViewingContainerQuery = gql`
         name
         size
         height
+        threshold
         distance
         water_level
         sensor_state
@@ -54,7 +56,7 @@ export const updateContainerMutation = gql`
     $name: String!
     $size: String!
     $height: String!
-    $threshold: Number!
+    $threshold: Int!
   ) {
     updateContainers(
       where: { id: $container_id }
@@ -70,6 +72,7 @@ export const updateContainerMutation = gql`
         name
         size
         height
+        threshold
         sensor_state
         private_mode
         manual_mode

@@ -60,7 +60,7 @@ export default function SettingForm({
             setValue={setHeight}
           />
 
-          <label htmlFor="steps-range">Alert Threshold ({threshold}%)</label>
+          <label htmlFor="steps-range">Level Alert ({threshold}%)</label>
           <input
             id="steps-range"
             type="range"
