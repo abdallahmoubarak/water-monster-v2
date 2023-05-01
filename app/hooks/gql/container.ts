@@ -54,10 +54,16 @@ export const updateContainerMutation = gql`
     $name: String!
     $size: String!
     $height: String!
+    $threshold: Number!
   ) {
     updateContainers(
       where: { id: $container_id }
-      update: { name: $name, size: $size, height: $height }
+      update: {
+        name: $name
+        size: $size
+        height: $height
+        threshold: $threshold
+      }
     ) {
       containers {
         id

@@ -76,8 +76,9 @@ const updateContainer = async ({
   name,
   size,
   height,
+  threshold,
 }: updateContainerTypes) => {
-  const variables = { container_id: id, name, size, height };
+  const variables = { container_id: id, name, size, height, threshold };
   const res = await graphQLClient.request(updateContainerMutation, variables);
   return res?.updateContainers?.containers;
 };

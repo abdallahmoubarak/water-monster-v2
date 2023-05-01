@@ -17,6 +17,9 @@ export default function SettingForm({
   const [name, setName] = useState<string>(currentContainer?.name);
   const [size, setSize] = useState<string>(currentContainer?.size);
   const [height, setHeight] = useState<string>(currentContainer?.height);
+  const [threshold, setThreshold] = useState<number>(
+    currentContainer?.threshold || 15
+  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alertMsg, setAlertMsg] = useState<string>("");
 
@@ -26,8 +29,14 @@ export default function SettingForm({
   });
 
   const handleUpdate = () => {
-    if (!!name && !!size && !!height) {
-      updateContainer({ id: currentContainer?.id, name, size, height });
+    if (!!name && !!size && !!height && !!threshold) {
+      updateContainer({
+        id: currentContainer?.id,
+        name,
+        size,
+        height,
+        threshold,
+      });
     } else {
       setAlertMsg("All fields are required");
     }
@@ -50,7 +59,25 @@ export default function SettingForm({
             value={height}
             setValue={setHeight}
           />
-          <div className="flex items-center">
+
+          <label htmlFor="steps-range">Alert Threshold ({threshold}%)</label>
+          <input
+            id="steps-range"
+            type="range"
+            min="0"
+            max="60"
+            onChange={(e) => setThreshold(parseInt(e.target.value))}
+            value={threshold}
+            step="5"
+            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer select-auto text-primary"
+          />
+          {threshold === 0 && (
+            <div className="text-sm text-gray-400">
+              You will never recieve any notifications if you set it 0%
+            </div>
+          )}
+
+          <div className="flex items-center pt-6">
             <Button
               text="Save"
               onClick={handleUpdate}
@@ -58,7 +85,8 @@ export default function SettingForm({
               disabled={
                 name === currentContainer?.name &&
                 size === currentContainer?.size &&
-                height === currentContainer?.height
+                height === currentContainer?.height &&
+                threshold === currentContainer?.threshold
               }
             />
           </div>

@@ -17,6 +17,7 @@ export type updateContainerTypes = {
   name: string;
   size: string;
   height: string;
+  threshold: number;
 };
 
 export type useUpdateContainerTypes = {
