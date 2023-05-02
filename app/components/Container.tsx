@@ -49,7 +49,7 @@ export default function Container({
               className="text-red-600 text-sm cursor-pointer font-bold"
               onClick={handleOnDelete}
             >
-              Delete
+              {/* Delete */}
             </div>
           ) : (
             <div

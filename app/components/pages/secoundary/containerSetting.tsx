@@ -18,6 +18,9 @@ export default function ContainerSetting({
       >
         <SettingForm currentContainer={currentContainer} setPage={setPage} />
         <div className="mx-auto w-fit p-4 pt-6">
+          <div className="text-sm text-gray-400">
+            Scan the QR code to connect other device.
+          </div>
           <QrCode
             value={`serialNumber=${currentContainer?.serialNumber}`}
             width={"250px"}
