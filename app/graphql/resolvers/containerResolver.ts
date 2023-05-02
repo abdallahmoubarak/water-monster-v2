@@ -1,4 +1,5 @@
 import { driver } from "../index";
+import { v4 as uuidv4 } from "uuid";
 
 type containerTypes = {
   serialNumber: string;
@@ -28,8 +29,9 @@ export const containerMutations = {
 
     if (!existingContainer) {
       // create new container with user as owner
+      const id = uuidv4();
       const newContainer = await session.run(`
-      CREATE (c:Container {location: "${location}", serialNumber: "${serialNumber}"})
+      CREATE (c:Container {id:"${id}", location: "${location}", serialNumber: "${serialNumber}"})
       WITH c
       MATCH (u:User {  id: "${userId}" })
       MERGE (c)<-[:OWNS]-(u)
