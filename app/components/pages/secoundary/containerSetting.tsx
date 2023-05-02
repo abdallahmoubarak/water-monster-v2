@@ -17,10 +17,10 @@ export default function ContainerSetting({
         onClick={() => setPage("Containers")}
       >
         <SettingForm currentContainer={currentContainer} setPage={setPage} />
-        <div className="mx-auto w-fit p-4 pt-6">
-          <div className="text-sm text-gray-400">
-            Scan the QR code to connect other device.
-          </div>
+        <div className="text-sm text-center text-gray-400 pt-6">
+          Scan the QR code to connect other device.
+        </div>
+        <div className="mx-auto w-fit pb-4">
           <QrCode
             value={`serialNumber=${currentContainer?.serialNumber}`}
             width={"250px"}
