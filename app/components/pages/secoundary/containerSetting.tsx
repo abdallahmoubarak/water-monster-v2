@@ -18,7 +18,10 @@ export default function ContainerSetting({
       >
         <SettingForm currentContainer={currentContainer} setPage={setPage} />
         <div className="mx-auto w-fit p-4 pt-6">
-          <QrCode value={"serialNumber"} width={"250px"} />
+          <QrCode
+            value={`serialNumber=${currentContainer?.serialNumber}`}
+            width={"250px"}
+          />
         </div>
         <div className="pt-4">
           <Button

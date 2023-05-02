@@ -8,6 +8,7 @@ export const userContainerQuery = gql`
       size
       height
       threshold
+      serialNumber
       distance
       sensor_state
       private_mode
@@ -73,6 +74,7 @@ export const updateContainerMutation = gql`
         size
         height
         threshold
+        serialNumber
         sensor_state
         private_mode
         manual_mode
