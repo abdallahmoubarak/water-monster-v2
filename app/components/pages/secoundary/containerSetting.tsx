@@ -2,6 +2,7 @@ import Button from "@/components/Button";
 import SettingForm from "@/components/SettingForm";
 import Layout from "./sLayout";
 import QrCode from "@/components/QRcode";
+import Box from "@/components/Box";
 
 export default function ContainerSetting({
   setPage,
@@ -20,7 +21,7 @@ export default function ContainerSetting({
         <div className="text-sm text-center text-gray-400 pt-6">
           Scan the QR code to connect other device.
         </div>
-        <div className="mx-auto w-fit pb-4 pt-2">
+        <div className="mx-auto w-fit border border-gray-300 p-4 ">
           <QrCode
             value={`serialNumber=${currentContainer?.serialNumber}`}
             width={"250px"}

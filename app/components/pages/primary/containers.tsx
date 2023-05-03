@@ -48,7 +48,7 @@ export default function Containers({
       <ServicesBar setPage={setPage} />
       <div className="p-3">
         {isLoading && <ContainerLoader />}
-        <div className="flex items-center justify-center gap-4 pb-3 flex-wrap ">
+        <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
           {containers?.map((container: any, i: Key) => (
             <Container
               key={i}
