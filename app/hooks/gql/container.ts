@@ -39,7 +39,7 @@ export const userViewingContainerQuery = gql`
 `;
 
 export const createContainerMutation = gql`
-  mutation ($userId: String!, $serialNumber: String!, $location: PointInput!) {
+  mutation ($userId: String!, $serialNumber: String!, $location: PointInput) {
     createOrUpdateContainer(
       location: $location
       serialNumber: $serialNumber
