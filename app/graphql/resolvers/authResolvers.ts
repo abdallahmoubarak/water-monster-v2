@@ -21,7 +21,7 @@ export const authMutations = {
     const id = uuidv4();
 
     await session.run(
-      `CREATE (n:User {id:"${id}", email:"${email}", password:"${hashedPassword}", name:"${name}", userType:"${userType}"})`
+      `CREATE (n:User {id:"${id}", email:"${email}", password:"${hashedPassword}", name:"${name}", userType:"${userType}", createdAt: datetime(), updatedAt: datetime()})`
     );
 
     const token = await createJWT({ sub: id });

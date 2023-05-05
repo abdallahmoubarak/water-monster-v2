@@ -31,7 +31,7 @@ export const containerMutations = {
       // create new container with user as owner
       const id = uuidv4();
       const newContainer = await session.run(`
-      CREATE (c:Container {id:"${id}", location: "${location}", serialNumber: "${serialNumber}"})
+      CREATE (c:Container {id:"${id}", location: "${location}", serialNumber: "${serialNumber}", createdAt: datetime(), updatedAt: datetime()})
       WITH c
       MATCH (u:User {  id: "${userId}" })
       MERGE (c)<-[:OWNS]-(u)
