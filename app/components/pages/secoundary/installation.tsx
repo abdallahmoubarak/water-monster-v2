@@ -20,15 +20,15 @@ export default function Installation({ setPage }: { setPage: Function }) {
 
   useEffect(() => {
     if (data !== "No QR code detected") {
+      const latitude = parseFloat(localStorage.getItem("lat") ?? "");
+      const longitude = parseFloat(localStorage.getItem("long") ?? "");
+      const location = longitude && latitude ? { longitude, latitude } : null;
       const serialNumber = data.split("serialNumber=")[1].trim();
       if (serialNumber) {
         createContainer({
           userId: currentUser?.id,
           serialNumber,
-          location: {
-            latitude: parseFloat(localStorage.getItem("lat") || ""),
-            longitude: parseFloat(localStorage.getItem("long") || ""),
-          },
+          location,
         });
         setStep(3);
         setIsScan(false);

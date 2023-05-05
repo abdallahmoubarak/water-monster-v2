@@ -68,7 +68,7 @@ const createContainer = async ({
 export const useCreateContainer = () => {
   return useMutation(createContainer, {
     onSuccess: () => client.refetchQueries(["Containers"]),
-    onError: (err: Error) => console.log(err.message),
+    onError: (err: Error) => console.log("create conatiner error: ",err.message),
   });
 };
 
