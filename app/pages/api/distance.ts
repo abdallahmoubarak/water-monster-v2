@@ -15,17 +15,9 @@ export default async function handler(
     distance: string;
     serialNumber: string;
   };
-  let headers:any ={
-    "Content-Type": "application/json",
-    Accept:"*/*",
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-    "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type,
-    
-  }
 
   if (distance && serialNumber) {
-    const graphQLClient = new GraphQLClient(endpoint, { mode: "cors",  headers });
+    const graphQLClient = new GraphQLClient(endpoint);
 
     await graphQLClient.request(
       `mutation {
