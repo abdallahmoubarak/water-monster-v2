@@ -31,7 +31,7 @@ export default function DateTimePicker({ service }: { service: string }) {
             Selected date : {formatDate(selectedDate)}
           </div>
           <div className="py-4 text-xl">Select a time</div>
-          <div className="w-fit mx-auto flex flex-col gap-2 pb-4">
+          <div className="w-fit mx-auto flex flex-col gap-2">
             {availbleTime.map((time, i) => (
               <div
                 key={i}
@@ -41,7 +41,7 @@ export default function DateTimePicker({ service }: { service: string }) {
               </div>
             ))}
           </div>
-          <div>Coming Soon</div>
+          <div className="py-4">Coming Soon...</div>
           <Button
             text={"Request " + service}
             onClick={() => setIsDate(false)}
