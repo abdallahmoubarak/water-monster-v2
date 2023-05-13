@@ -4,7 +4,7 @@ import Layout from "./sLayout";
 export default function WaterProvider({ setPage }: { setPage: Function }) {
   return (
     <Layout title={"Water Provider"} onClick={() => setPage("Containers")}>
-      <DateTimePicker />
+      <DateTimePicker service={"water provider"} />
     </Layout>
   );
 }

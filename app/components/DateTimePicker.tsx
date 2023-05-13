@@ -1,8 +1,10 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Button from "./Button";
+import { formatDate } from "@/utils/time";
 
-export default function DateTimePicker() {
+export default function DateTimePicker({ service }: { service: string }) {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [isDate, setIsDate] = useState<boolean>(true);
 
@@ -10,24 +12,26 @@ export default function DateTimePicker() {
     <>
       {isDate ? (
         <div className="text-center">
-          <div>Select a Date</div>
+          <div className="text-xl py-4">Select a date for {service}</div>
           <DatePicker
             selected={selectedDate}
-            onChange={(date: any) => {
-              setSelectedDate(date);
-              setIsDate(false);
-            }}
+            onChange={(date: any) => setSelectedDate(date)}
             minDate={new Date()}
             inline
           />
+          <div className="py-4">{formatDate(selectedDate)}</div>
+          <Button text={"Accept"} onClick={() => setIsDate(false)} />
         </div>
       ) : (
         <div className="text-center">
-          <div onClick={() => setIsDate(true)} className="cursor-pointer">
-            Back
+          <div
+            onClick={() => setIsDate(true)}
+            className="cursor-pointer bg-blue-100 w-fit mx-auto"
+          >
+            Selected date : {formatDate(selectedDate)}
           </div>
-          Select a Time
-          <div className="w-fit mx-auto flex flex-col gap-2">
+          <div className="py-4 text-xl">Select a time</div>
+          <div className="w-fit mx-auto flex flex-col gap-2 pb-4">
             {availbleTime.map((time, i) => (
               <div
                 key={i}
@@ -37,6 +41,12 @@ export default function DateTimePicker() {
               </div>
             ))}
           </div>
+          <div>Coming Soon</div>
+          <Button
+            text={"Request " + service}
+            onClick={() => setIsDate(false)}
+            disabled={true}
+          />
         </div>
       )}
     </>
