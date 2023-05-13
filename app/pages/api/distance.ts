@@ -2,10 +2,14 @@ import { GraphQLClient } from "graphql-request";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 declare const process: {
-  env: { NEXT_PUBLIC_GQL_PATH: string };
+  env: {
+    NEXT_PUBLIC_BASEURL: string;
+    NEXT_PUBLIC_GQL_PATH: string;
+  };
 };
 
-const endpoint: string = process.env.NEXT_PUBLIC_GQL_PATH;
+const endpoint: string =
+  process.env.NEXT_PUBLIC_BASEURL + process.env.NEXT_PUBLIC_GQL_PATH;
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,23 +20,27 @@ export default async function handler(
     serialNumber: string;
   };
 
+  console.log({ distance, serialNumber });
   if (distance && serialNumber) {
-    const graphQLClient = new GraphQLClient(endpoint, { mode: "cors" });
-
-    await graphQLClient.request(
-      `mutation {
-        updateContainers(
-          where: { serialNumber: "${serialNumber}" }
-          update: { distance: ${parseInt(distance)} }
-        ) {	
-          containers {
-            id
-            name
-            distance
-          }
+    try {
+      const graphQLClient = new GraphQLClient(endpoint);
+      const mutation = `mutation {
+      updateContainers(
+        where: { serialNumber: "${serialNumber}" }
+        update: { distance: ${parseInt(distance)} }
+      ) {	
+        containers {
+          id
+          name
+          distance
         }
-      }`
-    );
+      }
+    }`;
+
+      await graphQLClient.request(mutation);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   res.status(200).end(`Water level is: ${distance}`);
