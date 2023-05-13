@@ -72,3 +72,14 @@ export const humanReadableTime = (timestamp: string): string => {
     return "just now";
   }
 };
+
+// Date formater
+export const formatDate = (date: Date): string => {
+  const options: any = {
+    weekday: "long",
+    day: "numeric",
+    month: "short",
+  };
+  const formattedDate = date.toLocaleDateString("en-US", options);
+  return formattedDate;
+};
