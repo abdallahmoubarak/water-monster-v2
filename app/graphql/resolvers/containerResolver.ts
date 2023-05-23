@@ -47,7 +47,8 @@ export const containerMutations = {
       // update existing container with user as viewer
       await session.run(`
         MATCH (c:Container {serialNumber: "${serialNumber}"})
-        MERGE (c)<-[:CAN_VIEW]-(u:User { id: "${userId}" })
+        MATCH (u:User {  id: "${userId}" })
+        MERGE (c)<-[:CAN_VIEW]-(u)
       `);
 
       return existingContainer;
