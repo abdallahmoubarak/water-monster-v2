@@ -16,6 +16,7 @@ export default function SignForm({
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPass] = useState<string>("");
+  const [phone, setPhone] = useState<number>(+961);
   const [msg, setMsg] = useState<string>("");
   const [selectedType, setSelectedType] = useState<string>("Client");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -29,14 +30,13 @@ export default function SignForm({
     if (!isLoading) {
       setIsLoading(true);
       setMsg("");
-      let userType = selectedType;
       let newEmail = email.toLowerCase().trim();
       const { valid, message } = validSign({
         signType,
         email: newEmail,
         password,
         name,
-        userType,
+        phone,
       });
 
       if (!valid) {
@@ -73,6 +73,14 @@ export default function SignForm({
       </div>
       <InputsContainer>
         {signup && <Input name="Name" value={name} setValue={setName} />}
+        {signup && (
+          <Input
+            name="Phone"
+            inputType="number"
+            value={phone}
+            setValue={setPhone}
+          />
+        )}
         <Input
           name="Email"
           value={email.toLowerCase().trim()}
@@ -84,15 +92,6 @@ export default function SignForm({
             inputType={"password"}
             value={password}
             setValue={setPass}
-          />
-        )}
-        {signup && (
-          <Select
-            name="Account type"
-            options={["Client", "Provider"]}
-            setSelected={setSelectedType}
-            selected={selectedType}
-            hasDefault={true}
           />
         )}
         <div className={`msg ${invalid && "invalid-msg"}`}>{msg}</div>

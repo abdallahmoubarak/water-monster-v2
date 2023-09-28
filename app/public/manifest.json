@@ -4,7 +4,7 @@
   "display": "standalone",
   "theme_color": "#40A3C0",
   "background_color": "#FFFFFF",
-  "description": "Keep the water flowing",
+  "description": "Control your water flow",
   "start_url": "/",
   "orientation": "portrait",
   "scope": "/",

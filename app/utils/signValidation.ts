@@ -1,6 +1,5 @@
 import { signTypes } from "./../types/common";
-const regularExpression =
-  /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+const regularExpression = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
 
 /************** Sign Validation Function **************/
 
@@ -9,6 +8,7 @@ export const validSign = ({
   email,
   password,
   name,
+  phone,
   userType,
 }: validationTypes) => {
   let valid = true;
@@ -34,10 +34,9 @@ export const validSign = ({
   }
 
   if (signType === "signup") {
-    if (!userType) {
+    if (!phone || (phone && phone?.toString().length < 6)) {
       valid = false;
-      message = "Please enter a user type.";
-      return { valid, message };
+      message = "Phone number is not valid";
     }
     if (!name || name?.length < 5) {
       valid = false;

@@ -4,6 +4,7 @@ export type signTypes = {
   name?: string;
   email: string;
   password: string;
+  phone?: number;
   userType?: string;
 };
 
