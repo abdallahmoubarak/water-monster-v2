@@ -3,7 +3,7 @@ import Logo from "./svg/Logo";
 export default function TopBar({ hasImg, setActive }: topBarProps) {
   return (
     <>
-      <div className="flex items-center justify-between gap-4 bg-primary px-4 py-2 h-16">
+      <div className="flex items-center justify-between gap-4  bg-primary px-4 py-2 h-16">
         <div className="h-full">
           <Logo />
         </div>
