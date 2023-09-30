@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Box from "./Box";
+import Box from "./atoms/Box";
 
 export default function ServicesBar({ setPage }: any) {
   return (
@@ -10,8 +10,7 @@ export default function ServicesBar({ setPage }: any) {
             <div
               key={i}
               className="cursor-pointer"
-              onClick={() => setPage(service.name)}
-            >
+              onClick={() => setPage(service.name)}>
               <Image
                 src={`/png/${service.name.toLowerCase()}.png`}
                 alt={""}

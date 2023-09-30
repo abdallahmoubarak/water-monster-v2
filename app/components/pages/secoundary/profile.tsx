@@ -1,8 +1,8 @@
 import Alert from "@/components/Alert";
-import Box from "@/components/Box";
-import Button from "@/components/Button";
+import Box from "@/components/atoms/Box";
+import Button from "@/components/atoms/Button";
 import Field from "@/components/Field";
-import Input from "@/components/Input";
+import Input from "@/components/atoms/Input";
 import InputsContainer from "@/components/InputsContainer";
 import UploadImage from "@/components/UploadImage";
 import { useCurrentUser } from "@/hooks/useAuth";
@@ -37,10 +37,10 @@ export default function Profile({ setPage }: { setPage: Function }) {
           setImg64={setImg64}
         />
         <div className="sign-container">
-          <Box withOutShadow={true}>
+          <Box noShadow={true}>
             <InputsContainer>
               <Input
-                name="Name"
+                placeholder="Name"
                 value={name}
                 setValue={setName}
                 onBlur={() =>
@@ -49,7 +49,7 @@ export default function Profile({ setPage }: { setPage: Function }) {
                 }
               />
               <Input
-                name="Phone number"
+                placeholder="Phone number"
                 value={phone}
                 setValue={setPhone}
                 onBlur={() =>

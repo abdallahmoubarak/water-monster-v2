@@ -1,8 +1,8 @@
-import Button from "@/components/Button";
-import Input from "@/components/Input";
+import Button from "@/components/atoms/Button";
+import Input from "@/components/atoms/Input";
 import { useState } from "react";
 import { useUpdateContainer } from "@/hooks/useContainer";
-import Box from "./Box";
+import Box from "./atoms/Box";
 import Alert from "./Alert";
 
 interface settingFormTypes {
@@ -18,7 +18,7 @@ export default function SettingForm({
   const [size, setSize] = useState<string>(currentContainer?.size);
   const [height, setHeight] = useState<string>(currentContainer?.height);
   const [threshold, setThreshold] = useState<number>(
-    currentContainer?.threshold || 15
+    currentContainer?.threshold || 15,
   );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alertMsg, setAlertMsg] = useState<string>("");
@@ -46,15 +46,15 @@ export default function SettingForm({
     <>
       <div className="flex flex-col gap-4">
         <Box title={"Inforamation"}>
-          <Input name="Container name" value={name} setValue={setName} />
+          <Input placeholder="Container name" value={name} setValue={setName} />
           <Input
-            name={"Size (liter)"}
+            placeholder={"Size (liter)"}
             inputType={"number"}
             value={size}
             setValue={setSize}
           />
           <Input
-            name={"Height (cm)"}
+            placeholder={"Height (cm)"}
             inputType={"number"}
             value={height}
             setValue={setHeight}
@@ -82,7 +82,7 @@ export default function SettingForm({
               text="Save"
               onClick={handleUpdate}
               isLoading={isLoading}
-              disabled={
+              isDisabled={
                 name === currentContainer?.name &&
                 size === currentContainer?.size &&
                 height === currentContainer?.height &&

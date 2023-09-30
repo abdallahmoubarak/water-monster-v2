@@ -4,13 +4,10 @@ import { driver } from "../index";
 import { v4 as uuidv4 } from "uuid";
 
 export const authMutations = {
-  signUp: async (
-    _source: any,
-    { name, email, password, userType }: signTypes
-  ) => {
+  signUp: async (_source: any, { name, phone, email, password }: signTypes) => {
     const session = driver.session();
     const users = await session.run(
-      `MATCH (n:User {email:"${email}"}) RETURN n`
+      `MATCH (n:User {email:"${email}"}) RETURN n`,
     );
 
     if (users.records.length > 0) {
@@ -21,21 +18,21 @@ export const authMutations = {
     const id = uuidv4();
 
     await session.run(
-      `CREATE (n:User {id:"${id}", email:"${email}", password:"${hashedPassword}", name:"${name}", userType:"${userType}", createdAt: datetime(), updatedAt: datetime()})`
+      `CREATE (n:User {id:"${id}", phone:"${phone}", email:"${email}", password:"${hashedPassword}", name:"${name}", userType:"Client", createdAt: datetime(), updatedAt: datetime()})`,
     );
 
     const token = await createJWT({ sub: id });
-    const user = { id, email, name, userType };
+    const user = { id, email, phone, name, userType: "Client" };
     return { user, token };
   },
 
-  signIn: async (_source: any, { email, password }: signTypes) => {
+  logIn: async (_source: any, { email, password }: signTypes) => {
     const session = driver.session();
     const users = await session.run(
-      `MATCH (n:User {email:"${email}"}) RETURN n`
+      `MATCH (n:User {email:"${email}"}) RETURN n`,
     );
     const [user]: any = users.records.map(
-      (record) => record.get("n").properties
+      (record) => record.get("n").properties,
     );
     if (!user) throw new Error("Email or password is not correct!");
     const correctPassword = await comparePassword(password, user.password);

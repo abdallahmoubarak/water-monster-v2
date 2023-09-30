@@ -53,6 +53,6 @@ export type useGetMessagesType = {
 export type userTypes = {
   id: string;
   name?: string;
-  phone?: string;
-  profile_url?: string;
+  phone?: number;
+  profileUrl?: string;
 };

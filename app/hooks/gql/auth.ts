@@ -5,14 +5,9 @@ export const signUpMutation = gql`
     $name: String!
     $email: String!
     $password: String!
-    $userType: String!
+    $phone: String!
   ) {
-    signUp(
-      name: $name
-      email: $email
-      password: $password
-      userType: $userType
-    ) {
+    signUp(name: $name, email: $email, phone: $phone, password: $password) {
       token
       user {
         id
@@ -20,15 +15,14 @@ export const signUpMutation = gql`
         email
         phone
         userType
-        profile_url
       }
     }
   }
 `;
 
-export const signInMutation = gql`
+export const logInMutation = gql`
   mutation ($email: String!, $password: String!) {
-    signIn(email: $email, password: $password) {
+    logIn(email: $email, password: $password) {
       token
       user {
         id
@@ -36,7 +30,7 @@ export const signInMutation = gql`
         email
         phone
         userType
-        profile_url
+        profileUrl
       }
     }
   }
@@ -50,7 +44,7 @@ export const meQuery = gql`
       email
       phone
       userType
-      profile_url
+      profileUrl
     }
   }
 `;

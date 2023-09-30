@@ -8,12 +8,12 @@ export const userDefs = gql`
     password: String! @auth(rules: [{ allow: { id: "$jwt.sub" } }]) @private
     userType: String!
     phone: String
-    profile_url: String
+    profileUrl: String
     language: String
     location: Point
-    palet_number: String
-    sent_messages: [Message!]! @relationship(type: "FROM", direction: OUT)
-    received_messages: [Message!]! @relationship(type: "TO", direction: IN)
+    paletNumber: String
+    sentMessages: [Message!]! @relationship(type: "FROM", direction: OUT)
+    receivedMessages: [Message!]! @relationship(type: "TO", direction: IN)
     containers: [Container!]! @relationship(type: "OWNS", direction: OUT)
     viewContainers: [Container!]!
       @relationship(type: "CAN_VIEW", direction: OUT)
@@ -31,11 +31,11 @@ export const userDefs = gql`
   type Mutation {
     signUp(
       name: String!
+      phone: String!
       email: String!
       password: String!
-      userType: String!
     ): AuthRes!
-    signIn(email: String!, password: String!): AuthRes!
+    logIn(email: String!, password: String!): AuthRes!
   }
 
   type Query {

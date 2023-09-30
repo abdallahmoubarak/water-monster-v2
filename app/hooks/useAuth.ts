@@ -1,14 +1,14 @@
 import { useSignTypes } from "./hookTypes";
 import { graphQLClient } from "@/utils/graphQLInstance";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { meQuery, signInMutation, signUpMutation } from "./gql/auth";
+import { meQuery, logInMutation, signUpMutation } from "./gql/auth";
 import { client } from "pages/_app";
 import { signTypes } from "@/types/common";
 
 /*********************** useSignUp hook ***********************/
 
-const signUp = async ({ userType, name, email, password }: signTypes) => {
-  const variables = { name, email, password, userType };
+const signUp = async ({ name, phone, email, password }: signTypes) => {
+  const variables = { name, phone, email, password };
   const res: any = await graphQLClient.request(signUpMutation, variables);
   return res?.signUp;
 };
@@ -31,16 +31,16 @@ export const useSignUp = ({ setMsg, setIsLoading }: useSignTypes) => {
   });
 };
 
-/*********************** useSignIn hook ***********************/
+/*********************** uselogIn hook ***********************/
 
-const signIn = async ({ email, password }: signTypes) => {
+const logIn = async ({ email, password }: signTypes) => {
   const variables = { email, password };
-  const res: any = await graphQLClient.request(signInMutation, variables);
-  return res?.signIn;
+  const res: any = await graphQLClient.request(logInMutation, variables);
+  return res?.logIn;
 };
 
-export const useSignIn = ({ setMsg, setIsLoading }: useSignTypes) => {
-  return useMutation(signIn, {
+export const useLogIn = ({ setMsg, setIsLoading }: useSignTypes) => {
+  return useMutation(logIn, {
     onSuccess: (res) => {
       localStorage.setItem("JWT", res?.token);
       localStorage.setItem("User", JSON.stringify(res?.user));

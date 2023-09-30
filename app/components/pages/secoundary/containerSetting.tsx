@@ -1,8 +1,7 @@
-import Button from "@/components/Button";
+import Button from "@/components/atoms/Button";
 import SettingForm from "@/components/SettingForm";
 import Layout from "./sLayout";
 import QrCode from "@/components/QRcode";
-import Box from "@/components/Box";
 
 export default function ContainerSetting({
   setPage,
@@ -15,8 +14,7 @@ export default function ContainerSetting({
     <>
       <Layout
         title={"Container Settings"}
-        onClick={() => setPage("Containers")}
-      >
+        onClick={() => setPage("Containers")}>
         <SettingForm currentContainer={currentContainer} setPage={setPage} />
         <div className="text-sm text-center text-gray-400 pt-6">
           Scan the QR code to connect other device.

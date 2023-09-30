@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Button from "./Button";
+import Button from "./atoms/Button";
 import { formatDate } from "@/utils/time";
 
 export default function DateTimePicker({ service }: { service: string }) {
@@ -26,8 +26,7 @@ export default function DateTimePicker({ service }: { service: string }) {
         <div className="text-center">
           <div
             onClick={() => setIsDate(true)}
-            className="cursor-pointer bg-blue-100 w-fit mx-auto"
-          >
+            className="cursor-pointer bg-blue-100 w-fit mx-auto">
             Selected date : {formatDate(selectedDate)}
           </div>
           <div className="py-4 text-xl">Select a time</div>
@@ -35,8 +34,7 @@ export default function DateTimePicker({ service }: { service: string }) {
             {availbleTime.map((time, i) => (
               <div
                 key={i}
-                className="border-blue-400 border rounded-sm px-12 py-2 cursor-pointer hover:bg-blue-100"
-              >
+                className="border-blue-400 border rounded-sm px-12 py-2 cursor-pointer hover:bg-blue-100">
                 {time}
               </div>
             ))}
@@ -45,7 +43,7 @@ export default function DateTimePicker({ service }: { service: string }) {
           <Button
             text={"Request " + service}
             onClick={() => setIsDate(false)}
-            disabled={true}
+            isDisabled={true}
           />
         </div>
       )}

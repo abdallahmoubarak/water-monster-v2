@@ -1,6 +1,6 @@
 import ConfigLayout from "./configLayout";
 import Image from "next/image";
-import Button from "@/components/Button";
+import Button from "@/components/atoms/Button";
 
 export default function PlugStep({ setStep }: { setStep: Function }) {
   return (
