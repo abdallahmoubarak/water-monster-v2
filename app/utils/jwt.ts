@@ -1,3 +1,4 @@
+import { JwtPayload } from "@neo4j/graphql/dist/types/deprecated/auth/jwt-payload";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -9,12 +10,15 @@ declare const process: {
   };
 };
 
-export const createJWT = (data: string | object) => {
+export const createJWT = (
+  data: string | object,
+  expires: string | number = "5d",
+) => {
   return new Promise((resolve, reject) => {
     jwt.sign(
       data,
       process.env.NEXT_PUBLIC_JWT_SECRET,
-      { expiresIn: "30d" },
+      { expiresIn: expires },
       (err, token) => {
         if (err) return reject(err);
         return resolve(token);
@@ -43,12 +47,16 @@ export const hashPassword = (plainText: any) => {
   });
 };
 
-// export const decodeJWT = (token: string) => {
-//   return new Promise((resolve, reject) => {
-//     jwt.verify(token, process.env.NEXT_PUBLIC_JWT_SECRET, (err, decoded) => {
-//       if (err) return reject(err);
-//       const { sub } = decoded;
-//       return resolve({ sub });
-//     });
-//   });
-// };
+export const decodeJWT = (token: string) => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(
+      token,
+      process.env.NEXT_PUBLIC_JWT_SECRET,
+      { ignoreExpiration: false },
+      (err, decoded) => {
+        if (err) return reject(err);
+        return resolve(decoded);
+      },
+    );
+  });
+};

@@ -2,6 +2,8 @@
 export type useSignTypes = {
   setMsg: Function;
   setIsLoading: Function;
+  setIsMailSent?: Function;
+  router?: any;
 };
 
 /************************ useContainer types ************************/

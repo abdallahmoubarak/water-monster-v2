@@ -54,6 +54,7 @@ export default function Input({
             <input
               className={`border-none flex-1 w-full bg-transparent  peer placeholder:text-transparent focus:ring-0 focus:outline-none select-auto`}
               autoComplete="off"
+              name={placeholder}
               ref={refprop}
               id={id}
               placeholder={placeholder}

@@ -37,7 +37,6 @@ export default function SignForm({ setIsForget }: { setIsForget: Function }) {
         setIsLoading(false);
         return setMsg("*" + message);
       }
-      console.log(user);
       setIsLoading(false);
       isLogIn ? logIn({ ...user }) : signUp({ ...user });
     }
@@ -57,7 +56,7 @@ export default function SignForm({ setIsForget }: { setIsForget: Function }) {
         <span
           onClick={() => setIsForget(true)}
           className="text-sm underline cursor-pointer">
-          Forget password
+          Forget password?
         </span>
       </div>
       {!isLogIn && (

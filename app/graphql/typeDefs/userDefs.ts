@@ -28,6 +28,11 @@ export const userDefs = gql`
     token: String!
   }
 
+  type SendLink {
+    message: String!
+    success: Boolean
+  }
+
   type Mutation {
     signUp(
       name: String!
@@ -36,6 +41,8 @@ export const userDefs = gql`
       password: String!
     ): AuthRes!
     logIn(email: String!, password: String!): AuthRes!
+    sendMagicLink(email: String!): SendLink!
+    resetPass(token: String!, password: String!): AuthRes!
   }
 
   type Query {

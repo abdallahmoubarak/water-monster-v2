@@ -3,22 +3,31 @@ import Input from "../../atoms/Input";
 import Button from "../../atoms/Button";
 import { useRef, useState } from "react";
 import validEmail from "@/utils/validEmail";
-import SendEmail from "./SendEmail";
+import EmailSent from "./EmailSent";
+import { useSendMagicLinkMutation } from "@/hooks/useAuth";
 
 export default function ForgetPass({ setIsForget }: { setIsForget: Function }) {
+  const [isLoading, setIsLoading] = useState(false);
   const [msg, setMsg] = useState<string>("");
   const [isMailSent, setIsMailSent] = useState(false);
   const emailRef = useRef<HTMLInputElement>(null);
 
+  const { mutate: sendMail } = useSendMagicLinkMutation({
+    setMsg,
+    setIsLoading,
+    setIsMailSent,
+  });
   const handleSubmit = () => {
+    setIsLoading(true);
     const valid = validEmail(emailRef?.current?.value || "");
-    valid ? setIsMailSent(true) : setMsg("The email is not valid.");
+    let email = emailRef?.current?.value || "";
+    valid ? sendMail({ email }) : setMsg("The email is not valid.");
   };
 
   return (
     <>
       {isMailSent ? (
-        <SendEmail />
+        <EmailSent />
       ) : (
         <>
           <div
@@ -33,7 +42,11 @@ export default function ForgetPass({ setIsForget }: { setIsForget: Function }) {
             refprop={emailRef}
           />
           <div className={`text-sm pl-2 text-secondary font-bold`}>{msg}</div>
-          <Button text="Submit" onClick={handleSubmit} />
+          <Button
+            text={"Submit"}
+            onClick={handleSubmit}
+            isLoading={isLoading}
+          />
         </>
       )}
     </>

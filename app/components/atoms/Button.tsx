@@ -1,4 +1,4 @@
-import Loading from "@/public/svg/Loading.svg";
+import Loading from "@/components/assets/LoadingDots";
 
 export interface ButtonProps {
   text: string;

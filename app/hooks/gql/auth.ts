@@ -48,3 +48,28 @@ export const meQuery = gql`
     }
   }
 `;
+
+export const sendMagicLinkMutation = gql`
+  mutation Mutation($email: String!) {
+    sendMagicLink(email: $email) {
+      message
+      success
+    }
+  }
+`;
+
+export const resetPassMutation = gql`
+  mutation Mutation($token: String!, $password: String!) {
+    resetPass(token: $token, password: $password) {
+      token
+      user {
+        id
+        name
+        email
+        phone
+        userType
+        profileUrl
+      }
+    }
+  }
+`;

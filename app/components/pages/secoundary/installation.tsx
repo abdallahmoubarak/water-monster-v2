@@ -40,7 +40,7 @@ export default function Installation({ setPage }: { setPage: Function }) {
   return (
     <>
       <Layout title={"Installation"} onClick={() => setPage("Containers")}>
-        <h1 className="text-3xl pt-6">Step {step}</h1>
+        <h1 className="text-3xl pt-6 text-center">Step {step}</h1>
         {step === 1 && <PlugStep setStep={setStep} />}
         {step === 2 && !isScan && <AskToScan setIsScan={setIsScan} />}
         {isScan && <QrReaderStep data={data} setData={setData} />}

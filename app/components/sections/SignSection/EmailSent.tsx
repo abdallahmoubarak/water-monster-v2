@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaCheckCircle } from "react-icons/fa";
 
-export default function SendEmail() {
+export default function EmailSent() {
   return (
     <>
       <div className="text-green-600 text-lg gap-3 text-center flex flex-col items-center">
