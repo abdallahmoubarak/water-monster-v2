@@ -12,7 +12,7 @@ export default function QrCodeSettings({
   return (
     <Box>
       <div className="text-sm text-center text-gray-400 ">
-        Scan the QR code to connect other device.
+        Scan the QR code to connect other account as a viewer.
       </div>
       <div className="mx-auto w-fit border border-gray-300 p-4 ">
         <QRcode

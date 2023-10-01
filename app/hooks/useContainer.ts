@@ -9,6 +9,7 @@ import {
 import {
   createContainerMutation,
   updateContainerInfoMutation,
+  updateThresholdMutation,
   userContainerQuery,
   userViewingContainerQuery,
 } from "./gql/container";
@@ -73,7 +74,7 @@ export const useCreateContainer = () => {
   });
 };
 
-/************************* update a container *************************/
+/************************* update container info *************************/
 
 const updateContainerInfo = async ({
   id,
@@ -81,7 +82,7 @@ const updateContainerInfo = async ({
   size,
   height,
 }: updateContainerInfoTypes) => {
-  const variables = { container_id: id, name, size, height };
+  const variables = { id, name, size, height };
   const res: any = await graphQLClient.request(
     updateContainerInfoMutation,
     variables,
@@ -102,5 +103,32 @@ export const useUpdateContainerInfo = ({
       setIsLoading(false);
       setAlertMsg("Something went wrong");
     },
+  });
+};
+/************************* update container info *************************/
+
+const updateThreshold = async ({
+  id,
+  threshold,
+}: {
+  id: string;
+  threshold: number;
+}) => {
+  const variables = { id, threshold };
+  const res: any = await graphQLClient.request(
+    updateThresholdMutation,
+    variables,
+  );
+  return res?.updateContainers?.containers;
+};
+
+export const useUpdateThreshold = ({
+  setAlertMsg,
+}: {
+  setAlertMsg: Function;
+}) => {
+  return useMutation(updateThreshold, {
+    onSuccess: () => setAlertMsg("Alert level updated"),
+    onError: () => setAlertMsg("Something went wrong"),
   });
 };

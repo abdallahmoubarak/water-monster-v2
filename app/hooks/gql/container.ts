@@ -52,16 +52,31 @@ export const createContainerMutation = gql`
 `;
 
 export const updateContainerInfoMutation = gql`
-  mutation (
-    $container_id: ID!
-    $name: String!
-    $size: String!
-    $height: String!
-  ) {
+  mutation ($id: ID!, $name: String!, $size: String!, $height: String!) {
     updateContainers(
-      where: { id: $container_id }
+      where: { id: $id }
       update: { name: $name, size: $size, height: $height }
     ) {
+      containers {
+        id
+        name
+        size
+        height
+        threshold
+        serialNumber
+        sensor_state
+        private_mode
+        manual_mode
+        water_level
+        updatedAt
+      }
+    }
+  }
+`;
+
+export const updateThresholdMutation = gql`
+  mutation ($id: ID!, $threshold: Int!) {
+    updateContainers(where: { id: $id }, update: { threshold: $threshold }) {
       containers {
         id
         name
