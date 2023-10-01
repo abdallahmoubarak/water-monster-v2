@@ -3,12 +3,12 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { client } from "pages/_app";
 import {
   createContainerTypes,
-  updateContainerTypes,
+  updateContainerInfoTypes,
   useUpdateContainerTypes,
 } from "./hookTypes";
 import {
   createContainerMutation,
-  updateContainerMutation,
+  updateContainerInfoMutation,
   userContainerQuery,
   userViewingContainerQuery,
 } from "./gql/container";
@@ -35,7 +35,7 @@ const getUserViewingContainers = async (id: string) => {
   const variables = { id };
   const res: any = await graphQLClient.request(
     userViewingContainerQuery,
-    variables
+    variables,
   );
   return res?.users[0].viewContainers;
 };
@@ -68,33 +68,39 @@ const createContainer = async ({
 export const useCreateContainer = () => {
   return useMutation(createContainer, {
     onSuccess: () => client.refetchQueries(["Containers"]),
-    onError: (err: Error) => console.log("create conatiner error: ",err.message),
+    onError: (err: Error) =>
+      console.log("create conatiner error: ", err.message),
   });
 };
 
 /************************* update a container *************************/
 
-const updateContainer = async ({
+const updateContainerInfo = async ({
   id,
   name,
   size,
   height,
-  threshold,
-}: updateContainerTypes) => {
-  const variables = { container_id: id, name, size, height, threshold };
+}: updateContainerInfoTypes) => {
+  const variables = { container_id: id, name, size, height };
   const res: any = await graphQLClient.request(
-    updateContainerMutation,
-    variables
+    updateContainerInfoMutation,
+    variables,
   );
   return res?.updateContainers?.containers;
 };
 
-export const useUpdateContainer = ({
-  setPage,
+export const useUpdateContainerInfo = ({
+  setAlertMsg,
   setIsLoading,
 }: useUpdateContainerTypes) => {
-  return useMutation(updateContainer, {
-    onSuccess: () => setPage("Containers"),
-    onError: () => setIsLoading(false),
+  return useMutation(updateContainerInfo, {
+    onSuccess: () => {
+      setIsLoading(false);
+      setAlertMsg("Container info updated");
+    },
+    onError: () => {
+      setIsLoading(false);
+      setAlertMsg("Something went wrong");
+    },
   });
 };

@@ -3,7 +3,7 @@ import { MouseEventHandler } from "react";
 export default function Field({ icon, title, value, onClick }: fieldProps) {
   return (
     <>
-      <div className="flex items-center justify-between bg-[#f3f3f3] w-full p-2">
+      <div className="flex items-center justify-between bg-gray-100 w-full p-2 rounded-md select-none">
         <div className="font-bold flex items-center gap-2">
           {icon}
           {title}

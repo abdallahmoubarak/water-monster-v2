@@ -1,4 +1,4 @@
-import Logo from "./svg/Logo";
+import Logo from "../svg/Logo";
 
 export default function TopBar({ hasImg, setActive }: topBarProps) {
   return (

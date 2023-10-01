@@ -14,16 +14,15 @@ export type createContainerTypes = {
   location: any;
 };
 
-export type updateContainerTypes = {
+export type updateContainerInfoTypes = {
   id: string;
   name: string;
   size: string;
   height: string;
-  threshold: number;
 };
 
 export type useUpdateContainerTypes = {
-  setPage: Function;
+  setAlertMsg: Function;
   setIsLoading: Function;
 };
 

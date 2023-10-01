@@ -1,5 +1,5 @@
-import NavBar from "@/components/NavBar";
-import TopBar from "@/components/TopBar";
+import NavBar from "@/components/sections/NavBar";
+import TopBar from "@/components/atoms/TopBar";
 
 export default function RootLayout({
   children,

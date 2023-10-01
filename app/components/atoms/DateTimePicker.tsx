@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Button from "./atoms/Button";
+import Button from "./Button";
 import { formatDate } from "@/utils/time";
 
 export default function DateTimePicker({ service }: { service: string }) {

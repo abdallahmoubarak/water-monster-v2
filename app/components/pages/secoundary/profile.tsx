@@ -1,10 +1,10 @@
-import Alert from "@/components/Alert";
+import Alert from "@/components/atoms/Alert";
 import Box from "@/components/atoms/Box";
 import Button from "@/components/atoms/Button";
-import Field from "@/components/Field";
+import Field from "@/components/atoms/Field";
 import Input from "@/components/atoms/Input";
-import InputsContainer from "@/components/InputsContainer";
-import UploadImage from "@/components/UploadImage";
+import InputsContainer from "@/components/atoms/InputsContainer";
+import UploadImage from "@/components/atoms/UploadImage";
 import { useCurrentUser } from "@/hooks/useAuth";
 import { useUpdateName, useUpdatePhone } from "@/hooks/useUser";
 import { graphQLClient } from "@/utils/graphQLInstance";

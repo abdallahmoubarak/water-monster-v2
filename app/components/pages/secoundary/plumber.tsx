@@ -1,5 +1,5 @@
 import Layout from "./sLayout";
-import DateTimePicker from "@/components/DateTimePicker";
+import DateTimePicker from "@/components/atoms/DateTimePicker";
 
 export default function Plumber({ setPage }: { setPage: Function }) {
   return (

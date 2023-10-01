@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Box from "./atoms/Box";
+import Box from "@/components/atoms/Box";
 
 export default function ServicesBar({ setPage }: any) {
   return (

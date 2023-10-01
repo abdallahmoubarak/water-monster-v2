@@ -1,6 +1,6 @@
 import { FaArrowLeft } from "react-icons/fa";
-import Input from "../../atoms/Input";
-import Button from "../../atoms/Button";
+import Input from "@/components/atoms/Input";
+import Button from "@/components/atoms/Button";
 import { useRef, useState } from "react";
 import validEmail from "@/utils/validEmail";
 import EmailSent from "./EmailSent";

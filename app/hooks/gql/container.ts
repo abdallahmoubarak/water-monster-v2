@@ -51,22 +51,16 @@ export const createContainerMutation = gql`
   }
 `;
 
-export const updateContainerMutation = gql`
+export const updateContainerInfoMutation = gql`
   mutation (
     $container_id: ID!
     $name: String!
     $size: String!
     $height: String!
-    $threshold: Int!
   ) {
     updateContainers(
       where: { id: $container_id }
-      update: {
-        name: $name
-        size: $size
-        height: $height
-        threshold: $threshold
-      }
+      update: { name: $name, size: $size, height: $height }
     ) {
       containers {
         id

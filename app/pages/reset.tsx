@@ -1,4 +1,4 @@
-import TopBar from "@/components/TopBar";
+import TopBar from "@/components/atoms/TopBar";
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import MagicBox from "@/components/atoms/MagicBox";

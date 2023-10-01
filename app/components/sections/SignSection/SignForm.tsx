@@ -41,6 +41,7 @@ export default function SignForm({ setIsForget }: { setIsForget: Function }) {
       isLogIn ? logIn({ ...user }) : signUp({ ...user });
     }
   };
+
   return (
     <>
       <h1 className="text-4xl text-primary">

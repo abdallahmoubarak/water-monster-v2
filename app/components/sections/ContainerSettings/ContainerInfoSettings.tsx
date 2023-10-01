@@ -1,41 +1,34 @@
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import { useState } from "react";
-import { useUpdateContainer } from "@/hooks/useContainer";
-import Box from "./atoms/Box";
-import Alert from "./Alert";
-
-interface settingFormTypes {
-  currentContainer: any;
-  setPage: Function;
-}
+import { useUpdateContainerInfo } from "@/hooks/useContainer";
+import Box from "@/components/atoms/Box";
+import Alert from "@/components/atoms/Alert";
 
 export default function SettingForm({
   currentContainer,
-  setPage,
-}: settingFormTypes) {
+}: {
+  currentContainer: any;
+}) {
   const [name, setName] = useState<string>(currentContainer?.name);
   const [size, setSize] = useState<string>(currentContainer?.size);
   const [height, setHeight] = useState<string>(currentContainer?.height);
-  const [threshold, setThreshold] = useState<number>(
-    currentContainer?.threshold || 15,
-  );
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [alertMsg, setAlertMsg] = useState<string>("");
 
-  const { mutate: updateContainer } = useUpdateContainer({
-    setPage,
+  const { mutate: updateContainerInfo } = useUpdateContainerInfo({
+    setAlertMsg,
     setIsLoading,
   });
 
   const handleUpdate = () => {
-    if (!!name && !!size && !!height && !!threshold) {
-      updateContainer({
+    setIsLoading(true);
+    if (!!name && !!size && !!height) {
+      updateContainerInfo({
         id: currentContainer?.id,
         name,
         size,
         height,
-        threshold,
       });
     } else {
       setAlertMsg("All fields are required");
@@ -60,33 +53,15 @@ export default function SettingForm({
             setValue={setHeight}
           />
 
-          <label htmlFor="steps-range">Level Alert ({threshold}%)</label>
-          <input
-            id="steps-range"
-            type="range"
-            min="0"
-            max="60"
-            onChange={(e) => setThreshold(parseInt(e.target.value))}
-            value={threshold}
-            step="5"
-            className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer select-auto text-primary"
-          />
-          {threshold === 0 && (
-            <div className="text-sm text-gray-400">
-              You will never recieve any notifications if you set it 0%
-            </div>
-          )}
-
           <div className="flex items-center pt-6">
             <Button
-              text="Save"
+              text="Update"
               onClick={handleUpdate}
               isLoading={isLoading}
               isDisabled={
                 name === currentContainer?.name &&
                 size === currentContainer?.size &&
-                height === currentContainer?.height &&
-                threshold === currentContainer?.threshold
+                height === currentContainer?.height
               }
             />
           </div>

@@ -4,7 +4,7 @@ import settings from "@/public/svg/settings.svg";
 import { BiWater } from "react-icons/bi";
 import { HiOutlineClock } from "react-icons/hi";
 import { humanReadableTime } from "@/utils/time";
-import Loading from "./svg/Loading";
+import Loading from "../svg/Loading";
 import { sensorState } from "@/utils/sensorState";
 
 interface ContainerCard {
@@ -34,7 +34,7 @@ export default function Container({
 
   const calc = Math.round(
     ((container?.height - container?.distance / 10 + 18) * 100) /
-      container?.height
+      container?.height,
   );
 
   const waterLevel = calc > 0 && calc < 100 ? calc : calc < 0 ? 1 : 100;
@@ -47,15 +47,13 @@ export default function Container({
           {view ? (
             <div
               className="text-red-600 text-sm cursor-pointer font-bold"
-              onClick={handleOnDelete}
-            >
+              onClick={handleOnDelete}>
               {/* Delete */}
             </div>
           ) : (
             <div
               className="w-8 h-8 cursor-pointer"
-              onClick={handleOnSettingsClick}
-            >
+              onClick={handleOnSettingsClick}>
               <Image width={30} src={settings} alt="s" />
             </div>
           )}
@@ -113,8 +111,7 @@ export default function Container({
               sensorState({ date: container.updatedAt })
                 ? "bg-primary"
                 : "bg-secondary"
-            }`}
-          ></div>
+            }`}></div>
         </div>
       </div>
     </>

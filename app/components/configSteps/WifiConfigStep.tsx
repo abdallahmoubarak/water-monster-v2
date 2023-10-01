@@ -1,7 +1,7 @@
 import ConfigLayout from "./configLayout";
 import Image from "next/image";
 import Button from "@/components/atoms/Button";
-import ToolTipButton from "@/components/ToolTipButton";
+import ToolTipButton from "@/components/atoms/ToolTipButton";
 import Box from "@/components/atoms/Box";
 
 export default function WifiConfigStep({ setPage }: { setPage: Function }) {

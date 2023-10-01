@@ -1,4 +1,4 @@
-import DateTimePicker from "@/components/DateTimePicker";
+import DateTimePicker from "@/components/atoms/DateTimePicker";
 import Layout from "./sLayout";
 
 export default function Cleaner({ setPage }: { setPage: Function }) {
