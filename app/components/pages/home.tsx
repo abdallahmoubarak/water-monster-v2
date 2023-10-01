@@ -1,19 +1,26 @@
 import Layout from "./layout";
 import { useState } from "react";
-import Containers from "./primary/Containers";
+import Containers from "@/components/pages/primary/Containers";
 import Head from "next/head";
 import dynamic from "next/dynamic";
-import Chat from "./secoundary/Chat";
-import Reconfig from "./secoundary/Reconfig";
-import Plumber from "./secoundary/Plumber";
-import WaterProvider from "./secoundary/Provider";
-import Cleaner from "./secoundary/Cleaner";
 
-const ContainerSetting = dynamic(
-  () => import("./secoundary/ContainerSettings"),
+const Reconfig = dynamic(
+  () => import("@/components/pages/secoundary/Reconfig"),
 );
-const Profile = dynamic(() => import("./secoundary/Profile"));
-const Installation = dynamic(() => import("./secoundary/Installation"));
+const WaterProvider = dynamic(
+  () => import("@/components/pages/secoundary/Provider"),
+);
+const Cleaner = dynamic(() => import("@/components/pages/secoundary/Cleaner"));
+
+const Chat = dynamic(() => import("@/components/pages/secoundary/Chat"));
+const Plumber = dynamic(() => import("@/components/pages/secoundary/Plumber"));
+const ContainerSetting = dynamic(
+  () => import("@/components/pages/secoundary/ContainerSettings"),
+);
+const Profile = dynamic(() => import("@/components/pages/secoundary/Profile"));
+const Installation = dynamic(
+  () => import("@/components/pages/secoundary/Installation"),
+);
 
 export default function Home() {
   const [page, setPage] = useState<string>("Containers");
