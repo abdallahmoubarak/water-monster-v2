@@ -47,7 +47,7 @@ export const userDefs = gql`
 
   type Query {
     me: User
-      @cypher(statement: "MATCH (u:User { id: $auth.jwt.sub }) RETURN u")
+      @cypher(statement: "MATCH (u:User { id: $jwt.sub }) RETURN u")
       @auth(rules: [{ isAuthenticated: true }])
   }
 `;

@@ -5,10 +5,12 @@ import { useUpdateContainerInfo } from "@/hooks/useContainer";
 import Box from "@/components/atoms/Box";
 import Alert from "@/components/atoms/Alert";
 
-export default function SettingForm({
+export default function ContainerInfoSettings({
   currentContainer,
+  setPage,
 }: {
   currentContainer: any;
+  setPage: Function;
 }) {
   const [name, setName] = useState<string>(currentContainer?.name);
   const [size, setSize] = useState<string>(currentContainer?.size);
@@ -19,6 +21,7 @@ export default function SettingForm({
   const { mutate: updateContainerInfo } = useUpdateContainerInfo({
     setAlertMsg,
     setIsLoading,
+    setPage,
   });
 
   const handleUpdate = () => {

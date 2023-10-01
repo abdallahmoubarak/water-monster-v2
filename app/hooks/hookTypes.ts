@@ -24,6 +24,7 @@ export type updateContainerInfoTypes = {
 export type useUpdateContainerTypes = {
   setAlertMsg: Function;
   setIsLoading: Function;
+  setPage: Function;
 };
 
 export type updatePrivateModeTypes = {

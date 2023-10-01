@@ -93,11 +93,13 @@ const updateContainerInfo = async ({
 export const useUpdateContainerInfo = ({
   setAlertMsg,
   setIsLoading,
+  setPage,
 }: useUpdateContainerTypes) => {
   return useMutation(updateContainerInfo, {
     onSuccess: () => {
       setIsLoading(false);
       setAlertMsg("Container info updated");
+      setPage("Containers");
     },
     onError: () => {
       setIsLoading(false);

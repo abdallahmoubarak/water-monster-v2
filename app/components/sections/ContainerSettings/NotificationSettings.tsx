@@ -16,6 +16,12 @@ export default function NotificationSettings({
 
   const { mutate: updateThreshold } = useUpdateThreshold({ setAlertMsg });
 
+  const handleUpdateThreshold = () => {
+    updateThreshold({
+      id: currentContainer?.id,
+      threshold: threshold,
+    });
+  };
   return (
     <>
       <Box title="Notifications">
@@ -30,12 +36,8 @@ export default function NotificationSettings({
           min="0"
           max="60"
           onChange={(e) => setThreshold(parseInt(e.target.value))}
-          onMouseUp={() =>
-            updateThreshold({
-              id: currentContainer?.id,
-              threshold: threshold,
-            })
-          }
+          onMouseUp={handleUpdateThreshold}
+          onTouchEnd={handleUpdateThreshold}
           value={threshold}
           step="5"
           className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer select-auto text-primary"
