@@ -1,8 +1,5 @@
-import { JwtPayload } from "@neo4j/graphql/dist/types/deprecated/auth/jwt-payload";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
-//TODO: [WM-8] Improve types of the bellow variables
 
 declare const process: {
   env: {
@@ -19,7 +16,7 @@ export const createJWT = (
       data,
       process.env.NEXT_PUBLIC_JWT_SECRET,
       { expiresIn: expires },
-      (err, token) => {
+      (err: any, token: any) => {
         if (err) return reject(err);
         return resolve(token);
       },
@@ -29,7 +26,7 @@ export const createJWT = (
 
 export const comparePassword = (plainText: any, hash: any) => {
   return new Promise((resolve, reject) => {
-    bcrypt.compare(plainText, hash, (err: any, result: unknown) => {
+    bcrypt.compare(plainText, hash, (err: any, result: any) => {
       if (err) return reject(err);
       return resolve(result);
     });
@@ -40,7 +37,7 @@ const saltRounds = 10;
 
 export const hashPassword = (plainText: any) => {
   return new Promise((resolve, reject) => {
-    bcrypt.hash(plainText, saltRounds, (err: any, hash: unknown) => {
+    bcrypt.hash(plainText, saltRounds, (err: any, hash: any) => {
       if (err) return reject(err);
       return resolve(hash);
     });

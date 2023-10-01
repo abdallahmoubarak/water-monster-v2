@@ -19,7 +19,7 @@ export default function NotificationSettings({
   return (
     <>
       <Box title="Notifications">
-        <TitledSwitcher title="Change notification" />
+        <TitledSwitcher title="Level change notification" />
         <TitledSwitcher title="Flow notification" />
         <TitledSwitcher title="Shortage notification" />
 
