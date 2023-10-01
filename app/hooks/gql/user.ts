@@ -9,7 +9,7 @@ export const updateNameMutation = gql`
         email
         phone
         userType
-        profile_url
+        profileUrl
       }
     }
   }
@@ -24,7 +24,7 @@ export const updatePhoneMutation = gql`
         email
         phone
         userType
-        profile_url
+        profileUrl
       }
     }
   }
@@ -32,14 +32,14 @@ export const updatePhoneMutation = gql`
 
 export const updateProfileUrlMutation = gql`
   mutation ($id: ID!, $url: String!) {
-    updateUsers(where: { id: $id }, update: { profile_url: $url }) {
+    updateUsers(where: { id: $id }, update: { profileUrl: $url }) {
       users {
         id
         name
         email
         phone
         userType
-        profile_url
+        profileUrl
       }
     }
   }
@@ -50,7 +50,7 @@ export const getAdminQuery = gql`
     users(where: { userType: "Admin" }) {
       id
       name
-      profile_url
+      profileUrl
     }
   }
 `;
@@ -68,7 +68,7 @@ export const getContactsQuery = gql`
     ) {
       id
       name
-      profile_url
+      profileUrl
       userType
     }
   }

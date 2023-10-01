@@ -13,8 +13,8 @@ export default function UploadImage({
           htmlFor="upload-img-input"
           className="absolute opacity-0 z-10 cursor-pointer">
           <Image
-            src={image || currentUser?.profile_url || ""}
-            loader={() => image || currentUser?.profile_url || ""}
+            src={image || currentUser?.profileUrl || ""}
+            loader={() => image || currentUser?.profileUrl || ""}
             alt=""
             width="160"
             height="160"

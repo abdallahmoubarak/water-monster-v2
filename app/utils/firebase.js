@@ -26,7 +26,7 @@ export const signInWithGoogle = (setName, setEmail, setProfilePic) => {
         id: result.user.uid,
         name: result.user.displayName,
         email: result.user.email,
-        profile_url: result.user.photoURL,
+        profileUrl: result.user.photoURL,
       });
     })
     .catch((error) => {
