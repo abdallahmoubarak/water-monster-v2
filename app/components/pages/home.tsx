@@ -4,22 +4,20 @@ import Containers from "@/components/pages/Containers";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
-const Reconfig = dynamic(
-  () => import("@/components/pages/secoundary/Reconfig"),
-);
+const Reconfig = dynamic(() => import("@/components/pages/secondary/Reconfig"));
 const WaterProvider = dynamic(
-  () => import("@/components/pages/secoundary/Provider"),
+  () => import("@/components/pages/secondary/Provider"),
 );
-const Cleaner = dynamic(() => import("@/components/pages/secoundary/Cleaner"));
+const Cleaner = dynamic(() => import("@/components/pages/secondary/Cleaner"));
 
-const Chat = dynamic(() => import("@/components/pages/secoundary/Chat"));
-const Plumber = dynamic(() => import("@/components/pages/secoundary/Plumber"));
+const Chat = dynamic(() => import("@/components/pages/secondary/Chat"));
+const Plumber = dynamic(() => import("@/components/pages/secondary/Plumber"));
 const ContainerSetting = dynamic(
-  () => import("@/components/pages/secoundary/ContainerSettings"),
+  () => import("@/components/pages/secondary/ContainerSettings"),
 );
-const Profile = dynamic(() => import("@/components/pages/secoundary/Profile"));
+const Profile = dynamic(() => import("@/components/pages/secondary/Profile"));
 const Installation = dynamic(
-  () => import("@/components/pages/secoundary/Installation"),
+  () => import("@/components/pages/secondary/Installation"),
 );
 
 export default function Home() {
