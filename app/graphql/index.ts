@@ -14,10 +14,10 @@ declare const process: {
 };
 
 export const driver = neo4j.driver(
-  "test.iot-monster.com",
+  process.env.NEXT_PUBLIC_NEO4J_URI,
   neo4j.auth.basic(
-    "neo4j+s://ee38a1df.databases.neo4j.io",
-    "l416Juq-w8HwBnsf4DqT8bGihlDvZ3Onj8cpILQlCqs",
+    process.env.NEXT_PUBLIC_NEO4J_USER,
+    process.env.NEXT_PUBLIC_NEO4J_PASSWORD,
   ),
 );
 
@@ -26,7 +26,7 @@ const neoSchema = new Neo4jGraphQL({
   resolvers,
   driver,
   features: {
-    authorization: { key: "TutorialTesting@123" },
+    authorization: { key: process.env.NEXT_PUBLIC_JWT_SECRET },
   },
 });
 
