@@ -9,20 +9,6 @@ import { client } from "./_app";
 export default function Index() {
   const [enabled, setEnabled] = useState<boolean>(true);
   const { data: currentUser, isLoading } = useCurrentUser({ enabled });
-  useEffect(() => {
-    const registerServiceWorker = async () => {
-      if ("serviceWorker" in navigator) {
-        try {
-          const registration = await navigator.serviceWorker.register("/app/public/sw.js");
-          console.log("Service Worker registered with scope:", registration.scope);
-        } catch (error) {
-          console.error("Service Worker registration failed:", error);
-        }
-      }
-    };
-
-    registerServiceWorker();
-  }, []);
 
   useEffect(() => setEnabled(Boolean(localStorage.getItem("JWT"))), []);
   useEffect(() => {
