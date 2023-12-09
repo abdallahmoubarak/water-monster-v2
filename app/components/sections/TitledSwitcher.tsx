@@ -8,7 +8,7 @@ export default function TitledSwitcher({ title }: { title: string }) {
     const registerServiceWorker = async () => {
       if ("serviceWorker" in navigator) {
         try {
-          const registration = await navigator.serviceWorker.register("../../public/sw.js");
+          const registration = await navigator?.serviceWorker?.register("../../public/sw.js");
           console.log("Service Worker registered with scope:", registration.scope);
         } catch (error) {
           console.error("Service Worker registration failed:", error);
@@ -48,10 +48,11 @@ export default function TitledSwitcher({ title }: { title: string }) {
   };
 
   useEffect(() => {
-  alert(JSON.stringify(navigator.serviceWorker.getRegistration()))
+  alert(JSON.stringify(navigator?.serviceWorker))
     
-    navigator.serviceWorker.getRegistration().then((reg) => {
+    navigator?.serviceWorker?.getRegistration().then((reg) => {
       setRegistration(reg);
+    
     });
   }, []);
 
