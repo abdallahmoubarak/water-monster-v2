@@ -37,7 +37,7 @@ export default function TitledSwitcher({ title }: { title: string }) {
   useEffect(() => {
   alert(JSON.stringify(navigator.serviceWorker.getRegistrations()))
     
-    navigator.serviceWorker.getRegistrations().then((reg) => {
+    navigator.serviceWorker.getRegistration().then((reg) => {
       setRegistration(reg);
     });
   }, []);
