@@ -72,51 +72,6 @@ define(['./workbox-d5a6b829'], (function (workbox) { 'use strict';
   importScripts();
   self.skipWaiting();
   workbox.clientsClaim();
-
-  // Handle push notifications
-  self.addEventListener('push', event => {
-    const options = {
-      body: event.data.text(),
-    };
-
-    event.waitUntil(
-      self.registration.showNotification('Push Notification', options)
-    );
-  });
-
-  // Handle notification clicks
-  self.addEventListener('notificationclick', event => {
-    event.notification.close();
-
-    // Add your custom handling here, e.g., open a specific page.
-    clients.openWindow('https://example.com');
-  });
-
-  // Rest of your code...
-
-  workbox.registerRoute("/", new workbox.NetworkFirst({
-    "cacheName": "start-url",
-    plugins: [{
-      cacheWillUpdate: async ({
-        response: e
-      }) => e && "opaqueredirect" === e.type ? new Response(e.body, {
-        status: 200,
-        statusText: "OK",
-        headers: e.headers
-      }) : e
-    }]
-  }), 'GET');
-  workbox.registerRoute(/.*/i, new workbox.NetworkOnly({
-    "cacheName": "dev",
-    plugins: []
-  }), 'GET');
-
-}));
-define(['./workbox-d5a6b829'], (function (workbox) { 'use strict';
-
-  importScripts();
-  self.skipWaiting();
-  workbox.clientsClaim();
   workbox.registerRoute("/", new workbox.NetworkFirst({
     "cacheName": "start-url",
     plugins: [{
