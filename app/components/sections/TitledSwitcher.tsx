@@ -7,7 +7,9 @@ export default function TitledSwitcher({ title }: { title: string }) {
 
   const handlePush = () => {
     setToggle(!toggle);
+    
     Notification.requestPermission().then((result) => {
+      alert(result);
       if (result !== "granted") {
         alert("Go to setting and allow notifications");
         setToggle(false);

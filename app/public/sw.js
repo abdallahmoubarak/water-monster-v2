@@ -10,7 +10,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+    .then(registration => {
+      console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch(error => {
+      console.error('Service Worker registration failed:', error);
+    });
+}
 // If the loader is already loaded, just stop.
 if (!self.define) {
   let registry = {};
