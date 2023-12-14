@@ -26,6 +26,7 @@ export default function TitledSwitcher({ title }: { title: string }) {
       if (result !== "granted") {
         alert("Go to setting and allow notifications");
         setToggle(false);
+        Notification.requestPermission()
       }
       showNotification();
     });
@@ -48,7 +49,7 @@ export default function TitledSwitcher({ title }: { title: string }) {
   };
 
   useEffect(() => {
-  alert(JSON.stringify(navigator?.serviceWorker))
+
     
     navigator?.serviceWorker?.getRegistration().then((reg) => {
       setRegistration(reg);
