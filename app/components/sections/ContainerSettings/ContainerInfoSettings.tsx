@@ -41,7 +41,7 @@ export default function ContainerInfoSettings({
   return (
     <>
       <div className="flex flex-col gap-4">
-        <Box title={"Inforamation"}>
+        <Box title={"Information"}>
           <Input placeholder="Container name" value={name} setValue={setName} />
           <Input
             placeholder={"Size (liter)"}

@@ -2,6 +2,7 @@ import ContainerInfoSettings from "@/components/sections/ContainerSettings/Conta
 import Layout from "./sLayout";
 import NotificationSettings from "@/components/sections/ContainerSettings/NotificationSettings";
 import QrCodeSettings from "@/components/sections/ContainerSettings/QrCodeSettings";
+import ViewerSettings from "@/components/sections/ContainerSettings/ViewerSettings";
 
 export default function ContainerSetting({
   setPage,
@@ -17,6 +18,7 @@ export default function ContainerSetting({
         onClick={() => setPage("Containers")}>
         <div className="flex flex-col gap-3">
           <NotificationSettings currentContainer={currentContainer} />
+          <ViewerSettings />
           <ContainerInfoSettings
             currentContainer={currentContainer}
             setPage={setPage}
