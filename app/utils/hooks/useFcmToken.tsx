@@ -25,6 +25,7 @@ const useFcmToken = () => {
             });
             if (currentToken) {
               setToken(currentToken);
+             
             } else {
               console.log(
                 'No registration token available. Request permission to generate one.'
