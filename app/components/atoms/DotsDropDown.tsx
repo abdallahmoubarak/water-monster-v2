@@ -20,7 +20,7 @@ export default function DotsDropDown({
   let currentUser: any = localStorage.getItem("User");
 
   return (
-    <>
+    <div>
       <div
         className="cursor-pointer text-xl px-2"
         onClick={() => setIsDropDown(true)}>
@@ -61,6 +61,6 @@ export default function DotsDropDown({
           className="w-screen h-screen top-40 right-0 absolute z-10 bg-transparent cursor-pointer"></div>
       )}
       <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
-    </>
+    </div>
   );
 }
