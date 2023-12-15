@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 
 export default function ViewerSettings() {
-  const [users, setUsers] = useState([{ email: "xyz" }]);
+  const [users, setUsers] = useState([{ email: "xyz", pending: false }]);
   const [email, setEmail] = useState("");
 
   return (
