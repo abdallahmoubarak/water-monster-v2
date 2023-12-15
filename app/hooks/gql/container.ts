@@ -96,3 +96,38 @@ export const updateThresholdMutation = gql`
     }
   }
 `;
+export const transferOwnerShipMutation = gql`
+mutation UpdateContainer(
+  $contId: ID!,
+  $ownerId: ID!,
+  $newOwnerId: ID!
+) {
+  updateContainers(
+    where: { id: $contId }
+    disconnect: { user: { where: { node: { id: $ownerId } } } }
+    connect: { user: { where: { node: { id: $newOwnerId } } } }
+  ) {
+    containers {
+      id
+      user {
+        id
+      }
+    }
+  }
+}
+`;
+
+export const removeViewerMutation = gql`
+mutation($contId: ID!, $userId: ID!) {
+  updateContainers(
+    where: { id: $contId }
+    disconnect: { viewer: [{ where: { node: { id: $userId } } }] }
+  ) {
+    containers {
+      id
+      viewer {
+        id
+      }
+    }
+  }
+}`;

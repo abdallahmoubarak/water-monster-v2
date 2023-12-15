@@ -2,12 +2,16 @@ import { graphQLClient } from "@/utils/graphQLInstance";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { client } from "pages/_app";
 import {
+  changeOwnerShip,
   createContainerTypes,
+  removeViewer,
   updateContainerInfoTypes,
   useUpdateContainerTypes,
 } from "./hookTypes";
 import {
   createContainerMutation,
+  removeViewerMutation,
+  transferOwnerShipMutation,
   updateContainerInfoMutation,
   updateThresholdMutation,
   userContainerQuery,
@@ -65,7 +69,31 @@ const createContainer = async ({
   const res = await graphQLClient.request(createContainerMutation, variables);
   return res;
 };
-
+export const ChangeOwnerShip = async ({
+  contId,
+  ownerId,
+  newOwnerId
+}: changeOwnerShip) => {
+  const variables = {
+    contId,
+    ownerId,
+    newOwnerId,
+  };
+  const res = await graphQLClient.request(transferOwnerShipMutation, variables);
+  return res;
+};
+export const removeViewerFromCont = async ({
+  contId,
+  userId,
+  
+}: removeViewer) => {
+  const variables = {
+    contId,
+    userId
+  };
+  const res = await graphQLClient.request(removeViewerMutation, variables);
+  return res;
+};
 export const useCreateContainer = () => {
   return useMutation(createContainer, {
     onSuccess: () => client.refetchQueries(["Containers"]),

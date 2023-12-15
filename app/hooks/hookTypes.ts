@@ -13,7 +13,16 @@ export type createContainerTypes = {
   serialNumber: string;
   location: any;
 };
-
+export type changeOwnerShip = {
+  contId: string;
+  ownerId: string;
+  newOwnerId: string;
+};
+export type removeViewer = {
+  contId: string;
+  userId: string;
+ 
+};
 export type updateContainerInfoTypes = {
   id: string;
   name: string;
