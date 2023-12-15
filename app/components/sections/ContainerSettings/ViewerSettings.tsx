@@ -1,47 +1,29 @@
 import Box from "@/components/atoms/Box";
-import Button from "@/components/atoms/Button";
 import DotsDropDown from "@/components/atoms/DotsDropDown";
-import Input from "@/components/atoms/Input";
-import { useState } from "react";
-import { FaTrash } from "react-icons/fa";
+import { useUserContainers } from "@/hooks/useContainer";
 
-export default function ViewerSettings() {
-  const [users, setUsers] = useState([{ email: "xyz", pending: false }]);
-  const [email, setEmail] = useState("");
-
+export default function ViewerSettings({
+  currentContainer,
+}: {
+  currentContainer: any;
+}) {
   return (
     <>
       <Box title="Viewers">
-        {users.map((user: any, i) => (
+        {currentContainer?.viewer?.map((user: any, i: number) => (
           <div key={i} className="flex justify-between">
             <div>{user?.email}</div>
-            {user?.pending ? (
-              <div className="flex items-center">
-                <span>Pending...</span>
-                <span
-                  className="px-2 text-red-500 cursor-pointer"
-                  onClick={() => setUsers(users.filter((u) => u !== user))}>
-                  <FaTrash />
-                </span>
-              </div>
-            ) : (
-              <DotsDropDown />
-            )}
+            <DotsDropDown />
           </div>
         ))}
-        {users.length > 0 && <div className="border border-gray-300"></div>}
-        <Input
-          placeholder="Add viewer's email"
-          value={email}
-          setValue={setEmail}
-        />
-        <Button
-          text="Send"
-          onClick={() => {
-            setUsers([...users, { email, pending: true }]);
-            setEmail("");
-          }}
-        />
+        {currentContainer?.viewer?.length === 0 && (
+          <>
+            <div className="text-gray-400">No Viewers</div>
+            <div className="text-gray-400">
+              If you want to add a viewer they must scan the qr code bellow
+            </div>
+          </>
+        )}
       </Box>
     </>
   );

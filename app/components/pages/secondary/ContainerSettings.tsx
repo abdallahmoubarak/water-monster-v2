@@ -18,11 +18,11 @@ export default function ContainerSetting({
         onClick={() => setPage("Containers")}>
         <div className="flex flex-col gap-3">
           <NotificationSettings currentContainer={currentContainer} />
-          <ViewerSettings />
           <ContainerInfoSettings
             currentContainer={currentContainer}
             setPage={setPage}
           />
+          <ViewerSettings currentContainer={currentContainer} />
           <QrCodeSettings
             currentContainer={currentContainer}
             setPage={setPage}

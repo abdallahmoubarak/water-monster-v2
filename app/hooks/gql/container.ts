@@ -14,6 +14,9 @@ export const userContainerQuery = gql`
       private_mode
       manual_mode
       water_level
+      viewer {
+        email
+      }
       address
       updatedAt
     }

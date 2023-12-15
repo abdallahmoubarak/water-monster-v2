@@ -13,7 +13,6 @@ export default function NotificationSettings({
     currentContainer?.threshold || 15,
   );
   const [alertMsg, setAlertMsg] = useState<string>("");
-
   const { mutate: updateThreshold } = useUpdateThreshold({ setAlertMsg });
 
   const handleUpdateThreshold = () => {
