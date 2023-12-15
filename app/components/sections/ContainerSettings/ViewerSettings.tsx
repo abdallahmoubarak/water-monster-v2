@@ -1,17 +1,19 @@
 import Box from "@/components/atoms/Box";
 import Button from "@/components/atoms/Button";
+import DotsDropDown from "@/components/atoms/DotsDropDown";
 import Input from "@/components/atoms/Input";
 import { useState } from "react";
 import { FaTrash } from "react-icons/fa";
 
 export default function ViewerSettings() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([{ email: "xyz" }]);
   const [email, setEmail] = useState("");
+
   return (
     <>
       <Box title="Viewers">
-        {users.map((user: any) => (
-          <div className="flex justify-between">
+        {users.map((user: any, i) => (
+          <div key={i} className="flex justify-between">
             <div>{user?.email}</div>
             {user?.pending ? (
               <div className="flex items-center">
@@ -23,14 +25,13 @@ export default function ViewerSettings() {
                 </span>
               </div>
             ) : (
-              <div></div>
+              <DotsDropDown />
             )}
           </div>
         ))}
         {users.length > 0 && <div className="border border-gray-300"></div>}
-        <div>Add Viewer</div>
         <Input
-          placeholder="Insert user's email"
+          placeholder="Add viewer's email"
           value={email}
           setValue={setEmail}
         />
