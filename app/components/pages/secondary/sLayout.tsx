@@ -5,7 +5,7 @@ export default function Layout({ children, onClick, title }: layoutTypes) {
   return (
     <>
       <div className="flex flex-col h-screen overflow-hidden ">
-        <div className="flex items-center gap-2 text-white px-2 h-16 bg-primary">
+        <div className="flex items-center gap-2 text-white px-2 min-h-[4rem] h-16 bg-primary">
           <div
             className="text-xl p-2 cursor-pointer flex items-center justify-center"
             onClick={onClick}>

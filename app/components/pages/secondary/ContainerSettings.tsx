@@ -2,6 +2,7 @@ import ContainerInfoSettings from "@/components/sections/ContainerSettings/Conta
 import Layout from "./sLayout";
 import NotificationSettings from "@/components/sections/ContainerSettings/NotificationSettings";
 import QrCodeSettings from "@/components/sections/ContainerSettings/QrCodeSettings";
+import ViewerSettings from "@/components/sections/ContainerSettings/ViewerSettings";
 
 export default function ContainerSetting({
   setPage,
@@ -21,6 +22,7 @@ export default function ContainerSetting({
             currentContainer={currentContainer}
             setPage={setPage}
           />
+          <ViewerSettings currentContainer={currentContainer} />
           <QrCodeSettings
             currentContainer={currentContainer}
             setPage={setPage}
