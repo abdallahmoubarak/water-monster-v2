@@ -4,20 +4,7 @@ import { useEffect, useState } from "react";
 export default function TitledSwitcher({ title }: { title: string }) {
   const [toggle, setToggle] = useState(false);
   const [registration, setRegistration] = useState<any>();
-  useEffect(() => {
-    const registerServiceWorker = async () => {
-  
-        try {
-          const registration = await navigator?.serviceWorker?.register("../../public/sw.js");
-          console.log("Service Worker registered with scope:", registration.scope);
-        } catch (error) {
-          console.error("Service Worker registration failed:", error);
-        
-      }
-    };
 
-    registerServiceWorker();
-  }, []);
   const handlePush = () => {
     setToggle(!toggle);
     
