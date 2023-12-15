@@ -58,7 +58,7 @@ export default function DotsDropDown({
           onMouseDown={() => setIsDropDown(false)}
           onPointerDown={() => setIsDropDown(false)}
           onScrollCapture={() => setIsDropDown(false)}
-          className="w-screen h-screen top-0 right-0 absolute z-10 bg-gray-400  cursor-pointer"></div>
+          className="w-screen h-screen top-40 right-0 absolute z-10 bg-transparent cursor-pointer"></div>
       )}
       <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
     </>
