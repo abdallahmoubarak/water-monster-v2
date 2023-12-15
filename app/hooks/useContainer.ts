@@ -69,31 +69,7 @@ const createContainer = async ({
   const res = await graphQLClient.request(createContainerMutation, variables);
   return res;
 };
-export const ChangeOwnerShip = async ({
-  contId,
-  ownerId,
-  newOwnerId
-}: changeOwnerShip) => {
-  const variables = {
-    contId,
-    ownerId,
-    newOwnerId,
-  };
-  const res = await graphQLClient.request(transferOwnerShipMutation, variables);
-  return res;
-};
-export const removeViewerFromCont = async ({
-  contId,
-  userId,
-  
-}: removeViewer) => {
-  const variables = {
-    contId,
-    userId
-  };
-  const res = await graphQLClient.request(removeViewerMutation, variables);
-  return res;
-};
+
 export const useCreateContainer = () => {
   return useMutation(createContainer, {
     onSuccess: () => client.refetchQueries(["Containers"]),
@@ -159,6 +135,57 @@ export const useUpdateThreshold = ({
 }) => {
   return useMutation(updateThreshold, {
     onSuccess: () => setAlertMsg("Alert level updated"),
+    onError: () => setAlertMsg("Something went wrong"),
+  });
+};
+/************************* Change OwnerShip  *************************/
+
+ const changeOwnerShip = async ({
+  contId,
+  ownerId,
+  newOwnerId
+}: changeOwnerShip) => {
+  const variables = {
+    contId,
+    ownerId,
+    newOwnerId,
+  };
+  
+  const res = await graphQLClient.request(transferOwnerShipMutation, variables);
+  return res;
+};
+export const useChangeOwnerShip = ({
+  setAlertMsg,
+}: {
+  setAlertMsg: Function;
+}) => {
+  return useMutation(changeOwnerShip, {
+    onSuccess: () => setAlertMsg("The OwnerShip for this container was updated!"),
+    onError: () => setAlertMsg("Something went wrong"),
+  });
+};
+
+/************************* Remove Viewer from Container *************************/
+
+ const removeViewerFromCont = async ({
+  contId,
+  userId,
+  
+}: removeViewer) => {
+  const variables = {
+    contId,
+    userId
+  };
+  const res = await graphQLClient.request(removeViewerMutation, variables);
+  return res;
+};
+export const useRemoverViewFromCont = ({
+  setAlertMsg,
+}: {
+  setAlertMsg: Function;
+}) => {
+  return useMutation(removeViewerFromCont, {
+    onSuccess: () => setAlertMsg("User Removed Successfully!"),
     onError: () => setAlertMsg("Something went wrong"),
   });
 };
