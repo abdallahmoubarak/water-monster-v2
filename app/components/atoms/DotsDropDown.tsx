@@ -3,6 +3,8 @@ import { useState } from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import Alert from "./Alert";
 import { useTransferOwnerShip } from "@/hooks/container/useTransferOwerShip";
+import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
+import { useRouter } from "next/router";
 
 export default function DotsDropDown({
   currentContainer,
@@ -11,13 +13,14 @@ export default function DotsDropDown({
   currentContainer: any;
   viewer: any;
 }) {
+  const router = useRouter();
   const [isDropDown, setIsDropDown] = useState(false);
   const [alertMsg, setAlertMsg] = useState<string>("");
 
   const { mutate: removeViewer } = useRemoveViewer({ setAlertMsg });
-  const { mutate: transferOwnerShip } = useTransferOwnerShip({ setAlertMsg });
+  const { mutate: transferOwnerShip } = useTransferOwnerShip({ router });
 
-  let currentUser: any = localStorage.getItem("User");
+  const { data: currentUser } = useCurrentUser({ enabled: true });
 
   return (
     <div>
@@ -31,23 +34,25 @@ export default function DotsDropDown({
           <div className="bg-white z-20 right-0 absolute rounded-lg border border-gray-200">
             <div
               className="whitespace-nowrap cursor-pointer px-4 py-2 hover:bg-gray-100 rounded-lg"
-              onClick={() =>
+              onClick={() => {
                 transferOwnerShip({
-                  contId: currentContainer.id,
-                  ownerId: currentUser.id,
-                  viewerId: viewer.id,
-                })
-              }>
+                  contId: currentContainer?.id,
+                  ownerId: currentUser?.id,
+                  viewerId: viewer?.id,
+                });
+                setIsDropDown(false);
+              }}>
               Transfer ownership
             </div>
             <div
               className="whitespace-nowrap cursor-pointer px-4 py-2 hover:bg-gray-100 rounded-lg"
-              onClick={() =>
+              onClick={() => {
                 removeViewer({
-                  contId: currentContainer.id,
-                  userId: currentUser.id,
-                })
-              }>
+                  contId: currentContainer?.id,
+                  userId: viewer?.id,
+                });
+                setIsDropDown(false);
+              }}>
               Delete access
             </div>
           </div>{" "}

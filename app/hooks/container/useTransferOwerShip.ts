@@ -2,6 +2,7 @@ import { graphQLClient } from "@/utils/graphQLInstance";
 import { transferOwnerShipTypes } from "../hookTypes";
 import { useMutation } from "@tanstack/react-query";
 import { gql } from "graphql-request";
+import { client } from "pages/_app";
 
 const transferOwnerShipMutation = gql`
   mutation UpdateContainer($contId: ID!, $ownerId: ID!, $viewerId: ID!) {
@@ -12,9 +13,22 @@ const transferOwnerShipMutation = gql`
     ) {
       containers {
         id
-        user {
+        name
+        size
+        height
+        threshold
+        serialNumber
+        distance
+        sensor_state
+        private_mode
+        manual_mode
+        water_level
+        viewer {
           id
+          email
         }
+        address
+        updatedAt
       }
     }
   }
@@ -34,14 +48,12 @@ const transferOwnerShip = async ({
   return res;
 };
 
-export const useTransferOwnerShip = ({
-  setAlertMsg,
-}: {
-  setAlertMsg: Function;
-}) => {
+export const useTransferOwnerShip = ({ router }: { router: any }) => {
   return useMutation(transferOwnerShip, {
-    onSuccess: () =>
-      setAlertMsg("The OwnerShip for this container was updated!"),
-    onError: () => setAlertMsg("Something went wrong"),
+    onSuccess: async () => {
+      client.refetchQueries(["Containers"]);
+      await router.replace("/");
+    },
+    onError: () => {},
   });
 };

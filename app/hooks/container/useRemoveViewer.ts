@@ -2,6 +2,7 @@ import { graphQLClient } from "@/utils/graphQLInstance";
 import { removeViewer } from "../hookTypes";
 import { gql } from "graphql-request";
 import { useMutation } from "@tanstack/react-query";
+import { client } from "pages/_app";
 
 const removeViewerMutation = gql`
   mutation ($contId: ID!, $userId: ID!) {
@@ -11,9 +12,22 @@ const removeViewerMutation = gql`
     ) {
       containers {
         id
+        name
+        size
+        height
+        threshold
+        serialNumber
+        distance
+        sensor_state
+        private_mode
+        manual_mode
+        water_level
         viewer {
           id
+          email
         }
+        address
+        updatedAt
       }
     }
   }
@@ -30,7 +44,10 @@ const removeViewer = async ({ contId, userId }: removeViewer) => {
 
 export const useRemoveViewer = ({ setAlertMsg }: { setAlertMsg: Function }) => {
   return useMutation(removeViewer, {
-    onSuccess: () => setAlertMsg("User Removed Successfully!"),
+    onSuccess: () => {
+      setAlertMsg("User Removed Successfully!");
+      client.refetchQueries(["Containers"]);
+    },
     onError: () => setAlertMsg("Something went wrong"),
   });
 };

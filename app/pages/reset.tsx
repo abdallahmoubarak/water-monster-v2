@@ -25,7 +25,6 @@ export default function ResetPassLink() {
   const { data: currentUser } = useCurrentUser({ enabled: true });
 
   useEffect(() => {
-    console.log(currentUser);
     currentUser && router.replace("/");
   }, [currentUser]);
 
