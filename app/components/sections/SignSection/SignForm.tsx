@@ -1,6 +1,7 @@
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
-import { useLogIn, useSignUp } from "@/hooks/useAuth";
+import { useLogIn } from "@/hooks/auth/useLogIn";
+import { useSignUp } from "@/hooks/auth/useSignUp";
 import { validSign } from "@/utils/validSign";
 import { useRef, useState } from "react";
 

@@ -1,9 +1,9 @@
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import { useState } from "react";
-import { useUpdateContainerInfo } from "@/hooks/useContainer";
 import Box from "@/components/atoms/Box";
 import Alert from "@/components/atoms/Alert";
+import { useUpdateContainerInfo } from "@/hooks/container/useUpdateContainerInfo";
 
 export default function ContainerInfoSettings({
   currentContainer,

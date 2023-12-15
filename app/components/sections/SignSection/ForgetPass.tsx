@@ -4,7 +4,7 @@ import Button from "@/components/atoms/Button";
 import { useRef, useState } from "react";
 import validEmail from "@/utils/validEmail";
 import EmailSent from "./EmailSent";
-import { useSendMagicLinkMutation } from "@/hooks/useAuth";
+import { useSendMagicLinkMutation } from "@/hooks/auth/useSendMagicLinkMutation";
 
 export default function ForgetPass({ setIsForget }: { setIsForget: Function }) {
   const [isLoading, setIsLoading] = useState(false);

@@ -1,15 +1,13 @@
 import Button from "@/components/atoms/Button";
 import { Key, useEffect, useState } from "react";
 import Container from "@/components/atoms/Container";
-import {
-  useUserContainers,
-  useUserViewingContainers,
-} from "@/hooks/useContainer";
 import ContainerLoader from "@/components/atoms/ContainerLoader";
 import { client } from "pages/_app";
 import { userTypes } from "@/hooks/hookTypes";
 import Alert from "@/components/atoms/Alert";
 import ServicesBar from "@/components/sections/ServicesBar";
+import { useUserContainers } from "@/hooks/container/useUserContainers";
+import { useUserViewingContainers } from "@/hooks/container/useUserViewingContainers";
 
 export default function Containers({
   setPage,
