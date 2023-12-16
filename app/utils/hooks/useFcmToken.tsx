@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getMessaging, getToken } from 'firebase/messaging';
 import firebaseApp from '../firebase';
 
+
 const useFcmToken = () => {
   const [token, setToken] = useState('');
   const [notificationPermissionStatus, setNotificationPermissionStatus] =
@@ -25,6 +26,7 @@ const useFcmToken = () => {
             });
             if (currentToken) {
               setToken(currentToken);
+              localStorage.setItem("fcmToken",currentToken)
              
             } else {
               console.log(

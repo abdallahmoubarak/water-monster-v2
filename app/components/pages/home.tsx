@@ -4,8 +4,9 @@ import Containers from "@/components/pages/Containers";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 import { getMessaging, onMessage } from 'firebase/messaging';
-import firebaseApp from "@/utils/firebase";
+
 import useFcmToken from "@/utils/hooks/useFcmToken";
+import firebaseApp from "@/utils/firebase";
 
 const Reconfig = dynamic(() => import("@/components/pages/secondary/Reconfig"));
 const WaterProvider = dynamic(
@@ -27,7 +28,7 @@ export default function Home() {
   const [page, setPage] = useState<string>("Containers");
   const [currentContainer, setCurrentContainer] = useState<any>({});
   const { fcmToken,notificationPermissionStatus } = useFcmToken();
-  alert(fcmToken)
+
   return (
     <>
       <Head>
