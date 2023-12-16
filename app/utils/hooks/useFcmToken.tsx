@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getMessaging, getToken } from 'firebase/messaging';
 import firebaseApp from '../firebase';
+import { handleSendFCM } from '../SendFcm';
 
 
 const useFcmToken = () => {
@@ -27,6 +28,7 @@ const useFcmToken = () => {
             if (currentToken) {
               setToken(currentToken);
               localStorage.setItem("fcmToken",currentToken)
+              await handleSendFCM(currentToken,"hello from Water Monster","Test from Houssein!")
              
             } else {
               console.log(
