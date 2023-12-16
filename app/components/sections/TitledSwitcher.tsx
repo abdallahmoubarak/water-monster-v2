@@ -15,7 +15,17 @@ export default function TitledSwitcher({ title }: { title: string }) {
         
       }
     };
-
+    const registerNot = async () => {
+  
+      try {
+        const registration = await navigator?.serviceWorker?.register("../../firebase-messaging-sw.js");
+        console.log("Service Worker registered with scope:", registration.scope);
+      } catch (error) {
+        console.error("Service Worker registration failed:", error);
+      
+    }
+  };
+  registerNot()
     registerServiceWorker();
   }, []);
   const handlePush = () => {
