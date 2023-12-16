@@ -1,8 +1,8 @@
 import Alert from "@/components/atoms/Alert";
 import Box from "@/components/atoms/Box";
-import { useUpdateThreshold } from "@/hooks/useContainer";
 import { useState } from "react";
 import TitledSwitcher from "../TitledSwitcher";
+import { useUpdateThreshold } from "@/hooks/container/useUpdateThreshold";
 
 export default function NotificationSettings({
   currentContainer,

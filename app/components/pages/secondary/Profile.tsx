@@ -5,8 +5,6 @@ import Field from "@/components/atoms/Field";
 import Input from "@/components/atoms/Input";
 import InputsContainer from "@/components/atoms/InputsContainer";
 import UploadImage from "@/components/atoms/UploadImage";
-import { useCurrentUser } from "@/hooks/useAuth";
-import { useUpdateName, useUpdatePhone } from "@/hooks/useUser";
 import { graphQLClient } from "@/utils/graphQLInstance";
 import { client } from "pages/_app";
 import { useState } from "react";
@@ -14,6 +12,9 @@ import Layout from "./sLayout";
 import { IoLanguage, IoMailOutline } from "react-icons/io5";
 import { BiSupport } from "react-icons/bi";
 import { useRouter } from "next/router";
+import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
+import { useUpdateName } from "@/hooks/user/useUpdateName";
+import { useUpdatePhone } from "@/hooks/user/useUpdatePhone";
 
 export default function Profile({ setPage }: { setPage: Function }) {
   const { data: currentUser } = useCurrentUser({ enabled: true });

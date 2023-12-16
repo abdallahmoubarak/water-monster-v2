@@ -14,6 +14,16 @@ export type createContainerTypes = {
   location: any;
 };
 
+export type transferOwnerShipTypes = {
+  contId: string;
+  ownerId: string;
+  viewerId: string;
+};
+export type removeViewer = {
+  contId: string;
+  userId: string;
+};
+
 export type updateContainerInfoTypes = {
   id: string;
   name: string;

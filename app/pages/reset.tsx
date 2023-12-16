@@ -2,10 +2,11 @@ import TopBar from "@/components/atoms/TopBar";
 import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import MagicBox from "@/components/atoms/MagicBox";
-import { useCurrentUser, useResetPassMutation } from "@/hooks/useAuth";
 import validPass from "@/utils/validPass";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
+import { useResetPassMutation } from "@/hooks/auth/useResetPassMutation";
+import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
 
 export default function ResetPassLink() {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +25,6 @@ export default function ResetPassLink() {
   const { data: currentUser } = useCurrentUser({ enabled: true });
 
   useEffect(() => {
-    console.log(currentUser);
     currentUser && router.replace("/");
   }, [currentUser]);
 

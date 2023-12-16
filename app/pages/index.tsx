@@ -1,10 +1,10 @@
 import Home from "@/components/pages/home";
 import Head from "next/head";
-import { useCurrentUser } from "@/hooks/useAuth";
 import { useEffect, useState } from "react";
 import Sign from "@/components/pages/sign";
 import AnimatedLogo from "@/components/svg/AnimatedLogo";
 import { client } from "./_app";
+import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
 
 export default function Index() {
   const [enabled, setEnabled] = useState<boolean>(true);

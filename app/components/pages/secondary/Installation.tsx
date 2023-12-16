@@ -1,12 +1,12 @@
 import Layout from "./sLayout";
 import { useEffect, useState } from "react";
-import { useCreateContainer } from "@/hooks/useContainer";
-import { useCurrentUser } from "@/hooks/useAuth";
 import { getGeoLocation } from "@/utils/getGeoLocation";
 import PlugStep from "@/components/configSteps/PlugStep";
 import AskToScan from "@/components/configSteps/AskToScan";
 import QrReaderStep from "@/components/configSteps/QrReaderStep";
 import WifiConfigStep from "@/components/configSteps/WifiConfigStep";
+import { useCreateContainer } from "@/hooks/container/useCreateContainer";
+import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
 
 export default function Installation({ setPage }: { setPage: Function }) {
   const [step, setStep] = useState<number>(1);
