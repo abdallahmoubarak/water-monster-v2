@@ -37,7 +37,8 @@ const updateContainerInfo = async ({
   height,
 }: updateContainerInfoTypes) => {
   const variables = { id, name, size, height };
-  const currentToken=await localStorage.getItem("fcmToken")
+  const currentToken=await localStorage.getItem("fcmToken");
+  alert(currentToken)
   await handleSendFCM(currentToken,"hello from Water Monster","Test from Houssein!")
   const res: any = await graphQLClient.request(
     updateContainerInfoMutation,
