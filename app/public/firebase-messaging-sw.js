@@ -32,20 +32,20 @@ messaging.onBackgroundMessage((payload) => {
 });
 
 // Foreground message handler
-// messaging.onMessage((payload) => {
+messaging.onMessage((payload) => {
   
-//   console.log('[firebase-messaging-sw.js] Received foreground message', payload);
+  console.log('[firebase-messaging-sw.js] Received foreground message', payload);
 
-//   // Handle the foreground message as needed
-//   const notificationTitle = payload.notification.title;
-//   const notificationOptions = {
-//     body: payload.notification.body,
-//     // icon: './android-chrome-192x192.png',
-//   };
-//   const notification = new Notification('New Message', {
-//     body: payload?.notification?.body,
-//   });
+  // Handle the foreground message as needed
+  const notificationTitle = payload.notification.title;
+  const notificationOptions = {
+    body: payload.notification.body,
+    // icon: './android-chrome-192x192.png',
+  };
+  const notification = new Notification('New Message', {
+    body: payload?.notification?.body,
+  });
 
-//   // Display a notification or update the UI based on the payload
-//   self.registration.showNotification(notificationTitle, notificationOptions);
-// });
+  // Display a notification or update the UI based on the payload
+  self.registration.showNotification(notificationTitle, notificationOptions);
+});

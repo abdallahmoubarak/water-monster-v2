@@ -42,6 +42,7 @@ export const useSignUp = ({ setMsg, setIsLoading }: useSignTypes) => {
 
 const logIn = async ({ email, password }: signTypes) => {
   const variables = { email, password };
+
   const res: any = await graphQLClient.request(logInMutation, variables);
   return res?.logIn;
 };

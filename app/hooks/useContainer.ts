@@ -13,6 +13,7 @@ import {
   userContainerQuery,
   userViewingContainerQuery,
 } from "./gql/container";
+import { handleSendFCM } from "@/utils/SendFcm";
 
 /*********************** getting user containers ***********************/
 
@@ -117,6 +118,8 @@ const updateThreshold = async ({
   threshold: number;
 }) => {
   const variables = { id, threshold };
+  const fcm=await localStorage.getItem("fcmToken");
+  await handleSendFCM(fcm,"welcome user","hello from water Monster ")
   const res: any = await graphQLClient.request(
     updateThresholdMutation,
     variables,
