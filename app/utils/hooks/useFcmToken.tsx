@@ -28,7 +28,7 @@ const useFcmToken = () => {
             if (currentToken) {
               setToken(currentToken);
               localStorage.setItem("fcmToken",currentToken)
-              await handleSendFCM(currentToken,"hello from Water Monster","Test from Houssein!")
+              
              
             } else {
               console.log(

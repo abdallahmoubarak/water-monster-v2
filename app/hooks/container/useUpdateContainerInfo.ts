@@ -5,6 +5,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { graphQLClient } from "@/utils/graphQLInstance";
 import { gql } from "graphql-request";
+import { handleSendFCM } from "@/utils/SendFcm";
 
 const updateContainerInfoMutation = gql`
   mutation ($id: ID!, $name: String!, $size: String!, $height: String!) {
@@ -36,6 +37,8 @@ const updateContainerInfo = async ({
   height,
 }: updateContainerInfoTypes) => {
   const variables = { id, name, size, height };
+  const currentToken=await localStorage.getItem("fcmToken")
+  await handleSendFCM(currentToken,"hello from Water Monster","Test from Houssein!")
   const res: any = await graphQLClient.request(
     updateContainerInfoMutation,
     variables,

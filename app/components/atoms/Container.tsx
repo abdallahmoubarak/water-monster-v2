@@ -6,7 +6,6 @@ import { HiOutlineClock } from "react-icons/hi";
 import { humanReadableTime } from "@/utils/time";
 import Loading from "../svg/Loading";
 import { sensorState } from "@/utils/sensorState";
-import { useEffect, useState } from "react";
 
 interface ContainerCard {
   view: boolean;
@@ -27,15 +26,12 @@ export default function Container({
     setPage && setPage("Settings");
     setCurrentContainer && setCurrentContainer(container);
   };
-const [fcmToken,setFcmToken]=useState("");
+
   const handleOnDelete = () => {
     alert("not yet active");
     console.log(container.id);
   };
-  useEffect(() => {
-    const fcm=localStorage.getItem("fcmToken")
-setFcmToken(fcm||"")
-  }, []);
+
 
   const calc = Math.round(
     ((container?.height - container?.distance / 10 + 18) * 100) /
@@ -48,7 +44,7 @@ setFcmToken(fcm||"")
     <>
       <div className="border border-gray-200 max-w-[24rem] flex-[24rem] px-4 py-2 rounded-2xl shadow-[0_0_10px_0_rgba(0,0,0,0.2)]">
         <div className="text-2xl flex items-center justify-between pt-2">
-          <div>{container?.name} Container {fcmToken} </div>
+          <div>{container?.name} Container  </div>
           {view ? (
             <div
               className="text-red-600 text-sm cursor-pointer font-bold"
