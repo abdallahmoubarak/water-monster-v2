@@ -22,6 +22,7 @@
       });
  
       const responseData = await response.json();
+      alert("Notification sent Successfully!")
      
     } catch (error) {
       console.error('Error sending FCM payload:', error);
