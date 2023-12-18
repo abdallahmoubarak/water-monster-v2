@@ -10,11 +10,7 @@ export default function TitledSwitcher({ title }: { title: string }) {
     
     Notification.requestPermission().then((result) => {
     
-      if (result !== "granted") {
-        alert("Go to setting and allow notifications");
-        setToggle(false);
-     
-      }
+    alert(result)
       showNotification();
     });
   };

@@ -24,7 +24,7 @@
       const responseData = await response.json();
       console.log(responseData);
       
-      alert(`fcm ${fcmToken}`)
+     alert(responseData)
      
     } catch (error) {
       console.error('Error sending FCM payload:', error);
