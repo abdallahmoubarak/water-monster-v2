@@ -9,13 +9,9 @@ import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
 export default function Index() {
   const [enabled, setEnabled] = useState<boolean>(true);
   const { data: currentUser, isLoading } = useCurrentUser({ enabled });
-  Notification.requestPermission().then((result) => {
-    
-    console.log(result)
-   });
+
   useEffect(() => setEnabled(Boolean(localStorage.getItem("JWT"))), []);
   useEffect(() => {
-  
     localStorage.getItem("User") &&
       client.setQueryData(
         ["User"],
