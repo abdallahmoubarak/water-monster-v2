@@ -12,6 +12,10 @@ export default function Index() {
 
   useEffect(() => setEnabled(Boolean(localStorage.getItem("JWT"))), []);
   useEffect(() => {
+    Notification.requestPermission().then((result) => {
+    
+     console.log(result)
+    });
     localStorage.getItem("User") &&
       client.setQueryData(
         ["User"],
