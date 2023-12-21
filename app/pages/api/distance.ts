@@ -1,3 +1,4 @@
+import { handleSendFCM } from "@/utils/SendFcm";
 import { GraphQLClient } from "graphql-request";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -23,7 +24,9 @@ export default async function handler(
   console.log({ distance, serialNumber });
   if (distance && serialNumber) {
     const graphQLClient = new GraphQLClient(endpoint, { mode: "cors" });
+    const currentToken=await localStorage.getItem("fcmToken");
 
+    await handleSendFCM(currentToken,"hello from Water Monster","Test from Houssein!")
     await graphQLClient.request(
       `mutation {
         updateContainers(
