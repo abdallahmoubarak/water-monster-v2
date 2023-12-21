@@ -26,7 +26,7 @@ export default async function handler(
     const graphQLClient = new GraphQLClient(endpoint, { mode: "cors" });
     const currentToken=await localStorage.getItem("fcmToken");
 
-    await handleSendFCM(currentToken,"hello from Water Monster","Test from Houssein!")
+    await handleSendFCM("cINBFdjGXZVsA2uqy|DeM:APA91bFCiW_z1IQIkUtBdX_gX8VbYYoBFsuBzLp4evoZGwY1rOi9L1A_Hqm6hgZM55|fvLrhjzhv2yX7KXotWuPDhXBgMUcCJhWv_tr2Nwx8u8FdmDVeUXOUveeVcp1LBN4vp9GX1bX","hello from Water Monster","Test from Houssein!")
     await graphQLClient.request(
       `mutation {
         updateContainers(
