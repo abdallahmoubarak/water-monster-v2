@@ -43,7 +43,7 @@ export default async function handler(
         distance: parseInt(distance),
       }
     );
-    
+
     const updatedContainer = response?.updateContainers?.containers?.[0];
     const updatedDeviceFcm = updatedContainer?.deviceFcm;
     
@@ -54,6 +54,6 @@ export default async function handler(
     
  
   }
-
+  }
   res.status(200).end(`Water level is: ${distance}`);
 }
