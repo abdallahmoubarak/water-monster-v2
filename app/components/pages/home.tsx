@@ -1,5 +1,5 @@
 import Layout from "./layout";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Containers from "@/components/pages/Containers";
 import Head from "next/head";
 import dynamic from "next/dynamic";
