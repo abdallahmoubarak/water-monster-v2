@@ -27,8 +27,13 @@ const Installation = dynamic(
 export default function Home() {
   const [page, setPage] = useState<string>("Containers");
   const [currentContainer, setCurrentContainer] = useState<any>({});
+  const [registration, setRegistration] = useState<any>();
   const { fcmToken,notificationPermissionStatus } = useFcmToken();
-
+  useEffect(() => {
+    navigator.serviceWorker.getRegistration().then((reg) => {
+      setRegistration(reg);
+    });
+  }, []);
   return (
     <>
       <Head>

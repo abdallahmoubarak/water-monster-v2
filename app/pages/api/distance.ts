@@ -1,4 +1,3 @@
-import { handleSendFCM } from "@/utils/SendFcm";
 import { GraphQLClient } from "graphql-request";
 import type { NextApiRequest, NextApiResponse } from "next";
 
@@ -24,7 +23,8 @@ export default async function handler(
   console.log({ distance, serialNumber });
   if (distance && serialNumber) {
     const graphQLClient = new GraphQLClient(endpoint, { mode: "cors" });
-    const response =   await graphQLClient.request(
+
+    await graphQLClient.request(
       `mutation {
         updateContainers(
           where: { serialNumber: "${serialNumber}" }
@@ -34,22 +34,11 @@ export default async function handler(
             id
             name
             distance
-            deviceFcm
           }
         }
       }`
-    ); 
+    );
+  }
 
-    const updatedContainer = response?.updateContainers.containers[0];
-    const updatedDeviceFcm = updatedContainer?.deviceFcm;
-   
-    if (updatedDeviceFcm) {
-      await handleSendFCM(updatedDeviceFcm,"WM",`your water level have just updated, it is ${distance} `)
-    } else {
-      console.error('Error retrieving updated device FCM:', response?.updateContainers.containers[0]);
-    
- 
-  }
-  }
   res.status(200).end(`Water level is: ${distance}`);
 }
