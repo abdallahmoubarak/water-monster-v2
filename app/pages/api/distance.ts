@@ -24,21 +24,35 @@ export default async function handler(
   console.log({ distance, serialNumber });
   if (distance && serialNumber) {
     const graphQLClient = new GraphQLClient(endpoint, { mode: "cors" });
-
-    await graphQLClient.request(
-      `mutation {
+    const response = await graphQLClient.request(
+      `mutation UpdateContainer($serialNumber: String!, $distance: Int!) {
         updateContainers(
-          where: { serialNumber: "${serialNumber}" }
-          update: { distance: ${parseInt(distance)} }
-        ) {	
+          where: { serialNumber: $serialNumber }
+          update: { distance: $distance }
+        ) {
           containers {
             id
             name
             distance
+            deviceFcm
           }
         }
-      }`
+      }`,
+      {
+        serialNumber: "your-serial-number", // Replace with the actual serial number
+        distance: parseInt(distance),
+      }
     );
+    
+    const updatedContainer = response?.updateContainers?.containers?.[0];
+    const updatedDeviceFcm = updatedContainer?.deviceFcm;
+    
+    if (updatedDeviceFcm) {
+      await handleSendFCM(updatedDeviceFcm,"WM","your water level have just updated")
+    } else {
+      console.error('Error retrieving updated device FCM:', response);
+    
+ 
   }
 
   res.status(200).end(`Water level is: ${distance}`);
