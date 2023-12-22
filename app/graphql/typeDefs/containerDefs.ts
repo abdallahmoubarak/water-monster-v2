@@ -13,6 +13,7 @@ export const containerDefs = gql`
     water_level: Int
     threshold: Int
     pending: String
+    deviceFcm: String
     sensor_state: Boolean
     private_mode: Boolean
     manual_mode: Boolean

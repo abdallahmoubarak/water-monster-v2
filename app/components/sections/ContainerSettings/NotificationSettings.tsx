@@ -1,8 +1,10 @@
 import Alert from "@/components/atoms/Alert";
 import Box from "@/components/atoms/Box";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TitledSwitcher from "../TitledSwitcher";
 import { useUpdateThreshold } from "@/hooks/container/useUpdateThreshold";
+import { UseUpdateDeviceFcm } from "@/hooks/container/useUpdateDeviceFcm";
+import useFcmToken from "@/utils/hooks/useFcmToken";
 
 export default function NotificationSettings({
   currentContainer,
@@ -11,9 +13,19 @@ export default function NotificationSettings({
 }) {
   const [threshold, setThreshold] = useState<number>(
     currentContainer?.threshold || 15,
-  );
+  );  const { fcmToken,notificationPermissionStatus } = useFcmToken();
   const [alertMsg, setAlertMsg] = useState<string>("");
   const { mutate: updateThreshold } = useUpdateThreshold({ setAlertMsg });
+  const { mutate: updateDeviceFcm } = UseUpdateDeviceFcm({ setAlertMsg });
+  
+  useEffect(() => {
+    updateDeviceFcm({
+      id: currentContainer?.id,
+      deviceFcm: fcmToken,
+    });
+  }, []);
+
+   
 
   const handleUpdateThreshold = () => {
     updateThreshold({
