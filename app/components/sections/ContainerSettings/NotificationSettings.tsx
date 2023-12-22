@@ -23,7 +23,7 @@ export default function NotificationSettings({
       id: currentContainer?.id,
       deviceFcm: fcmToken,
     });
-  }, []);
+  }, [currentContainer?.id, fcmToken, updateDeviceFcm]);
 
    
 

@@ -3,7 +3,7 @@ import { graphQLClient } from "@/utils/graphQLInstance";
 import { gql } from "graphql-request";
 
 const updateDeviceFcmMutation = gql`
-  mutation ($id: ID!, $deviceFcm: string!) {
+  mutation ($id: ID!, $deviceFcm: String!) {
     updateContainers(where: { id: $id }, update: { deviceFcm: $deviceFcm }) {
       containers {
         id
