@@ -2,6 +2,9 @@
    
     try {
  
+     
+
+      // Send a test FCM payload to the current token
       const response = await fetch('https://fcm.googleapis.com/fcm/send', {
         method: 'POST',
         // timeout: 1000,

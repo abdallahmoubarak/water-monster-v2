@@ -24,12 +24,12 @@ export default async function handler(
   console.log({ distance, serialNumber });
   if (distance && serialNumber) {
     const graphQLClient = new GraphQLClient(endpoint, { mode: "cors" });
-    const response = await graphQLClient.request(
-      `mutation UpdateContainer($serialNumber: String!, $distance: Int!) {
+    const response =   await graphQLClient.request(
+      `mutation {
         updateContainers(
-          where: { serialNumber: $serialNumber }
-          update: { distance: $distance }
-        ) {
+          where: { serialNumber: "${serialNumber}" }
+          update: { distance: ${parseInt(distance)} }
+        ) {	
           containers {
             id
             name
@@ -37,20 +37,16 @@ export default async function handler(
             deviceFcm
           }
         }
-      }`,
-      {
-        serialNumber: "your-serial-number", // Replace with the actual serial number
-        distance: parseInt(distance),
-      }
-    );
+      }`
+    ); 
 
-    const updatedContainer = response?.updateContainers?.containers?.[0];
+    const updatedContainer = response?.updateContainers.containers[0];
     const updatedDeviceFcm = updatedContainer?.deviceFcm;
-    
+   
     if (updatedDeviceFcm) {
-      await handleSendFCM(updatedDeviceFcm,"WM","your water level have just updated")
+      await handleSendFCM(updatedDeviceFcm,"WM",`your water level have just updated, it is ${distance} `)
     } else {
-      console.error('Error retrieving updated device FCM:', response);
+      console.error('Error retrieving updated device FCM:', response?.updateContainers.containers[0]);
     
  
   }
