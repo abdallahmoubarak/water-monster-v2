@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 export default function TitledSwitcher({ title }: { title: string }) {
   const [toggle, setToggle] = useState(false);
   const [registration, setRegistration] = useState<any>();
-
+ 
   const handlePush = () => {
     setToggle(!toggle);
+    
     Notification.requestPermission().then((result) => {
+      alert(result);
       if (result !== "granted") {
         alert("Go to setting and allow notifications");
         setToggle(false);
+        
       }
       showNotification();
     });
@@ -32,11 +35,14 @@ export default function TitledSwitcher({ title }: { title: string }) {
     }
   };
 
-  // useEffect(() => {
-  //   navigator.serviceWorker.getRegistration().then((reg) => {
-  //     setRegistration(reg);
-  //   });
-  // }, []);
+  useEffect(() => {
+
+    
+    navigator?.serviceWorker?.getRegistration().then((reg) => {
+      setRegistration(reg);
+    
+    });
+  }, []);
 
   return (
     <div className="flex justify-between items-center">
