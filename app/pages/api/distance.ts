@@ -68,7 +68,7 @@ export default async function handler(
     
       const waterLevel = calc > 0 && calc < 100 ? calc : calc < 0 ? 1 : 100;
     
-      if (updatedDeviceFcm && waterLevel==updatedContainer?.threshold) {
+      if (updatedDeviceFcm ) {
        const greeting=await getTimeGreeting()
         await handleSendFCM(
           updatedDeviceFcm,
