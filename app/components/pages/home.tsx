@@ -4,6 +4,8 @@ import Containers from "@/components/pages/Containers";
 import Head from "next/head";
 import dynamic from "next/dynamic";
 
+import useFcmToken from "@/utils/hooks/useFcmToken";
+
 const Reconfig = dynamic(() => import("@/components/pages/secondary/Reconfig"));
 const WaterProvider = dynamic(
   () => import("@/components/pages/secondary/Provider"),
@@ -23,7 +25,13 @@ const Installation = dynamic(
 export default function Home() {
   const [page, setPage] = useState<string>("Containers");
   const [currentContainer, setCurrentContainer] = useState<any>({});
- 
+  const [registration, setRegistration] = useState<any>();
+  const { fcmToken,notificationPermissionStatus } = useFcmToken();
+  useEffect(() => {
+    navigator.serviceWorker.getRegistration().then((reg) => {
+      setRegistration(reg);
+    });
+  }, []);
   return (
     <>
       <Head>

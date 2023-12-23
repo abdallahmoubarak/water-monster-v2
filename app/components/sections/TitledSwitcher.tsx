@@ -1,13 +1,10 @@
 import ToggleSwitch from "@/components/atoms/ToggleSwitch";
-import useFcmToken from "@/utils/hooks/useFcmToken";
 import { useEffect, useState } from "react";
 
 export default function TitledSwitcher({ title }: { title: string }) {
   const [toggle, setToggle] = useState(false);
   const [registration, setRegistration] = useState<any>();
-
-  const { fcmToken,notificationPermissionStatus } = useFcmToken();
-
+ 
   const handlePush = () => {
     setToggle(!toggle);
     
