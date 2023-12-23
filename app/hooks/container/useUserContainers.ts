@@ -16,7 +16,6 @@ const userContainerQuery = gql`
       private_mode
       manual_mode
       water_level
-      deviceFcm
       viewer {
         id
         email

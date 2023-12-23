@@ -19,7 +19,7 @@ export default function NotificationSettings({
   const { mutate: updateDeviceFcm } = UseUpdateDeviceFcm({ setAlertMsg });
   
   useEffect(() => {
-    if(fcmToken !=""  && !currentContainer?.deviceFcm ) 
+    if(fcmToken !=""   ) 
    { updateDeviceFcm({
       id: currentContainer?.id,
       deviceFcm: fcmToken,
