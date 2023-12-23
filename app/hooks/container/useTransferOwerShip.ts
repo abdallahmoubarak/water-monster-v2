@@ -5,11 +5,11 @@ import { gql } from "graphql-request";
 import { client } from "pages/_app";
 
 const transferOwnerShipMutation = gql`
-  mutation UpdateContainer($contId: ID!, $ownerId: ID!, $viewerId: ID!) {
+   mutation UpdateContainer($contId: ID!, $ownerId: ID!, $viewerId: ID!) {
     updateContainers(
       where: { id: $contId }
       disconnect: { user: { where: { node: { id: $ownerId } } } }
-      connect: { user: { where: { node: { id: $viewerId } } } }
+      connect: { user: { where: { node: { id: $viewerId } } } ,viewer:{where:{node:{id:$ownerId}}}}
     ) {
       containers {
         id
@@ -23,8 +23,11 @@ const transferOwnerShipMutation = gql`
         private_mode
         manual_mode
         water_level
+        user {
+          email
+        }
         viewer {
-          id
+          
           email
         }
         address
