@@ -28,21 +28,14 @@ export default function TitledSwitcher({ title }: { title: string }) {
       icon: notifImg,
     };
 
-    // if (registration && "showNotification" in registration) {
-    //   registration.showNotification(title, payload);
-    // } else {
-    //   new Notification(notiftitle, payload);
-    // }
+    if (registration && "showNotification" in registration) {
+      registration.showNotification(title, payload);
+    } else {
+      new Notification(notiftitle, payload);
+    }
   };
 
-  useEffect(() => {
-
-    
-    navigator?.serviceWorker?.getRegistration().then((reg) => {
-      setRegistration(reg);
-    
-    });
-  }, []);
+  
 
   return (
     <div className="flex justify-between items-center">
