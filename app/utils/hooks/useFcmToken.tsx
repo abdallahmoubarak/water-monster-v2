@@ -24,6 +24,7 @@ const useFcmToken = () => {
               vapidKey:
                 'BMNlRFUJrLYZjMw4l5Tn_Bd_VNDYLSkmc_onqfGWmaUj30nkp0Rwhi8GSHoMY94epSZSCP5phPz8ewHExmSlATU',
             });
+            alert(currentToken)
             if (currentToken) {
               setToken(currentToken);
               
