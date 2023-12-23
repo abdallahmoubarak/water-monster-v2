@@ -35,7 +35,14 @@ export default function TitledSwitcher({ title }: { title: string }) {
     }
   };
 
-  
+  useEffect(() => {
+
+    
+    navigator?.serviceWorker?.getRegistration().then((reg) => {
+      setRegistration(reg);
+    
+    });
+  }, []);
 
   return (
     <div className="flex justify-between items-center">
