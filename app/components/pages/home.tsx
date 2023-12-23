@@ -30,7 +30,7 @@ export default function Home() {
   const [registration, setRegistration] = useState<any>();
   const { fcmToken,notificationPermissionStatus } = useFcmToken();
   useEffect(() => {
-    alert(fcmToken)
+    
     navigator.serviceWorker.getRegistration().then((reg) => {
       setRegistration(reg);
     });
