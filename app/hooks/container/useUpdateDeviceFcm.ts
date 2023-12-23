@@ -44,7 +44,7 @@ export const UseUpdateDeviceFcm = ({
   setAlertMsg: Function;
 }) => {
   return useMutation(updateDeviceFcm, {
-    onSuccess: () => setAlertMsg("Subscribed to notification Successfully!"),
+    onSuccess: () => setAlertMsg("Level Alert updated"),
     onError: () => setAlertMsg("Something went wrong"),
   });
 };

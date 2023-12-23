@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import Containers from "@/components/pages/Containers";
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import { getMessaging, onMessage } from 'firebase/messaging';
 
 import useFcmToken from "@/utils/hooks/useFcmToken";
+import firebaseApp from "@/utils/firebase";
 
 const Reconfig = dynamic(() => import("@/components/pages/secondary/Reconfig"));
 const WaterProvider = dynamic(
