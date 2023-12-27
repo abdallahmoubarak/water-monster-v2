@@ -2,9 +2,8 @@ import { useRemoveViewer } from "@/hooks/container/useRemoveViewer";
 import { useState } from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import Alert from "./Alert";
-import { useTransferOwnerShip } from "@/hooks/container/useTransferOwerShip";
+import { useTransferOwnerShip } from "@/hooks/container/useTransferOwnerShip";
 import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
-import { useRouter } from "next/router";
 
 export default function DotsDropDown({
   currentContainer,
@@ -13,12 +12,11 @@ export default function DotsDropDown({
   currentContainer: any;
   viewer: any;
 }) {
-  const router = useRouter();
   const [isDropDown, setIsDropDown] = useState(false);
   const [alertMsg, setAlertMsg] = useState<string>("");
 
   const { mutate: removeViewer } = useRemoveViewer({ setAlertMsg });
-  const { mutate: transferOwnerShip } = useTransferOwnerShip({ router });
+  const { mutate: transferOwnerShip } = useTransferOwnerShip();
 
   const { data: currentUser } = useCurrentUser({ enabled: true });
 
