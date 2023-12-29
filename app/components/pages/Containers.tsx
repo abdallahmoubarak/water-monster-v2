@@ -40,7 +40,7 @@ export default function Containers({
       const documentHeight = document.documentElement.scrollHeight;
 
       // Adjust the threshold as needed
-      const scrollThreshold = 20;
+      const scrollThreshold = 100;
 
       if (scrollY + windowHeight >= documentHeight - scrollThreshold && !isRefreshing) {
         // Trigger refresh when reaching the bottom with a buffer (threshold)

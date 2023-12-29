@@ -3,7 +3,7 @@ import { transferOwnerShipTypes } from "../hookTypes";
 import { useMutation } from "@tanstack/react-query";
 import { gql } from "graphql-request";
 import { client } from "pages/_app";
-
+import { useRouter } from "next/router";
 const transferOwnerShipMutation = gql`
     mutation UpdateContainer($contId: ID!, $ownerId: ID!, $viewerId: ID!) {
     updateContainers(
@@ -53,10 +53,11 @@ const transferOwnerShip = async ({
 };
 
 export const useTransferOwnerShip = () => {
+  const router = useRouter();
   return useMutation(transferOwnerShip, {
     onSuccess: async () => {
       client.refetchQueries(["Containers"]);
-     
+      await router.replace("/");
     },
     onError: () => {},
   });
