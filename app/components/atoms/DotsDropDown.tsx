@@ -2,8 +2,9 @@ import { useRemoveViewer } from "@/hooks/container/useRemoveViewer";
 import { useState } from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
 import Alert from "./Alert";
-import { useTransferOwnerShip } from "@/hooks/container/useTransferOwnerShip";
+
 import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
+import { useTransferOwnerShip } from "@/hooks/container/useTransferOwnerShip";
 
 export default function DotsDropDown({
   currentContainer,

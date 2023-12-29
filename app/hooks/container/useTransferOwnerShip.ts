@@ -52,11 +52,11 @@ const transferOwnerShip = async ({
   return res;
 };
 
-export const useTransferOwnerShip = ({ router }: { router: any }) => {
+export const useTransferOwnerShip = () => {
   return useMutation(transferOwnerShip, {
     onSuccess: async () => {
       client.refetchQueries(["Containers"]);
-      await router.replace("/");
+     
     },
     onError: () => {},
   });
