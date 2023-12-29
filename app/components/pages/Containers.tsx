@@ -22,7 +22,35 @@ export default function Containers({
   currentUser =
     (currentUser && JSON.parse(currentUser)) ||
     client.getQueryData<userTypes>(["User"]);
-
+    const handleRefresh = () => {
+      // Handle refresh logic here
+     alert("refresh")
+    };
+  
+    useEffect(() => {
+      const onScroll = () => {
+        const scrollY = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+  
+        // Adjust the threshold as needed
+        const scrollThreshold = 100;
+  
+        if (scrollY + windowHeight >= documentHeight - scrollThreshold) {
+          // Trigger refresh when reaching the bottom with a buffer (threshold)
+          handleRefresh();
+        }
+      };
+  
+      // Attach the scroll event listener
+      window.addEventListener('scroll', onScroll);
+  
+      // Clean up the event listener on component unmount
+      return () => {
+        window.removeEventListener('scroll', onScroll);
+      };
+    }, []); // Ensure the effect runs only once on mount
+  
   const {
     data: containers,
     isLoading,
