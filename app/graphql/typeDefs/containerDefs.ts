@@ -1,7 +1,7 @@
 import { gql } from "graphql-request";
 
 export const containerDefs = gql`
-  type Container @authentication(operations: [UPDATE, DELETE]) {
+  type Container {
     id: ID! @id
     serialNumber: String
     distance: Int

@@ -6,6 +6,7 @@ export const resolvers = {
     ...authMutations,
     ...containerMutations,
     ...resetPassMutations,
+    
   },
   Query: {},
 };
