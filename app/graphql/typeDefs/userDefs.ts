@@ -12,8 +12,6 @@ export const userDefs = gql`
     language: String
     location: Point
     paletNumber: String
-    sentMessages: [Message!]! @relationship(type: "FROM", direction: OUT)
-    receivedMessages: [Message!]! @relationship(type: "TO", direction: IN)
     containers: [Container!]! @relationship(type: "OWNS", direction: OUT)
     viewContainers: [Container!]!
       @relationship(type: "CAN_VIEW", direction: OUT)
