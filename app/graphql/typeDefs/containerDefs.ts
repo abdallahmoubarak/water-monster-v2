@@ -1,7 +1,10 @@
 import { gql } from "graphql-request";
 
 export const containerDefs = gql`
-  type Container {
+  type Container @authorization(validate: [
+    { where: { node: { user: { id: "$jwt.sub" } } } }
+
+]){
     id: ID! @id
     serialNumber: String
     distance: Int
