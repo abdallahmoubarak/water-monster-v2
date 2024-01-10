@@ -20,17 +20,17 @@ export const resetPassMutations = {
     if (user) {
       const tempToken = await createJWT({ sub: user.id, email }, 900);
       const magicLinkURL = `${process.env.NEXT_PUBLIC_BASEURL}/reset?token=${tempToken}`;
-
+    
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: process.env.NEXT_GMAIL,
-          pass: process.env.NEXT_GMAIL_KEY,
+          user: "husseinreda1472002@gmail.com",
+          pass: "bgoxmwmexxclehzr",
         },
       });
 
       const mailOptions = {
-        from: process.env.NEXT_GMAIL,
+        from: "husseinreda1472002@gmail.com",
         to: email,
         subject: "Magic Link for Login",
         text: `Click the following link to log in: ${magicLinkURL}`,

@@ -2,4 +2,9 @@
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { server } from "@/graphql/index";
 
-export default startServerAndCreateNextHandler(server);
+export default  startServerAndCreateNextHandler(server,{
+    context:  async (req)=>({
+        token: req.headers.authorization
+
+    })
+});
