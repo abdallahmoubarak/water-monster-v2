@@ -1,11 +1,11 @@
 import { gql } from "graphql-request";
 
 export const userDefs = gql`
-  type User {
+  type User @authentication {
     id: ID! @id
     name: String!
     email: String!
-    password: String! @auth(rules: [{ allow: { id: "$jwt.sub" } }]) @private
+    password: String! @authentication
     userType: String!
     phone: String
     profileUrl: String
@@ -44,8 +44,9 @@ export const userDefs = gql`
   }
 
   type Query {
-    me: User
-      @cypher(statement: "MATCH (u:User { id: $jwt.sub }) RETURN u")
-      @auth(rules: [{ isAuthenticated: true }])
+    me: User @cypher(statement: "MATCH (u:User { id: $jwt.sub }) RETURN u")
+  }
+  type JWT @jwt {
+    roles: [String!]!
   }
 `;

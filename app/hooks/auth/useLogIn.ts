@@ -35,7 +35,7 @@ export const useLogIn = ({ setMsg, setIsLoading }: useSignTypes) => {
       user && client.setQueryData(["User"], user);
       token &&
         graphQLClient.setHeaders({
-          authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         });
     },

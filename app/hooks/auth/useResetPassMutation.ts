@@ -46,7 +46,7 @@ export const useResetPassMutation = ({
       user && client.setQueryData(["User"], user);
       token &&
         graphQLClient.setHeaders({
-          authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         });
       await router.replace("/");
