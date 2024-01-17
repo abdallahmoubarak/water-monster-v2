@@ -30,7 +30,7 @@ export default function Home() {
       </Head>
 
       {page === "Containers" && (
-        <Layout hasImg={true} hasNav={false} active={page} setActive={setPage}>
+        <Layout hasImg={true} hasNav={false} setActive={setPage}>
           <Containers
             setPage={setPage}
             setCurrentContainer={setCurrentContainer}

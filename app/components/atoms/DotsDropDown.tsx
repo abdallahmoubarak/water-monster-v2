@@ -1,22 +1,27 @@
 import { useRemoveViewer } from "@/hooks/container/useRemoveViewer";
 import { useState } from "react";
 import { BiDotsVerticalRounded } from "react-icons/bi";
-import Alert from "./Alert";
 import { useTransferOwnerShip } from "@/hooks/container/useTransferOwnerShip";
 import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
 
 export default function DotsDropDown({
   currentContainer,
   viewer,
+  setPage,
+  setAlertMsg,
 }: {
   currentContainer: any;
   viewer: any;
+  setPage: Function;
+  setAlertMsg: Function;
 }) {
   const [isDropDown, setIsDropDown] = useState(false);
-  const [alertMsg, setAlertMsg] = useState<string>("");
 
-  const { mutate: removeViewer } = useRemoveViewer({ setAlertMsg });
-  const { mutate: transferOwnerShip } = useTransferOwnerShip();
+  const { mutate: removeViewer } = useRemoveViewer({ setPage, setAlertMsg });
+  const { mutate: transferOwnerShip } = useTransferOwnerShip({
+    setPage,
+    setAlertMsg,
+  });
 
   const { data: currentUser } = useCurrentUser();
 
@@ -63,7 +68,6 @@ export default function DotsDropDown({
           onScrollCapture={() => setIsDropDown(false)}
           className="w-screen h-screen top-40 right-0 absolute z-10 bg-transparent cursor-pointer"></div>
       )}
-      <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
     </div>
   );
 }

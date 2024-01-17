@@ -42,10 +42,16 @@ const removeViewer = async ({ contId, userId }: removeViewer) => {
   return res;
 };
 
-export const useRemoveViewer = ({ setAlertMsg }: { setAlertMsg: Function }) => {
+export const useRemoveViewer = ({
+  setPage,
+  setAlertMsg,
+}: {
+  setPage: Function;
+  setAlertMsg: Function;
+}) => {
   return useMutation(removeViewer, {
     onSuccess: () => {
-      setAlertMsg("User Removed Successfully!");
+      setPage("Containers");
       client.refetchQueries(["Containers"]);
     },
     onError: () => setAlertMsg("Something went wrong"),

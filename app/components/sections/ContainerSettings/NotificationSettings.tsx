@@ -1,4 +1,3 @@
-import Alert from "@/components/atoms/Alert";
 import Box from "@/components/atoms/Box";
 import { useState } from "react";
 import TitledSwitcher from "../TitledSwitcher";
@@ -6,13 +5,14 @@ import { useUpdateThreshold } from "@/hooks/container/useUpdateThreshold";
 
 export default function NotificationSettings({
   currentContainer,
+  setAlertMsg,
 }: {
   currentContainer: any;
+  setAlertMsg: Function;
 }) {
   const [threshold, setThreshold] = useState<number>(
     currentContainer?.threshold || 15,
   );
-  const [alertMsg, setAlertMsg] = useState<string>("");
   const { mutate: updateThreshold } = useUpdateThreshold({ setAlertMsg });
 
   const handleUpdateThreshold = () => {
@@ -48,7 +48,6 @@ export default function NotificationSettings({
           </div>
         )}
       </Box>
-      <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
     </>
   );
 }

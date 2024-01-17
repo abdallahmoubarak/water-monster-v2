@@ -1,11 +1,9 @@
-import NavBar from "@/components/sections/NavBar";
 import TopBar from "@/components/atoms/TopBar";
 
 export default function RootLayout({
   children,
   hasImg,
   hasNav,
-  active,
   setActive,
 }: layoutProps) {
   return (
@@ -18,10 +16,6 @@ export default function RootLayout({
         }`}>
         {children}
       </div>
-
-      <div>
-        {hasNav && <NavBar activePage={active} setActivePage={setActive} />}
-      </div>
     </div>
   );
 }
@@ -30,6 +24,5 @@ type layoutProps = {
   children?: React.ReactNode;
   hasImg?: boolean;
   hasNav?: boolean;
-  active?: string;
   setActive?: Function;
 };

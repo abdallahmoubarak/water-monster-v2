@@ -2,21 +2,21 @@ import Button from "@/components/atoms/Button";
 import Input from "@/components/atoms/Input";
 import { useState } from "react";
 import Box from "@/components/atoms/Box";
-import Alert from "@/components/atoms/Alert";
 import { useUpdateContainerInfo } from "@/hooks/container/useUpdateContainerInfo";
 
 export default function ContainerInfoSettings({
   currentContainer,
   setPage,
+  setAlertMsg,
 }: {
   currentContainer: any;
   setPage: Function;
+  setAlertMsg: Function;
 }) {
   const [name, setName] = useState<string>(currentContainer?.name);
   const [size, setSize] = useState<string>(currentContainer?.size);
   const [height, setHeight] = useState<string>(currentContainer?.height);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [alertMsg, setAlertMsg] = useState<string>("");
 
   const { mutate: updateContainerInfo } = useUpdateContainerInfo({
     setAlertMsg,
@@ -35,6 +35,7 @@ export default function ContainerInfoSettings({
       });
     } else {
       setAlertMsg("All fields are required");
+      setIsLoading(false);
     }
   };
 
@@ -70,7 +71,6 @@ export default function ContainerInfoSettings({
           </div>
         </Box>
       </div>
-      <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
     </>
   );
 }

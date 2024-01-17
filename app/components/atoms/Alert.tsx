@@ -18,9 +18,9 @@ export default function Alert({ alertMsg, setAlertMsg }: alertType) {
           !alertMsg && "opacity-0 bg-white"
         }`}>
         <div
-          className={`w-[70vw] fixed p-2 text-center  transition-all duration-[200ms] ease-in-out ${
-            !alertMsg ? "top-[-2rem]" : "top-16"
-          } mx-auto text-white z-30 opacity-95 bg-gray-500 rounded-full text-lg transition-all duration-[3s] ease-in-out shadow-[0_0_10px_0_rgba(0,0,0,0.2)]`}>
+          className={`w-[70vw] fixed p-2 text-center ${
+            !alertMsg ? "top-[-2rem]" : "top-12"
+          } mx-auto text-white z-30 opacity-95 bg-gray-500 rounded-full text-lg shadow-[0_0_10px_0_rgba(0,0,0,0.2)]`}>
           {holdingMsg}
         </div>
       </div>
