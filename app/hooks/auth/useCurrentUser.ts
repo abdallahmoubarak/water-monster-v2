@@ -14,17 +14,26 @@ const meQuery = gql`
     }
   }
 `;
+
 const getUser = async () => {
-  const res: any = await graphQLClient.request(meQuery);
-  return res?.me;
+  if (!graphQLClient?.requestConfig?.headers?.Authorization) return;
+
+  try {
+    const res: any = await graphQLClient.request(meQuery);
+    return res?.me;
+  } catch (err: any) {
+    if (err.message.split(":")[0] === "Unauthenticated") {
+      return {};
+    }
+  }
 };
 
-export const useCurrentUser = ({ enabled }: { enabled: boolean }) => {
+export const useCurrentUser = () => {
   return useQuery({
     queryKey: ["User"],
     queryFn: () => getUser(),
-    onSuccess: (res) => localStorage.setItem("User", JSON.stringify(res)),
+    onSuccess: (res) => console.log(res),
+    onError: (err: Error) => console.log(err.message.split(":")[0]),
     refetchOnWindowFocus: false,
-    enabled,
   });
 };

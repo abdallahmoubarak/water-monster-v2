@@ -6,8 +6,8 @@ declare const process: {
 
 const endpoint: string = process.env.NEXT_PUBLIC_GQL_PATH;
 
-export const graphQLClient = new GraphQLClient(endpoint, {
-  headers: <HeadersInit | undefined>{
+export const graphQLClient: any = new GraphQLClient(endpoint, {
+  headers: <HeadersInit>{
     Authorization: Boolean(
       typeof window !== "undefined" && localStorage.getItem("JWT"),
     )

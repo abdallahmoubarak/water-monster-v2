@@ -9,7 +9,7 @@ declare const process: {
 
 export const createJWT = (
   data: string | object,
-  expires: string | number = "5d",
+  expires: string | number = "30d",
 ) => {
   return new Promise((resolve, reject) => {
     jwt.sign(

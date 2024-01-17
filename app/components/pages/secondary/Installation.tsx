@@ -13,7 +13,7 @@ export default function Installation({ setPage }: { setPage: Function }) {
   const [data, setData] = useState<string>("No QR code detected");
   const [isScan, setIsScan] = useState<boolean>(false);
 
-  const { data: currentUser } = useCurrentUser({ enabled: true });
+  const { data: currentUser } = useCurrentUser();
   const { mutate: createContainer } = useCreateContainer();
 
   useEffect(() => getGeoLocation(), []);

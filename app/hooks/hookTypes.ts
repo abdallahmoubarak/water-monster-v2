@@ -47,20 +47,6 @@ export type updateManualModeTypes = {
   manual_mode: boolean;
 };
 
-/************************ useMessages types ************************/
-
-export type createMessageType = {
-  from: string;
-  to: string;
-  content: string;
-};
-
-export type useGetMessagesType = {
-  me: string;
-  other: string;
-  enabled?: boolean;
-};
-
 /************************ useUser types ************************/
 export type userTypes = {
   id: string;

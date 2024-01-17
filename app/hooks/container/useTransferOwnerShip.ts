@@ -64,6 +64,5 @@ export const useTransferOwnerShip = () => {
       client.refetchQueries(["Containers"]);
       await router.replace("/");
     },
-    onError: () => {},
   });
 };

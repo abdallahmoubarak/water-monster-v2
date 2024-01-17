@@ -33,7 +33,5 @@ export const useUserViewingContainers = (id: string) => {
   return useQuery({
     queryKey: ["ViewingContainers"],
     queryFn: () => getUserViewingContainers(id),
-    onSuccess: (res) =>
-      localStorage.setItem("ViewingContainers", JSON.stringify(res)),
   });
 };

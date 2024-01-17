@@ -1,23 +1,11 @@
 import Home from "@/components/pages/home";
 import Head from "next/head";
-import { useEffect, useState } from "react";
 import Sign from "@/components/pages/sign";
 import AnimatedLogo from "@/components/svg/AnimatedLogo";
-import { client } from "./_app";
 import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
 
 export default function Index() {
-  const [enabled, setEnabled] = useState<boolean>(true);
-  const { data: currentUser, isLoading } = useCurrentUser({ enabled });
-
-  useEffect(() => setEnabled(Boolean(localStorage.getItem("JWT"))), []);
-  useEffect(() => {
-    localStorage.getItem("User") &&
-      client.setQueryData(
-        ["User"],
-        JSON.parse(localStorage.getItem("User") || "{}"),
-      );
-  }, []);
+  const { data: currentUser, isLoading } = useCurrentUser();
 
   return (
     <>

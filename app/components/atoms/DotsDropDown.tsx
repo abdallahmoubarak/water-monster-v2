@@ -18,7 +18,7 @@ export default function DotsDropDown({
   const { mutate: removeViewer } = useRemoveViewer({ setAlertMsg });
   const { mutate: transferOwnerShip } = useTransferOwnerShip();
 
-  const { data: currentUser } = useCurrentUser({ enabled: true });
+  const { data: currentUser } = useCurrentUser();
 
   return (
     <div>

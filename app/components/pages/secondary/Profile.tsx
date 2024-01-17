@@ -17,7 +17,7 @@ import { useUpdateName } from "@/hooks/user/useUpdateName";
 import { useUpdatePhone } from "@/hooks/user/useUpdatePhone";
 
 export default function Profile({ setPage }: { setPage: Function }) {
-  const { data: currentUser } = useCurrentUser({ enabled: true });
+  const { data: currentUser } = useCurrentUser();
   const [name, setName] = useState(currentUser?.name || "");
   const [phone, setPhone] = useState(currentUser?.phone || "");
   const [image, setImage] = useState("");

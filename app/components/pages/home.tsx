@@ -10,7 +10,6 @@ const WaterProvider = dynamic(
 );
 const Cleaner = dynamic(() => import("@/components/pages/secondary/Cleaner"));
 
-const Chat = dynamic(() => import("@/components/pages/secondary/Chat"));
 const Plumber = dynamic(() => import("@/components/pages/secondary/Plumber"));
 const ContainerSetting = dynamic(
   () => import("@/components/pages/secondary/ContainerSettings"),
@@ -48,9 +47,7 @@ export default function Home() {
       {page === "Plumber" && <Plumber setPage={setPage} />}
       {page === "Provider" && <WaterProvider setPage={setPage} />}
       {page === "Cleaner" && <Cleaner setPage={setPage} />}
-
       {page === "Profile" && <Profile setPage={setPage} />}
-      {page === "Chat" && <Chat setPage={setPage} />}
       {page === "Installation" && <Installation setPage={setPage} />}
       {page === "Reconfigure" && <Reconfig setPage={setPage} />}
     </>

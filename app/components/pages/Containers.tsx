@@ -1,13 +1,12 @@
 import Button from "@/components/atoms/Button";
-import { Key, useEffect, useState } from "react";
+import { useState } from "react";
 import Container from "@/components/atoms/Container";
 import ContainerLoader from "@/components/atoms/ContainerLoader";
-import { client } from "pages/_app";
-import { userTypes } from "@/hooks/hookTypes";
 import Alert from "@/components/atoms/Alert";
 import ServicesBar from "@/components/sections/ServicesBar";
 import { useUserContainers } from "@/hooks/container/useUserContainers";
 import { useUserViewingContainers } from "@/hooks/container/useUserViewingContainers";
+import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
 
 export default function Containers({
   setPage,
@@ -17,11 +16,7 @@ export default function Containers({
   setCurrentContainer: Function;
 }) {
   const [alertMsg, setAlertMsg] = useState<string>("");
-
-  let currentUser: any = localStorage.getItem("User");
-  currentUser =
-    (currentUser && JSON.parse(currentUser)) ||
-    client.getQueryData<userTypes>(["User"]);
+  const { data: currentUser } = useCurrentUser();
 
   const {
     data: containers,
@@ -30,24 +25,13 @@ export default function Containers({
   } = useUserContainers(currentUser.id);
   const { data: viewingContainer } = useUserViewingContainers(currentUser.id);
 
-  useEffect(() => {
-    client.setQueryData(
-      ["Containers"],
-      JSON.parse(localStorage.getItem("Containers") || "[{}]"),
-    );
-    client.setQueryData(
-      ["ViewingContainers"],
-      JSON.parse(localStorage.getItem("ViewingContainers") || "[{}]"),
-    );
-  }, []);
-
   return (
     <>
       <ServicesBar setPage={setPage} />
       <div className="p-3">
         {isLoading && <ContainerLoader />}
         <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
-          {containers?.map((container: any, i: Key) => (
+          {containers?.map((container: any, i: number) => (
             <Container
               key={i}
               view={false}
@@ -59,7 +43,7 @@ export default function Containers({
           ))}
         </div>
         <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
-          {viewingContainer?.map((container: any, i: Key) => (
+          {viewingContainer?.map((container: any, i: number) => (
             <Container
               view={true}
               key={i}

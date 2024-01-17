@@ -42,7 +42,6 @@ export const useResetPassMutation = ({
   return useMutation(resetPass, {
     onSuccess: async ({ token, user }) => {
       token && localStorage.setItem("JWT", token);
-      user && localStorage.setItem("User", JSON.stringify(user));
       user && client.setQueryData(["User"], user);
       token &&
         graphQLClient.setHeaders({

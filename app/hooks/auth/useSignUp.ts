@@ -35,7 +35,6 @@ export const useSignUp = ({ setMsg, setIsLoading }: useSignTypes) => {
   return useMutation(signUp, {
     onSuccess: ({ token, user }) => {
       token && localStorage.setItem("JWT", token);
-      user && localStorage.setItem("User", JSON.stringify(user));
       user && client.setQueryData(["User"], user);
       token &&
         graphQLClient.setHeaders({

@@ -38,7 +38,6 @@ export default function SignForm({ setIsForget }: { setIsForget: Function }) {
         setIsLoading(false);
         return setMsg("*" + message);
       }
-      setIsLoading(false);
       isLogIn ? logIn({ ...user }) : signUp({ ...user });
     }
   };

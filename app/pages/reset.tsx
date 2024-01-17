@@ -22,7 +22,7 @@ export default function ResetPassLink() {
     setIsLoading,
     router,
   });
-  const { data: currentUser } = useCurrentUser({ enabled: true });
+  const { data: currentUser } = useCurrentUser();
 
   useEffect(() => {
     currentUser && router.replace("/");
