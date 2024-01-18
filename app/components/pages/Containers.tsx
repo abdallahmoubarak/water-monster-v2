@@ -7,6 +7,8 @@ import ServicesBar from "@/components/sections/ServicesBar";
 import { useUserContainers } from "@/hooks/container/useUserContainers";
 import { useUserViewingContainers } from "@/hooks/container/useUserViewingContainers";
 import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
+import PullToRefresh from "react-simple-pull-to-refresh";
+import { client } from "pages/_app";
 
 export default function Containers({
   setPage,
@@ -26,44 +28,51 @@ export default function Containers({
   const { data: viewingContainer } = useUserViewingContainers(currentUser.id);
 
   return (
-    <>
-      <ServicesBar setPage={setPage} />
-      <div className="p-3">
-        {isLoading && <ContainerLoader />}
-        <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
-          {containers?.map((container: any, i: number) => (
-            <Container
-              key={i}
-              view={false}
-              container={container}
-              setPage={setPage}
-              setCurrentContainer={setCurrentContainer}
-              isFetching={isFetching}
-            />
-          ))}
-        </div>
-        <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
-          {viewingContainer?.map((container: any, i: number) => (
-            <Container
-              view={true}
-              key={i}
-              container={container}
-              setPage={undefined}
-              setCurrentContainer={undefined}
-              isFetching={isFetching}
-            />
-          ))}
-        </div>
+    <PullToRefresh
+      pullingContent=""
+      onRefresh={async () => {
+        await client.refetchQueries(["Containers"]);
+        await client.refetchQueries(["ViewingContainers"]);
+      }}>
+      <>
+        <ServicesBar setPage={setPage} />
+        <div className="p-3">
+          {isLoading && <ContainerLoader />}
+          <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
+            {containers?.map((container: any, i: number) => (
+              <Container
+                key={i}
+                view={false}
+                container={container}
+                setPage={setPage}
+                setCurrentContainer={setCurrentContainer}
+                isFetching={isFetching}
+              />
+            ))}
+          </div>
+          <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
+            {viewingContainer?.map((container: any, i: number) => (
+              <Container
+                view={true}
+                key={i}
+                container={container}
+                setPage={undefined}
+                setCurrentContainer={undefined}
+                isFetching={isFetching}
+              />
+            ))}
+          </div>
 
-        <div className="py-8">
-          <Button
-            text={"New Installation"}
-            isSecondary={true}
-            onClick={() => setPage("Installation")}
-          />
+          <div className="py-8">
+            <Button
+              text={"New Installation"}
+              isSecondary={true}
+              onClick={() => setPage("Installation")}
+            />
+          </div>
         </div>
-      </div>
-      <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
-    </>
+        <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
+      </>
+    </PullToRefresh>
   );
 }
