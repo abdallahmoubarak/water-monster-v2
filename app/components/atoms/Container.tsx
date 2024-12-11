@@ -28,15 +28,7 @@ export default function Container({
     setCurrentContainer && setCurrentContainer(container);
   };
 
-  const {
-    connectStatus,
-    mqttConnect,
-    mqttDisconnect,
-    mqttSubscribe,
-    mqttUnsubscribe,
-    mqttPublish,
-    payload,
-  } = useMqtt();
+  const { mqttSubscribe, payload } = useMqtt();
 
   const handleOnDelete = () => {
     alert("not yet active");

@@ -20,7 +20,7 @@ export default function Containers({
 }) {
   const [alertMsg, setAlertMsg] = useState<string>("");
   const { data: currentUser } = useCurrentUser();
-  const { connectStatus, mqttConnect, mqttSubscribe, payload } = useMqtt();
+  const { connectStatus, mqttConnect } = useMqtt();
 
   const {
     data: containers,
@@ -30,15 +30,16 @@ export default function Containers({
   const { data: viewingContainer } = useUserViewingContainers(currentUser.id);
 
   const connect = () => {
-    mqttConnect(process.env.MQTT_BROKER_URL!, {
+    mqttConnect(process.env.NEXT_PUBLIC_MQTT_BROKER_URL!, {
       clientId: `mqtt_${Math.random().toString(16).slice(2)}`, // Unique client ID
-      username: process.env.MQTT_USERNAME,
-      password: process.env.MQTT_PASSWORD,
+      username: process.env.NEXT_PUBLIC_MQTT_USERNAME,
+      password: process.env.NEXT_PUBLIC_MQTT_PASSWORD,
     });
   };
 
   useEffect(() => {
     connectStatus !== "Connected" && connect();
+    console.log(connectStatus);
   }, []);
 
   return (
