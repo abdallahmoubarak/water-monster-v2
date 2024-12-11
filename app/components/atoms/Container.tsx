@@ -41,10 +41,15 @@ export default function Container({
   };
 
   useEffect(() => {
-    connectStatus !== "Connected" && connect();
-    if (container?.serialNumber?.includes(":")) {
+    container?.serialNumber?.includes(":") &&
+      connectStatus !== "Connected" &&
+      connect();
+  }, []);
+
+  useEffect(() => {
+    container?.serialNumber?.includes(":") &&
+      connectStatus === "Connected" &&
       mqttSubscribe({ topic: `${container.serialNumber}/distance`, qos: 0 });
-    }
   }, [connectStatus]);
 
   useEffect(() => {
