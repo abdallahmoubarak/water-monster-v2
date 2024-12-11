@@ -1,5 +1,5 @@
 import Button from "@/components/atoms/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "@/components/atoms/Container";
 import ContainerLoader from "@/components/atoms/ContainerLoader";
 import Alert from "@/components/atoms/Alert";
@@ -9,6 +9,7 @@ import { useUserViewingContainers } from "@/hooks/container/useUserViewingContai
 import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
 import PullToRefresh from "react-simple-pull-to-refresh";
 import { client } from "pages/_app";
+import { useMqtt } from "@/hooks/useMqtt";
 
 export default function Containers({
   setPage,
@@ -19,6 +20,7 @@ export default function Containers({
 }) {
   const [alertMsg, setAlertMsg] = useState<string>("");
   const { data: currentUser } = useCurrentUser();
+  const { connectStatus, mqttConnect, mqttSubscribe, payload } = useMqtt();
 
   const {
     data: containers,
@@ -27,17 +29,31 @@ export default function Containers({
   } = useUserContainers(currentUser.id);
   const { data: viewingContainer } = useUserViewingContainers(currentUser.id);
 
+  const connect = () => {
+    mqttConnect(process.env.MQTT_BROKER_URL!, {
+      clientId: `mqtt_${Math.random().toString(16).slice(2)}`, // Unique client ID
+      username: process.env.MQTT_USERNAME,
+      password: process.env.MQTT_PASSWORD,
+    });
+  };
+
+  useEffect(() => {
+    connectStatus !== "Connected" && connect();
+  }, []);
+
   return (
     <PullToRefresh
       pullingContent=""
       onRefresh={async () => {
         await client.refetchQueries(["Containers"]);
         await client.refetchQueries(["ViewingContainers"]);
-      }}>
+      }}
+    >
       <>
         <ServicesBar setPage={setPage} />
         <div className="p-3">
           {isLoading && <ContainerLoader />}
+          <div className="pl-2 pb-2">{connectStatus}</div>
           <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
             {containers?.map((container: any, i: number) => (
               <Container

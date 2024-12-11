@@ -11,7 +11,9 @@ export default function RootLayout({
       <TopBar hasImg={hasImg} setActive={setActive} />
 
       <div
-        className={`overflow-auto ${hasNav && "height: calc(100vh - 8rem)"}`}
+        className={`flex-1 overflow-auto ${
+          hasNav && "height: calc(100vh - 8rem)"
+        }`}
       >
         {children}
       </div>

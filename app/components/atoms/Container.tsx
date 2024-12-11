@@ -6,6 +6,7 @@ import { HiOutlineClock } from "react-icons/hi";
 import { humanReadableTime } from "@/utils/time";
 import Loading from "../svg/Loading";
 import { sensorState } from "@/utils/sensorState";
+import { useMqtt } from "@/hooks/useMqtt";
 
 interface ContainerCard {
   view: boolean;
@@ -27,15 +28,34 @@ export default function Container({
     setCurrentContainer && setCurrentContainer(container);
   };
 
+  const {
+    connectStatus,
+    mqttConnect,
+    mqttDisconnect,
+    mqttSubscribe,
+    mqttUnsubscribe,
+    mqttPublish,
+    payload,
+  } = useMqtt();
+
   const handleOnDelete = () => {
     alert("not yet active");
     console.log(container.id);
   };
 
-  const calc = Math.round(
-    ((container?.height - container?.distance / 10 + 18) * 100) /
-      container?.height,
-  );
+  var calc;
+  if (container?.serialNumber?.includes(":")) {
+    mqttSubscribe({ topic: `${container.serialNumber}/distance`, qos: 0 });
+    calc = Math.round(
+      ((container?.height - Number(payload?.message) / 10 + 18) * 100) /
+        container?.height
+    );
+  } else {
+    calc = Math.round(
+      ((container?.height - container?.distance / 10 + 18) * 100) /
+        container?.height
+    );
+  }
 
   const waterLevel = calc > 0 && calc < 100 ? calc : calc < 0 ? 1 : 100;
 
@@ -47,13 +67,15 @@ export default function Container({
           {view ? (
             <div
               className="text-red-600 text-sm cursor-pointer font-bold"
-              onClick={handleOnDelete}>
+              onClick={handleOnDelete}
+            >
               {/* Delete */}
             </div>
           ) : (
             <div
               className="w-8 h-8 cursor-pointer"
-              onClick={handleOnSettingsClick}>
+              onClick={handleOnSettingsClick}
+            >
               <Image width={30} src={settings} alt="s" />
             </div>
           )}
@@ -111,7 +133,8 @@ export default function Container({
               sensorState({ date: container.updatedAt })
                 ? "bg-primary"
                 : "bg-secondary"
-            }`}></div>
+            }`}
+          ></div>
         </div>
       </div>
     </>
