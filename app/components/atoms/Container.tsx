@@ -7,6 +7,7 @@ import { humanReadableTime } from "@/utils/time";
 import Loading from "../svg/Loading";
 import { sensorState } from "@/utils/sensorState";
 import { useMqtt } from "@/hooks/useMqtt";
+import { useEffect, useState } from "react";
 
 interface ContainerCard {
   view: boolean;
@@ -27,29 +28,48 @@ export default function Container({
     setPage && setPage("Settings");
     setCurrentContainer && setCurrentContainer(container);
   };
+  const [waterLevel, setWaterLevel] = useState(0);
+  const [time, setTime] = useState<any>(null);
+  const { connectStatus, mqttConnect, mqttSubscribe, payload } = useMqtt();
 
-  const { mqttSubscribe, payload } = useMqtt();
+  const connect = () => {
+    mqttConnect(process.env.NEXT_PUBLIC_MQTT_BROKER_URL!, {
+      clientId: `mqtt_${container.serialNumber}`, // Unique client ID
+      username: process.env.NEXT_PUBLIC_MQTT_USERNAME,
+      password: process.env.NEXT_PUBLIC_MQTT_PASSWORD,
+    });
+  };
+
+  useEffect(() => {
+    connectStatus !== "Connected" && connect();
+    if (container?.serialNumber?.includes(":")) {
+      mqttSubscribe({ topic: `${container.serialNumber}/distance`, qos: 0 });
+    }
+  }, [connectStatus]);
+
+  useEffect(() => {
+    var calc;
+    if (container?.serialNumber?.includes(":")) {
+      calc = Math.round(
+        ((container?.height - Number(payload?.message) / 10 + 18) * 100) /
+          container?.height
+      );
+    } else {
+      calc = Math.round(
+        ((container?.height - container?.distance / 10 + 18) * 100) /
+          container?.height
+      );
+    }
+    const wl = calc > 0 && calc < 100 ? calc : calc < 0 ? 1 : 100;
+
+    setWaterLevel(wl);
+    payload?.message && setTime(Date.now());
+  }, [payload?.message]);
 
   const handleOnDelete = () => {
     alert("not yet active");
     console.log(container.id);
   };
-
-  var calc;
-  if (container?.serialNumber?.includes(":")) {
-    mqttSubscribe({ topic: `${container.serialNumber}/distance`, qos: 0 });
-    calc = Math.round(
-      ((container?.height - Number(payload?.message) / 10 + 18) * 100) /
-        container?.height
-    );
-  } else {
-    calc = Math.round(
-      ((container?.height - container?.distance / 10 + 18) * 100) /
-        container?.height
-    );
-  }
-
-  const waterLevel = calc > 0 && calc < 100 ? calc : calc < 0 ? 1 : 100;
 
   return (
     <>
@@ -100,11 +120,16 @@ export default function Container({
             </>
           )}
         </div>
+
         <div className="flex items-center gap-1 text-gray-500">
           <span>
             <HiOutlineClock />
           </span>
-          <span>{humanReadableTime(container?.updatedAt)}</span>
+          {container?.serialNumber?.includes(":") ? (
+            <span>{humanReadableTime(time)}</span>
+          ) : (
+            <span>{humanReadableTime(container?.updatedAt)}</span>
+          )}
           {isFetching && (
             <span>
               <Loading />

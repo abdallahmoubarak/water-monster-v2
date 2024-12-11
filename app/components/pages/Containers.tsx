@@ -9,7 +9,6 @@ import { useUserViewingContainers } from "@/hooks/container/useUserViewingContai
 import { useCurrentUser } from "@/hooks/auth/useCurrentUser";
 import PullToRefresh from "react-simple-pull-to-refresh";
 import { client } from "pages/_app";
-import { useMqtt } from "@/hooks/useMqtt";
 
 export default function Containers({
   setPage,
@@ -20,7 +19,6 @@ export default function Containers({
 }) {
   const [alertMsg, setAlertMsg] = useState<string>("");
   const { data: currentUser } = useCurrentUser();
-  const { connectStatus, mqttConnect } = useMqtt();
 
   const {
     data: containers,
@@ -28,19 +26,6 @@ export default function Containers({
     isFetching,
   } = useUserContainers(currentUser.id);
   const { data: viewingContainer } = useUserViewingContainers(currentUser.id);
-
-  const connect = () => {
-    mqttConnect(process.env.NEXT_PUBLIC_MQTT_BROKER_URL!, {
-      clientId: `mqtt_${Math.random().toString(16).slice(2)}`, // Unique client ID
-      username: process.env.NEXT_PUBLIC_MQTT_USERNAME,
-      password: process.env.NEXT_PUBLIC_MQTT_PASSWORD,
-    });
-  };
-
-  useEffect(() => {
-    connectStatus !== "Connected" && connect();
-    console.log(connectStatus);
-  }, []);
 
   return (
     <PullToRefresh
@@ -53,7 +38,6 @@ export default function Containers({
       <>
         <ServicesBar setPage={setPage} />
         <div className="p-3">
-          <div className="pl-2 pb-2">{connectStatus}</div>
           {isLoading && <ContainerLoader />}
           <div className="flex items-center justify-center gap-4 pb-4 flex-wrap ">
             {containers?.map((container: any, i: number) => (
