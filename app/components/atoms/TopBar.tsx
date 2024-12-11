@@ -4,7 +4,7 @@ export default function TopBar({ hasImg, setActive }: topBarProps) {
   return (
     <>
       <div className="flex items-center justify-between gap-4  bg-primary px-4 py-2 h-16">
-        <div className="h-full w-fit bg-red-200">
+        <div className="h-full w-fit flex-0">
           <Logo />
         </div>
         {hasImg && (
