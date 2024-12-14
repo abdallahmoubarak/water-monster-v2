@@ -12,6 +12,7 @@ const userViewingContainerQuery = gql`
         height
         threshold
         distance
+        serialNumber
         water_level
         sensor_state
         updatedAt
@@ -24,7 +25,7 @@ const getUserViewingContainers = async (id: string) => {
   const variables = { id };
   const res: any = await graphQLClient.request(
     userViewingContainerQuery,
-    variables,
+    variables
   );
   return res?.users[0].viewContainers;
 };
