@@ -8,12 +8,6 @@ type Subscription = {
   qos: QoS;
 };
 
-type PublishContext = {
-  topic: string;
-  qos: QoS;
-  payload: string | Buffer;
-};
-
 export const useMqtt = () => {
   const [client, setClient] = useState<MqttClient | null>(null);
   const [connectStatus, setConnectStatus] = useState<
@@ -33,9 +27,7 @@ export const useMqtt = () => {
 
   const mqttDisconnect = () => {
     if (client) {
-      client.end(() => {
-        setConnectStatus("Disconnected");
-      });
+      client.end(() => setConnectStatus("Disconnected"));
     }
   };
 
@@ -61,17 +53,6 @@ export const useMqtt = () => {
     }
   };
 
-  const mqttPublish = (context: PublishContext) => {
-    if (client) {
-      const { topic, qos, payload } = context;
-      client.publish(topic, payload, { qos }, (error?: Error) => {
-        if (error) {
-          console.error("Publish error:", error);
-        }
-      });
-    }
-  };
-
   useEffect(() => {
     if (client) {
       client.on("connect", () => setConnectStatus("Connected"));
@@ -82,8 +63,12 @@ export const useMqtt = () => {
       });
       client.on("message", (topic, message, packet) => {
         const publishedAt =
-          packet?.properties?.userProperties?.publishTime || Date.now();
-        console.log(packet?.properties?.userProperties?.publishTime);
+          packet?.properties?.userProperties?.timestamp || Date.now();
+        console.log(
+          "Publish Time:",
+          packet?.properties?.userProperties?.timestamp
+        );
+        console.log("Packet Properties:", packet?.properties);
         setPayload({
           topic,
           message: message.toString(),
@@ -99,7 +84,6 @@ export const useMqtt = () => {
     mqttDisconnect,
     mqttSubscribe,
     mqttUnsubscribe,
-    mqttPublish,
     payload,
   };
 };

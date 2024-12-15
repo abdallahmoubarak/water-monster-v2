@@ -34,9 +34,13 @@ export default function Container({
 
   const connect = () => {
     mqttConnect(process.env.NEXT_PUBLIC_MQTT_BROKER_URL!, {
-      clientId: `mqtt_${container.serialNumber}`, // Unique client ID
+      protocolId: "MQTT",
+      clientId: `app_${container.serialNumber}`,
       username: process.env.NEXT_PUBLIC_MQTT_USERNAME,
       password: process.env.NEXT_PUBLIC_MQTT_PASSWORD,
+      port: 8084,
+      protocolVersion: 5,
+      clean: false,
     });
   };
 
