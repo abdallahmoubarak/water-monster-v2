@@ -29,7 +29,7 @@ export default function Container({
     setCurrentContainer && setCurrentContainer(container);
   };
   const [waterLevel, setWaterLevel] = useState(0);
-  const [time, setTime] = useState<any>(null);
+  const [timeStamp, setTimeStamp] = useState<any>(null);
   const { connectStatus, mqttConnect, mqttSubscribe, payload } = useMqtt();
 
   const connect = () => {
@@ -68,7 +68,7 @@ export default function Container({
     const wl = calc > 0 && calc < 100 ? calc : calc < 0 ? 1 : 100;
 
     setWaterLevel(wl);
-    payload?.message && setTime(Date.now());
+    payload?.message && setTimeStamp(payload?.timestamp);
   }, [payload?.message]);
 
   const handleOnDelete = () => {
@@ -131,7 +131,7 @@ export default function Container({
             <HiOutlineClock />
           </span>
           {container?.serialNumber?.includes(":") ? (
-            <span>{humanReadableTime(time)}</span>
+            <span>{humanReadableTime(timeStamp)}</span>
           ) : (
             <span>{humanReadableTime(container?.updatedAt)}</span>
           )}
@@ -152,7 +152,11 @@ export default function Container({
           <div>Sensor State</div>
           <div
             className={`rounded-full w-4 h-4  ${
-              sensorState({ date: container.updatedAt })
+              sensorState({
+                date: container?.serialNumber?.includes(":")
+                  ? timeStamp
+                  : container.updatedAt,
+              })
                 ? "bg-primary"
                 : "bg-secondary"
             }`}

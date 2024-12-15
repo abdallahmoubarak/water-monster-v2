@@ -22,6 +22,7 @@ export const useMqtt = () => {
   const [payload, setPayload] = useState<{
     topic: string;
     message: string;
+    timestamp: string;
   } | null>(null);
 
   const mqttConnect = (host: string, options: mqtt.IClientOptions) => {
@@ -79,8 +80,15 @@ export const useMqtt = () => {
         console.error("Connection error:", err);
         setConnectStatus("Disconnected");
       });
-      client.on("message", (topic, message) => {
-        setPayload({ topic, message: message.toString() });
+      client.on("message", (topic, message, packet) => {
+        const publishedAt =
+          packet?.properties?.userProperties?.publishTime || Date.now();
+        console.log(packet?.properties?.userProperties?.publishTime);
+        setPayload({
+          topic,
+          message: message.toString(),
+          timestamp: publishedAt.toString(),
+        });
       });
     }
   }, [client]);
