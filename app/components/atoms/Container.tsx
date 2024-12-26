@@ -72,7 +72,7 @@ export default function Container({
     const wl = calc > 0 && calc < 100 ? calc : calc < 0 ? 1 : 100;
 
     setWaterLevel(wl);
-    payload?.message && setTimeStamp(payload?.timestamp);
+    payload?.message && setTimeStamp(payload?.timeStamp);
   }, [payload?.message]);
 
   const handleOnDelete = () => {
