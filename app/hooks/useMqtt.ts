@@ -15,8 +15,7 @@ export const useMqtt = () => {
   >("Disconnected");
   const [payload, setPayload] = useState<{
     topic: string;
-    message: string;
-    timeStamp: string;
+    message: any;
   } | null>(null);
 
   const mqttConnect = (host: string, options: mqtt.IClientOptions) => {
@@ -63,16 +62,10 @@ export const useMqtt = () => {
       });
       client.on("message", (topic, message) => {
         const msg = JSON.parse(message.toString());
-        console.log(msg?.time);
-        const d = new Date(0);
-        d.setUTCSeconds(msg?.time);
-        const timeStamp = d.toLocaleString();
-        const distance = msg?.distance;
 
         setPayload({
           topic,
-          message: distance,
-          timeStamp,
+          message: msg,
         });
       });
     }

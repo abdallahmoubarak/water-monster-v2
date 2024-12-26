@@ -58,22 +58,27 @@ export default function Container({
 
   useEffect(() => {
     var calc;
+
+    const distance = container?.serialNumber?.includes(":")
+      ? Number(payload?.message?.distance)
+      : container?.distance;
+
+    let timeStamp = new Date(0);
+
     if (container?.serialNumber?.includes(":")) {
-      calc = Math.round(
-        ((container?.height - Number(payload?.message) / 10 + 18) * 100) /
-          container?.height
-      );
-    } else {
-      calc = Math.round(
-        ((container?.height - container?.distance / 10 + 18) * 100) /
-          container?.height
-      );
+      timeStamp.setUTCSeconds(payload?.message?.time).toLocaleString();
     }
+
+    calc = Math.round(
+      ((container?.height - distance / 10 + 18) * 100) / container?.height
+    );
+
     const wl = calc > 0 && calc < 100 ? calc : calc < 0 ? 1 : 100;
 
     setWaterLevel(wl);
-    payload?.message && setTimeStamp(payload?.timeStamp);
-  }, [payload?.message]);
+
+    payload?.message?.distance && setTimeStamp(timeStamp);
+  }, [payload?.message?.distance]);
 
   const handleOnDelete = () => {
     alert("not yet active");
