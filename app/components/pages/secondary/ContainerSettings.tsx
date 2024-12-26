@@ -14,37 +14,9 @@ export default function ContainerSetting({
   setPage: Function;
   currentContainer: any;
 }) {
-  const { connectStatus, mqttConnect, mqttSubscribe, payload } = useMqtt();
   const [alertMsg, setAlertMsg] = useState<string>("");
-  const [ip, setIP] = useState();
-  const [version, setVersion] = useState();
-
-  const connect = () => {
-    mqttConnect(process.env.NEXT_PUBLIC_MQTT_BROKER_URL!, {
-      protocolId: "MQTT",
-      clientId: `app_${currentContainer.serialNumber}`,
-      username: process.env.NEXT_PUBLIC_MQTT_USERNAME,
-      password: process.env.NEXT_PUBLIC_MQTT_PASSWORD,
-      port: 8084,
-      protocolVersion: 5,
-      clean: false,
-    });
-  };
-  useEffect(() => {
-    currentContainer?.serialNumber?.includes(":") &&
-      connectStatus !== "Connected" &&
-      connect();
-  }, []);
-  useEffect(() => {
-    currentContainer?.serialNumber?.includes(":") &&
-      connectStatus === "Connected" &&
-      mqttSubscribe({ topic: `${currentContainer.serialNumber}/ip`, qos: 0 });
-  }, [connectStatus]);
-
-  useEffect(() => {
-    setVersion(payload?.message?.version);
-    setIP(payload?.message?.ip);
-  }, []);
+  // const [ip, setIP] = useState();
+  // const [version, setVersion] = useState();
 
   return (
     <>
@@ -73,14 +45,14 @@ export default function ContainerSetting({
           />
         </div>
 
-        <div className="text-sm text-center p-4 text-gray-400">
+        {/* <div className="text-sm text-center p-4 text-gray-400">
           <div>
             Version: <span>{version}</span>
           </div>
           <div>
             IP: <span>{ip}</span>
           </div>
-        </div>
+        </div> */}
 
         <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
       </Layout>
