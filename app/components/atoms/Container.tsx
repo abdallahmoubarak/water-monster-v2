@@ -6,8 +6,8 @@ import { HiOutlineClock } from "react-icons/hi";
 import { humanReadableTime } from "@/utils/time";
 import Loading from "../svg/Loading";
 import { sensorState } from "@/utils/sensorState";
-import { useMqtt } from "@/hooks/useMqtt";
 import { useEffect, useState } from "react";
+import { useMqttContext } from "../pages/MqttProvider";
 
 interface ContainerCard {
   view: boolean;
@@ -30,43 +30,29 @@ export default function Container({
   };
   const [waterLevel, setWaterLevel] = useState(0);
   const [timeStamp, setTimeStamp] = useState<any>(null);
-  const { connectStatus, mqttConnect, mqttSubscribe, payload } = useMqtt();
 
-  const connect = () => {
-    mqttConnect(process.env.NEXT_PUBLIC_MQTT_BROKER_URL!, {
-      protocolId: "MQTT",
-      clientId: `app_${container.serialNumber}`,
-      username: process.env.NEXT_PUBLIC_MQTT_USERNAME,
-      password: process.env.NEXT_PUBLIC_MQTT_PASSWORD,
-      port: 8084,
-      protocolVersion: 5,
-      clean: false,
-    });
-  };
+  const { subscribe, payload } = useMqttContext();
 
   useEffect(() => {
-    container?.serialNumber?.includes(":") &&
-      connectStatus !== "Connected" &&
-      connect();
-  }, []);
+    const topic = `${container.serialNumber}/distance`;
+    if (container?.serialNumber?.includes(":")) {
+      subscribe(topic);
+    }
+  }, [container?.serialNumber]);
 
   useEffect(() => {
-    container?.serialNumber?.includes(":") &&
-      connectStatus === "Connected" &&
-      mqttSubscribe({ topic: `${container.serialNumber}/distance`, qos: 0 });
-  }, [connectStatus]);
-
-  useEffect(() => {
+    const currentPayload = JSON?.parse(
+      payload[`${container.serialNumber}/distance`] || "{}"
+    );
     var calc;
-
     const distance = container?.serialNumber?.includes(":")
-      ? Number(payload?.message?.distance)
+      ? Number(currentPayload?.distance)
       : container?.distance;
 
     let timeStamp = new Date(0);
 
     if (container?.serialNumber?.includes(":")) {
-      timeStamp.setUTCSeconds(payload?.message?.time).toLocaleString();
+      timeStamp.setUTCSeconds(currentPayload?.time).toLocaleString();
     }
 
     calc = Math.round(
@@ -77,8 +63,8 @@ export default function Container({
 
     setWaterLevel(wl);
 
-    payload?.message?.distance && setTimeStamp(timeStamp);
-  }, [payload?.message?.distance]);
+    currentPayload?.distance && setTimeStamp(timeStamp);
+  }, [payload]);
 
   const handleOnDelete = () => {
     alert("not yet active");

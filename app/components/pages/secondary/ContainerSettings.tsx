@@ -5,7 +5,7 @@ import QrCodeSettings from "@/components/sections/ContainerSettings/QrCodeSettin
 import ViewerSettings from "@/components/sections/ContainerSettings/ViewerSettings";
 import { useEffect, useState } from "react";
 import Alert from "@/components/atoms/Alert";
-import { useMqtt } from "@/hooks/useMqtt";
+import { useMqttContext } from "../MqttProvider";
 
 export default function ContainerSetting({
   setPage,
@@ -15,8 +15,26 @@ export default function ContainerSetting({
   currentContainer: any;
 }) {
   const [alertMsg, setAlertMsg] = useState<string>("");
-  // const [ip, setIP] = useState();
-  // const [version, setVersion] = useState();
+  const { subscribe, payload } = useMqttContext();
+
+  const [ip, setIP] = useState();
+  const [version, setVersion] = useState();
+
+  useEffect(() => {
+    const topic = `${currentContainer.serialNumber}/ip`;
+    if (currentContainer?.serialNumber?.includes(":")) {
+      subscribe(topic);
+    }
+  }, [currentContainer?.serialNumber]);
+
+  useEffect(() => {
+    const currentPayload = JSON?.parse(
+      payload[`${currentContainer.serialNumber}/ip`] || "{}"
+    );
+    currentContainer?.serialNumber?.includes(":") &&
+      setVersion(currentPayload?.version);
+    setIP(currentPayload?.ip);
+  }, [payload]);
 
   return (
     <>
@@ -45,14 +63,14 @@ export default function ContainerSetting({
           />
         </div>
 
-        {/* <div className="text-sm text-center p-4 text-gray-400">
+        <div className="text-sm text-center p-4 text-gray-400">
           <div>
             Version: <span>{version}</span>
           </div>
           <div>
             IP: <span>{ip}</span>
           </div>
-        </div> */}
+        </div>
 
         <Alert alertMsg={alertMsg} setAlertMsg={setAlertMsg} />
       </Layout>
