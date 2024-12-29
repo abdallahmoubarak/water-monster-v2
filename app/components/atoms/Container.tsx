@@ -1,7 +1,7 @@
 import ContainerSVG from "@/components/svg/ContainerSVG";
 import Image from "next/image";
 import settings from "@/public/svg/settings.svg";
-import { BiWater } from "react-icons/bi";
+import { BiRuler, BiWater } from "react-icons/bi";
 import { HiOutlineClock } from "react-icons/hi";
 import { humanReadableTime } from "@/utils/time";
 import Loading from "../svg/Loading";
@@ -30,6 +30,7 @@ export default function Container({
   };
   const [waterLevel, setWaterLevel] = useState(0);
   const [timeStamp, setTimeStamp] = useState<any>(null);
+  const [distance, setDistance] = useState();
 
   const { subscribe, payload } = useMqttContext();
 
@@ -49,6 +50,7 @@ export default function Container({
       ? Number(currentPayload?.distance)
       : container?.distance;
 
+    setDistance(distance);
     let timeStamp = new Date(0);
 
     if (container?.serialNumber?.includes(":")) {
@@ -135,6 +137,12 @@ export default function Container({
               <Loading />
             </span>
           )}
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-300">
+          <span>
+            <BiRuler />
+          </span>
+          <span>{Number(distance) / 10} cm</span>
         </div>
         <div className="transition-all duration-[3s] ease-in-out">
           {container.water_level ? (
